@@ -32,4 +32,11 @@
 (my-load 'yas)
 (my-load 'global)
 
+;; Load saved sessions
+(when (file-exists-p my-current-session)
+  (add-to-list 'kill-emacs-hook (lambda () (save-session)))
+  (switch-session (my-current-session-name)))
+
+;; Reload theme, switch-session does not restore all colors in the
+;; session correctly
 (load-theme 'zenburn)

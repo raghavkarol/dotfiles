@@ -78,11 +78,3 @@
   (switch-session name)
   (session-changed name)
   (delete-directory (my-session-save-dir delete-session-name) t))
-
-
-
-(add-to-list
- 'kill-emacs-hook (lambda () (save-session)))
-
-(when (file-exists-p my-current-session)
-  (switch-session (my-current-session-name)))
