@@ -112,3 +112,30 @@
   (interactive)
   (let ((default-directory "~/github/s3-api-tests"))
     (shell-command-to-string "echo 'gradle build' > run_flag")))
+
+;; Elscreen re-ordering
+(defun seq-missing (list)
+    (cl-set-difference
+     (number-sequence (seq-min list) (seq-max list))
+     list))
+
+(defun elscreen-screen-0-index-org ()
+  (interactive)
+  (if (eq 0 (helm-elscreen-find-file "~/org/index.org"))
+      (elscreen-toggle)
+    (progn (elscreen-goto 0)
+           (elscreen-swap)
+           (elscreen-toggle))))
+
+(defun elscreen-reorder-last ()
+  (interactive)
+  (let ((screen-max-index (seq-max (elscreen-get-screen-list)))
+        (screen-missing (car (seq-missing (elscreen-get-screen-list)))))
+    (when screen-missing
+      (elscreen-goto screen-max-index)
+      (elscreen-create)
+      (elscreen-goto screen-missing)
+      (elscreen-swap)
+      (elscreen-kill screen-max-index)
+      (elscreen-toggle)
+      (message "elscreen swapped %s %s" screen-max-index screen-missing))))
