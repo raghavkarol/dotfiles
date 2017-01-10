@@ -127,15 +127,25 @@
            (elscreen-swap)
            (elscreen-toggle))))
 
-(defun elscreen-reorder-last ()
+(defun elscreen-reorder-continuous1 (elscreen-actual elscreen-reorder)
+  (cond ((eq elscreen-actual elscreen-reorder)
+         't)
+        ((eq (car elscreen-actual) (car elscreen-reorder))
+         (elscreen-reorder-continuous1
+          (cdr elscreen-actual)
+          (cdr elscreen-reorder)))
+        ('t
+         (progn
+           (when (not (seq-contains elscreen-actual (car elscreen-reorder)))
+             (elscreen-create))
+           (elscreen-goto (car elscreen-actual))
+           (elscreen-goto (car elscreen-reorder))
+           (elscreen-swap)
+           (elscreen-kill (car elscreen-actual))
+           (elscreen-reorder-continuous1 (cdr elscreen-actual) (cdr elscreen-reorder))))))
+
+(defun elscreen-reorder-continuous ()
   (interactive)
-  (let ((screen-max-index (seq-max (elscreen-get-screen-list)))
-        (screen-missing (car (seq-missing (elscreen-get-screen-list)))))
-    (when screen-missing
-      (elscreen-goto screen-max-index)
-      (elscreen-create)
-      (elscreen-goto screen-missing)
-      (elscreen-swap)
-      (elscreen-kill screen-max-index)
-      (elscreen-toggle)
-      (message "elscreen swapped %s %s" screen-max-index screen-missing))))
+  (let ((elscreen-actual (elscreen-get-screen-list))
+        (elscreen-reorder (number-sequence 0 (1- (length (elscreen-get-screen-list))))))
+    (elscreen-reorder-continuous1 (seq-sort '< elscreen-actual) elscreen-reorder)))
