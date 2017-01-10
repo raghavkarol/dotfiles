@@ -134,7 +134,7 @@
  '(horizontal-scroll-bar-mode nil)
  '(httpd-port 9080)
  '(jenkins-api-url "http://jenkins.issuu.com/job/Publish-Api/801/api/xml")
- '(line-number-mode nil)
+ '(line-number-mode t)
  '(linum-format (quote dynamic))
  '(mode-line-format
 (quote
