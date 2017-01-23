@@ -59,6 +59,11 @@
           ('t
            (erl-eval (format "user_action:test(eunit, \"%s\")." file-name))))))
 
+(defun erl-run-all-ct-suites()
+  (interactive)
+  (let ((dir-name (file-name-directory (buffer-file-name))))
+    (erl-eval (format "user_action:test(ct, \"%s\")." dir-name))))
+
 (defun erl-run-testcase-with-options (test-options)
   (let ((function-name (erlang-function-name))
         (file-name (buffer-file-name))
