@@ -181,7 +181,7 @@
   ("marmalade" . "http://marmalade-repo.org/packages/"))))
 '(package-selected-packages
 (quote
- (python-mode gradle-mode color-theme-solarized grandshell-theme emamux magit multiple-cursors flymake-cursor anti-zenburn-theme adoc-mode color-theme-sanityinc-solarized rfringe wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme magithub intellij-theme doom-themes github-browse-file virtualenvwrapper docker groovy-mode yaml-mode wsd-mode windata wgrep-helm web-mode sublime-themes sqlup-mode skewer-mode sass-mode rvm rsense restclient projectile-rails powerline paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point color-theme-sanityinc-tomorrow color-theme-monokai coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm)))
+ (synonyms synonymous monokai-theme monochrome-theme alect-themes python-mode gradle-mode color-theme-solarized grandshell-theme emamux magit multiple-cursors flymake-cursor anti-zenburn-theme adoc-mode color-theme-sanityinc-solarized rfringe wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme magithub intellij-theme doom-themes github-browse-file virtualenvwrapper docker groovy-mode yaml-mode wsd-mode windata wgrep-helm web-mode sublime-themes sqlup-mode skewer-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point color-theme-sanityinc-tomorrow color-theme-monokai coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(projectile-completion-system (quote helm))
  '(projectile-enable-caching t)
@@ -261,6 +261,8 @@
  '(sql-mysql-options (quote ("--unbuffered" "-A")))
  '(sql-mysql-program "/usr/local/bin/mysql")
  '(sql-password "")
+ '(synonyms-cache-file "")
+ '(synonyms-file "~/.emacs.d/mthesaur.txt")
 '(term-bind-key-alist
 (quote
  (("C-c C-c" . term-interrupt-subjob)
