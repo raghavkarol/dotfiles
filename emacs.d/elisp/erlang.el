@@ -43,7 +43,7 @@
 (add-hook 'erlang-mode-hook (lambda () (linum-mode)))
 
 ;; Distel
-(add-to-list 'load-path "/usr/local/share/distel/elisp")
+(add-to-list 'load-path "/Users/raghav/github/distel/elisp")
 (require 'distel)
 (distel-setup)
 
