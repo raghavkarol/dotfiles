@@ -5,6 +5,7 @@
 (defun erlang-key-bindings()
   (local-set-key (kbd "C-x e") 'erl-run-suite)
   (local-set-key (kbd "C-x C-e") 'erl-run-testcase)
+  (local-set-key (kbd "C-x C-r") 'erl-run-testcase-repeat)
   (local-set-key (kbd "C-M-x") 'erl-compile-reload-buffer)
   (local-set-key (kbd "C-c .") 'erl-find-source-under-point)
   (local-set-key (kbd "C-c ,") 'erl-find-source-unwind))
