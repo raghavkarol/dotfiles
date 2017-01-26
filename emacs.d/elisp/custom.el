@@ -19,13 +19,12 @@
 ")))
  '(compilation-error-regexp-alist
    (quote
-    (("^\\(.*?\\) info on line \\([0-9]+\\)
->>>: \\(.+\\)$"
-      (1 "%s.erl" "../test/%s.erl")
-      2 nil 0 3)
+    (("^>>> \\(.*?\\):\\([0-9]+\\) -- \\(.+\\)$"
+      (1 "%s.erl" "../test/%s.erl" "../src/%s.erl")
+      2 nil nil 3)
      ("^\\(.*?\\)\\(?:_meck_original\\)?:\\(.*?\\) failed on line \\([0-9]+\\)
 Reason: \\(.+\\)$"
-      (1 "%s.erl" "../test/%s.erl")
+      (1 "%s.erl" "../test/%s.erl" "../src/%s.erl")
       3 nil nil 4)
      absoft ada aix ant bash borland python-tracebacks-and-caml comma cucumber msft edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint guile-file guile-line)))
  '(compilation-window-height 20)
