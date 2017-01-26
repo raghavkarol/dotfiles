@@ -61,12 +61,12 @@
 
 ;; comint erlang nodes
 (defconst riak-kv "riak_kv")
-(defconst riak-kv "riak_kv")
+(defconst riak-s3-api "riak_s3_api")
 (defconst dev1 "dev1")
 
 (defun erlang-start-riak-kv ()
   (interactive)
-  (erlang-start-riak_ee-dep riak-kv))
+  (erlang-start-node riak-kv))
 
 (defun erlang-stop-riak-kv ()
   (interactive)
@@ -76,9 +76,17 @@
   (interactive)
   (erlang-show-node riak-kv))
 
+(defun erlang-clear-output-riak-kv ()
+  (interactive)
+  (erlang-clear-output-node riak-kv))
+
+(defun erlang-flush-compilation-errors-riak-kv ()
+  (interactive)
+  (erlang-flush-compilation-errors-node riak-kv))
+
 (defun erlang-start-riak-s3-api ()
   (interactive)
-  (erlang-start-riak_ee-dep riak-s3-api))
+  (erlang-start-node riak-s3-api))
 
 (defun erlang-stop-riak-s3-api ()
   (interactive)
@@ -100,19 +108,42 @@
   (interactive)
   (erlang-stop-node dev1))
 
+
 (defun erlang-start-dev (node)
   (let ((buffer
          (make-comint node "/usr/local/bin/zsh" nil "--login")))
+    (with-current-buffer buffer
+      (compilation-minor-mode 't))
     (display-buffer buffer)
     (comint-send-erlang-node node (format "cd ~/github/riak_ee && echo"))
     (comint-send-erlang-node node (format "dev/%s/bin/riak console -- dev" node)))) ;
 
-(defun erlang-start-riak_ee-dep (node)
+(defun is-riak_ee_release (node)
+  (string-match "dev[1-9]" node))
+
+(erlang-stop-node "riak_kv")
+
+(erlang-start-node "riak_kv")
+
+(defun erlang-start-node (node)
   (let ((buffer
-         (make-comint node "/usr/local/bin/zsh" nil "--login")))
+         (make-comint node "/usr/local/bin/zsh" nil "--login"))
+        (node-home
+         (cond ((is-riak_ee_release node)
+                (format "~/github/riak_ee/" node))
+               ('t
+                (format "~/github/riak_ee/deps/%s" node))))
+        (node-start-cmd
+         (cond ((is-riak_ee_release node)
+                (format "rlwrap dev/%s/bin/riak console -- dev" node))
+               ('t
+                (format "rlwrap erl -setcookie riak -name %s@127.0.0.1 -- dev" node)))))
+    (with-current-buffer buffer
+      (next-error-follow-minor-mode)
+      (compilation-minor-mode 't))
     (display-buffer buffer)
-    (comint-send-erlang-node node (format "cd ~/github/riak_ee/deps/%s && echo" node))
-    (comint-send-erlang-node node (format "rlwrap erl -setcookie riak -name %s@127.0.0.1 -- dev" node))))
+    (comint-send-erlang-node node (format "cd %s && echo" node-home))
+    (comint-send-erlang-node node node-start-cmd)))
 
 (defun erlang-show-node (node)
   (let ((buffer-name (comint-to-buffer-name node)))
@@ -126,6 +157,15 @@
         (comint-send-string (get-buffer-process buffer-name)
                         "q().\n")
       (message (format "no %s node running" node)))))
+
+(defun erlang-clear-output-node (node)
+  (with-current-buffer (comint-to-buffer-name node)
+    (erase-buffer)))
+
+(defun erlang-flush-compilation-errors-node (node)
+  (with-current-buffer (comint-to-buffer-name node)
+    (compilation-minor-mode 0)
+    (compilation-minor-mode 1)))
 
 (defun comint-to-buffer-name (node)
   (format "*%s*" node))
