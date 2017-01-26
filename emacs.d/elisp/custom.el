@@ -17,6 +17,17 @@
  '(column-number-mode t)
  '(compilation-environment (quote ("TERM=eterm-color
 ")))
+ '(compilation-error-regexp-alist
+   (quote
+    (("^\\(.*?\\) info on line \\([0-9]+\\)
+>>>: \\(.+\\)$"
+      (1 "%s.erl")
+      2 nil 0 3)
+     ("^\\(.*?\\):\\(.*?\\) failed on line \\([0-9]+\\)
+Reason: \\(.+\\)$"
+      (1 "%s.erl")
+      3 nil nil 4)
+     absoft ada aix ant bash borland python-tracebacks-and-caml comma cucumber msft edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint guile-file guile-line)))
  '(compilation-window-height 20)
  '(create-lockfiles nil)
  '(custom-enabled-themes nil)
@@ -76,6 +87,7 @@ static char *note[] = {
 \"#######..#\" };")))
  '(explicit-bash-args (quote ("--login" "-i")))
  '(fci-rule-color "#383838")
+ '(flymake-error-bitmap (quote exclation-mark))
  '(flymake-log-level -1)
  '(gnuplot-program "/usr/local/bin/gnuplot")
  '(gnus-logo-colors (quote ("#4c8383" "#bababa")))
@@ -367,4 +379,11 @@ static char *gnus-pointer[] = {
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "Inconsolata" :foundry "nil" :slant normal :weight normal :height 130 :width normal))))
- '(elscreen-tab-other-screen-face ((t (:background "dark gray" :foreground "black")))))
+ '(compilation-error ((t (:foreground "tomato"))))
+ '(compilation-info ((t (:foreground "spring green" :overline nil :underline nil))))
+ '(compilation-mode-line-fail ((t (:foreground "tomato" :weight bold))))
+ '(compilation-mode-line-run ((t (:foreground "spring green"))))
+ '(compilation-warning ((t (:foreground "yellow1"))))
+ '(elscreen-tab-other-screen-face ((t (:background "dark gray" :foreground "black"))))
+ '(flymake-errline ((t (:underline "tomato"))))
+ '(flymake-warnline ((t (:underline "yellow1")))))
