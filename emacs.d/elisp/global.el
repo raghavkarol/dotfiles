@@ -21,6 +21,7 @@
 ;; White space cleanup on writing files
 (add-hook 'write-file-hooks 'delete-trailing-blank-lines)
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 (require 'org)
 (setq initial-scratch-message "* -- ORG SCRATCH BUFFER -- ")
