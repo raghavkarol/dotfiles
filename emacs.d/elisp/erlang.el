@@ -156,6 +156,11 @@
                       (format "%s\n" cmd)))
 
 (add-to-list 'display-buffer-alist
+             '("\\*compilation\\*"
+               (display-buffer-reuse-window)
+               (reusable-frames . visible)
+               (window-height   . 0.3)))
+(add-to-list 'display-buffer-alist
              '("\\*riak_kv\\*"
                (display-buffer-reuse-window)
                (reusable-frames . visible)
