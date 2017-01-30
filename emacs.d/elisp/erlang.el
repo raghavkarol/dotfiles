@@ -35,7 +35,7 @@
 (add-hook 'erlang-mode-hook 'erlang-editing-hook)
 (add-hook 'erlang-mode-hook 'projectile-mode)
 (add-hook 'erlang-mode-hook 'yas-minor-mode)
-(add-hook 'erlang-mode-hook (lambda () (linum-mode)))
+(add-hook 'erlang-mode-hook 'linum-mode)
 
 ;; Distel
 (add-to-list 'load-path "/Users/raghav/github/distel/elisp")
