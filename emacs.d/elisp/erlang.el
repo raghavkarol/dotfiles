@@ -3,9 +3,10 @@
 ;; -----------------------------------------------------------------------------
 ;; Hook Definitions
 (defun erlang-key-bindings()
-  (local-set-key (kbd "C-x e") 'erl-run-suite)
-  (local-set-key (kbd "C-x C-e") 'erl-run-testcase)
-  (local-set-key (kbd "C-x C-r") 'erl-run-testcase-repeat)
+  (local-set-key (kbd "C-x c") 'show-compilation-window)
+  (local-set-key (kbd "C-x e") 'erlang-run-suite)
+  (local-set-key (kbd "C-x C-e") 'erlang-run-testcase)
+  (local-set-key (kbd "C-x C-r") 'erlang-repeat-testcase)
   (local-set-key (kbd "C-M-x") 'erl-compile-reload-buffer)
   (local-set-key (kbd "C-c .") 'erl-find-source-under-point)
   (local-set-key (kbd "C-c ,") 'erl-find-source-unwind))
@@ -59,71 +60,51 @@
 (setq eqc-root-dir "/usr/local/Cellar/erlang-r18/18.3.4/lib/erlang/lib/eqc-1.38.3")
 ;; EQC Emacs Mode -- Configuration End
 
-;; comint erlang nodes
-(defconst riak-kv "riak_kv")
-(defconst riak-s3-api "riak_s3_api")
-(defconst dev1 "dev1")
-
-(defun erlang-start-riak-kv ()
+(defun show-compilation-window ()
   (interactive)
-  (erlang-start-node riak-kv))
+  (display-buffer "*compilation*"))
 
-(defun erlang-stop-riak-kv ()
+(setq erlang-node-name nil)
+
+(defun erlang-run-testcase ()
   (interactive)
-  (erlang-stop-node riak-kv))
+  (erlang-run-lambda 'erl-run-testcase))
 
-(defun erlang-show-riak-kv-node ()
+(defun erlang-repeat-last-testcase ()
   (interactive)
-  (erlang-show-node riak-kv))
+  (erlang-run-lambda 'erl-run-testcase-repeat))
 
-(defun erlang-clear-output-riak-kv ()
+(defun erlang-run-suite ()
   (interactive)
-  (erlang-clear-output-node riak-kv))
+  (erlang-run-lambda 'erl-run-suite))
 
-(defun erlang-flush-compilation-errors-riak-kv ()
+(defun erlang-start (arg &optional input)
+  (interactive "P\nsNode name: ")
+  (setq erlang-node-name input)
+  (erlang-start-node erlang-node-name))
+
+(defun erlang-stop ()
   (interactive)
-  (erlang-flush-compilation-errors-node riak-kv))
+  (erlang-stop-node erlang-node-name))
 
-(defun erlang-start-riak-s3-api ()
+(defun erlang-show ()
   (interactive)
-  (erlang-start-node riak-s3-api))
+  (erlang-show-node erlang-node-name))
 
-(defun erlang-stop-riak-s3-api ()
+(defun erlang-clear ()
   (interactive)
-  (erlang-stop-node riak-s3-api))
+  (erlang-clear-output-node erlang-node-name))
 
-(defun erlang-show-riak-s3-api-node ()
-  (interactive)
-  (erlang-show-node riak-s3-api))
-
-(defun erlang-start-dev1 ()
-  (interactive)
-  (erlang-start-dev dev1))
-
-(defun erlang-show-dev1 ()
-  (interactive)
-  (erlang-show-node dev1))
-
-(defun erlang-stop-dev1 ()
-  (interactive)
-  (erlang-stop-node dev1))
-
-
-(defun erlang-start-dev (node)
-  (let ((buffer
-         (make-comint node "/usr/local/bin/zsh" nil "--login")))
-    (with-current-buffer buffer
-      (compilation-minor-mode 't))
-    (display-buffer buffer)
-    (comint-send-erlang-node node (format "cd ~/github/riak_ee && echo"))
-    (comint-send-erlang-node node (format "dev/%s/bin/riak console -- dev" node)))) ;
+(defun erlang-run-lambda (fun)
+    (erlang-flush-compilation)
+    (erlang-show)
+    (funcall fun))
 
 (defun is-riak_ee_release (node)
   (string-match "dev[1-9]" node))
 
-(erlang-stop-node "riak_kv")
-
-(erlang-start-node "riak_kv")
+(defun erlang-flush-compilation ()
+  (erlang-flush-compilation-errors-node erlang-node-name))
 
 (defun erlang-start-node (node)
   (let ((buffer
