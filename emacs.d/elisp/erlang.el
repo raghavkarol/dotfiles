@@ -155,6 +155,36 @@
   (comint-send-string (get-buffer-process (comint-to-buffer-name node))
                       (format "%s\n" cmd)))
 
+(defconst erlang-breadcrumb-buffer-name
+  "*erlang-breadcrumbs*")
+
+(defun get-current-line-text ()
+  (buffer-substring-no-properties
+   (line-beginning-position)
+   (line-end-position)))
+
+(defun erlang-breadmcrumbs-show ()
+  (interactive)
+  (display-buffer(get-buffer-create erlang-breadcrumb-buffer-name)))
+
+(defun erlang-breadcrumbs-mark ()
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (line-number (line-number-at-pos))
+        (line (get-current-line-text)))
+    (with-current-buffer (get-buffer-create erlang-breadcrumb-buffer-name)
+      (read-only-mode 0)
+      (insert (format "%s:%s: %s\n" filename line-number line))
+      (display-buffer (current-buffer))
+      (grep-mode))))
+
+(defun erlang-breadcrumbs-clear ()
+  (interactive)
+  (with-current-buffer (get-buffer-create erlang-breadcrumb-buffer-name)
+    (read-only-mode 0)
+    (erase-buffer)
+    (grep-mode)))
+
 (add-to-list 'display-buffer-alist
              '("\\*compilation\\*"
                (display-buffer-reuse-window)
