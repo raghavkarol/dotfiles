@@ -195,3 +195,9 @@
                (display-buffer-reuse-window)
                (reusable-frames . visible)
                (window-height   . 0.3)))
+
+(add-to-list 'display-buffer-alist
+             '("\\*erlang-breadcrumbs\\*"
+               (display-buffer-reuse-window)
+               (reusable-frames . visible)
+               (window-height   . 0.3)))
