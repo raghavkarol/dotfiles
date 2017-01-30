@@ -15,18 +15,7 @@
   (imenu-add-to-menubar "imenu")
   (local-set-key [return] 'newline-and-indent))
 
-;; (defun erlang-whitespace-cleanup-hook
-;;   (add-hook 'local-write-file-hooks
-;;             (save-excursion
-;;               (delete-trailing-whitespace))))
-
 ;; Erlang runtime customization
-
-;; Erlang R18
-;; -
-;; (setq erlang-home "/usr/local/Cellar/erlang-r18/18.3.4/")
-;; (setq erlang-tools-lib "lib/erlang/lib/tools-2.8.3/emacs")
-;; (setq eqc-tools-lib "lib/erlang/lib/eqc-1.38.3/emacs/")
 
 ;; Erlang R16
 (setq erlang-home "/Users/raghav/erlang/R16B02/")
@@ -34,10 +23,11 @@
 (setq eqc-tools-lib "lib/eqc-1.36.1/emacs/")
 
 (setq erlang-emacs-load-path (concat erlang-home erlang-tools-lib))
-(add-to-list 'load-path erlang-emacs-load-path)
 (setq erlang-root-dir erlang-home)
-(add-to-list 'exec-path (concat erlang-home "bin"))
 (setq erlang-electric-commands nil)
+(add-to-list 'load-path erlang-emacs-load-path)
+(add-to-list 'exec-path (concat erlang-home "bin"))
+
 (require 'erlang-start)
 
 ;; Erlang hooks
