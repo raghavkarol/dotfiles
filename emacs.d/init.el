@@ -32,6 +32,10 @@
 (my-load 'yas)
 (my-load 'global)
 
+
+;;
+(setq magit-last-seen-setup-instructions "1.4.0")
+
 ;; Load saved sessions
 (when (file-exists-p my-current-session)
   (add-to-list 'kill-emacs-hook (lambda () (save-session)))
