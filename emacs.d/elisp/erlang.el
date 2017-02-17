@@ -6,7 +6,7 @@
   (local-set-key (kbd "C-x c") 'show-compilation-window)
   (local-set-key (kbd "C-x e") 'erlang-run-suite)
   (local-set-key (kbd "C-x C-e") 'erlang-run-testcase)
-  (local-set-key (kbd "C-x C-r") 'erlang-repeat-testcase)
+  (local-set-key (kbd "C-x C-r") 'erlang-repeat-test)
   (local-set-key (kbd "C-M-x") 'erl-compile-reload-buffer)
   (local-set-key (kbd "C-c .") 'erl-find-source-under-point)
   (local-set-key (kbd "C-c ,") 'erl-find-source-unwind))
@@ -60,7 +60,7 @@
   (interactive)
   (erlang-run-lambda 'erl-run-testcase))
 
-(defun erlang-repeat-last-testcase ()
+(defun erlang-repeat-test ()
   (interactive)
   (erlang-run-lambda 'erl-run-testcase-repeat))
 
