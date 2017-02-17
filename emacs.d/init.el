@@ -8,7 +8,7 @@
 (package-initialize) ; Added by package.el, don't delete, comment out instead
 
 (my-load 'projectile)
-(my-load 'rfringe)
+;; (my-load 'rfringe)
 (my-load 'autopair)
 (my-load 'flymake)
 (my-load 'elscreen)
