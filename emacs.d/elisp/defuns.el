@@ -59,9 +59,19 @@
           ('t
            (erl-eval (format "user_action:test(eunit, \"%s\")." file-name))))))
 
+
+;;; Find if current directory is test
+(defun erlang-discover-test-dir (path)
+  (let* ((dir (directory-file-name (file-name-directory path)))
+         (maybe-test-dir (concat dir "/test")))
+    (cond ((file-directory-p maybe-test-dir) maybe-test-dir)
+          ((string-match "^/$" path) nil)
+          ('t (erlang-discover-test-dir (file-name-directory dir))))))
+
+
 (defun erl-run-all-ct-suites()
   (interactive)
-  (let ((dir-name (file-name-directory (buffer-file-name))))
+  (let ((dir-name (erlang-discover-test-dir (buffer-file-name))))
     (erl-eval (format "user_action:test(ct, \"%s\")." dir-name))))
 
 (defun erl-run-testcase-with-options (test-options)
