@@ -120,10 +120,10 @@ static char *gnus-pointer[] = {
  '(helm-candidate-number-limit 16)
  '(helm-find-files-actions
    (quote
-    (("Find File in Elscreen " . helm-elscreen-find-file)
+    (("Find filex" . helm-find-file-or-marked)
      ("Find file in Dired" . helm-point-file-in-dired)
-     ("Find file" . helm-find-file-or-marked)
      ("View file" . view-file)
+     ("Find File in Elscreen " . helm-elscreen-find-file)
      ("Checksum File" . helm-ff-checksum)
      ("Query replace fnames on marked" . helm-ff-query-replace-on-marked)
      ("Query replace contents on marked" . helm-ff-query-replace)
@@ -165,10 +165,10 @@ static char *gnus-pointer[] = {
  '(helm-projectile-fuzzy-match nil)
  '(helm-type-buffer-actions
    (quote
-    (("Display buffer in Elscreen" . helm-find-buffer-on-elscreen)
+    (("Switch to buffer(s)" . helm-switch-to-buffers)
      ("Switch to buffer(s) other window `C-c o'" . helm-switch-to-buffers-other-window)
      ("Switch to buffer other frame `C-c C-o'" . switch-to-buffer-other-frame)
-     ("Switch to buffer(s)" . helm-switch-to-buffers)
+     ("Display buffer in Elscreen" . helm-find-buffer-on-elscreen)
      ("Query replace regexp `C-M-%'" . helm-buffer-query-replace-regexp)
      ("Query replace `M-%'" . helm-buffer-query-replace)
      ("View buffer" . view-buffer)
