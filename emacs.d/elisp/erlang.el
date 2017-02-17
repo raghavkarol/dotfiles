@@ -88,27 +88,31 @@
 (defun erlang-run-lambda (fun)
     (erlang-flush-compilation)
     (erlang-show)
+    (erlang-clear)
     (funcall fun))
-
-(defun is-riak_ee_release (node)
-  (string-match "dev[1-9]" node))
 
 (defun erlang-flush-compilation ()
   (erlang-flush-compilation-errors-node erlang-node-name))
 
+(defun erlang-node-home (node)
+  (cond ((file-directory-p (format "~/github/riak_ee/deps/%s" node))
+         (format "~/github/riak_ee/deps/%s" node))
+        ((file-directory-p (format "~/github/riak_ee/dev/%s" node))
+         (format "~/github/riak_ee/"))
+        ((file-directory-p (format "~/github/%s" node))
+         (format "~/github/%s" node))
+        ('t (error (format "Could not find home directory for node %s" node)))))
+
+(defun erlang-node-start-cmd (node)
+  (cond ((string-match "dev[1-9]" node)
+         (format "rlwrap dev/%s/bin/riak console -- dev" node))
+        ('t
+         (format "rlwrap erl -setcookie riak -name %s@127.0.0.1 -- dev" node))))
+
 (defun erlang-start-node (node)
-  (let ((buffer
-         (make-comint node "/usr/local/bin/zsh" nil "--login"))
-        (node-home
-         (cond ((is-riak_ee_release node)
-                (format "~/github/riak_ee/" node))
-               ('t
-                (format "~/github/riak_ee/deps/%s" node))))
-        (node-start-cmd
-         (cond ((is-riak_ee_release node)
-                (format "rlwrap dev/%s/bin/riak console -- dev" node))
-               ('t
-                (format "rlwrap erl -setcookie riak -name %s@127.0.0.1 -- dev" node)))))
+  (let* ((node-home (erlang-node-home node))
+         (node-start-cmd (erlang-node-start-cmd node))
+         (buffer (make-comint node "/usr/local/bin/zsh" nil "--login")))
     (with-current-buffer buffer
       (next-error-follow-minor-mode)
       (compilation-minor-mode 't))
