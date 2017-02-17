@@ -17,18 +17,26 @@
 
 ;; Erlang runtime customization
 
-;; Erlang R16
-(setq erlang-home "/Users/raghav/erlang/R16B02/")
-(setq erlang-tools-lib "lib/tools-2.6.12/emacs/")
-(setq eqc-tools-lib "lib/eqc-1.36.1/emacs/")
+;; (setq erlang-home "/Users/raghav/erlang/R16B02/")
+(setq erlang-home "/Users/raghav/erlang/19.2/")
 
-(setq erlang-emacs-load-path (concat erlang-home erlang-tools-lib))
-(setq erlang-root-dir erlang-home)
-(setq erlang-electric-commands nil)
-(add-to-list 'load-path erlang-emacs-load-path)
+(defun erlang-get-current-version (lib)
+  (car (file-expand-wildcards
+        (format "%slib/%s" erlang-home lib))))
+
+(add-to-list 'load-path (erlang-get-current-version "tools-*/emacs"))
 (add-to-list 'exec-path (concat erlang-home "bin"))
 
+(setq erlang-electric-commands nil)
 (require 'erlang-start)
+
+;; EQC Emacs Mode -- Configuration Start
+(add-to-list 'load-path (erlang-get-current-version "eqc-*/emacs"))
+(autoload 'eqc-erlang-mode-hook "eqc-ext" "EQC Mode" t)
+(add-hook 'erlang-mode-hook 'eqc-erlang-mode-hook)
+(setq eqc-max-menu-length 30)
+(setq eqc-root-dir (erlang-get-current-version "eqc-*"))
+;; EQC Emacs Mode -- Configuration End
 
 ;; Erlang hooks
 (add-hook 'erlang-mode-hook 'erlang-key-bindings)
@@ -42,13 +50,6 @@
 (require 'distel)
 (distel-setup)
 
-;; EQC Emacs Mode -- Configuration Start
-(add-to-list 'load-path (concat erlang-home eqc-tools-lib))
-(autoload 'eqc-erlang-mode-hook "eqc-ext" "EQC Mode" t)
-(add-hook 'erlang-mode-hook 'eqc-erlang-mode-hook)
-(setq eqc-max-menu-length 30)
-(setq eqc-root-dir "/usr/local/Cellar/erlang-r18/18.3.4/lib/erlang/lib/eqc-1.38.3")
-;; EQC Emacs Mode -- Configuration End
 
 (defun show-compilation-window ()
   (interactive)
