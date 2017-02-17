@@ -186,10 +186,10 @@ static char *gnus-pointer[] = {
             4 "
 
 (fn CANDIDATE)"]))))
+ '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(horizontal-scroll-bar-mode nil)
  '(httpd-port 9080)
  '(jenkins-api-url "http://jenkins.issuu.com/job/Publish-Api/801/api/xml")
- '(line-number-mode t)
  '(linum-format (quote dynamic))
  '(mode-line-format
 (quote
