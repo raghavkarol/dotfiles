@@ -199,9 +199,19 @@
                (display-buffer-reuse-window)
                (reusable-frames . visible)
                (window-height   . 0.3)))
-
+(add-to-list 'display-buffer-alist
+             '("\\*erl_scripts\\*"
+               (display-buffer-reuse-window)
+               (reusable-frames . visible)
+               (window-height   . 0.3)))
 (add-to-list 'display-buffer-alist
              '("\\*erlang-breadcrumbs\\*"
+               (display-buffer-reuse-window)
+               (reusable-frames . visible)
+               (window-height   . 0.3)))
+;;; Distel completion list
+(add-to-list 'display-buffer-alist
+             '("\\*Completions\\*"
                (display-buffer-reuse-window)
                (reusable-frames . visible)
                (window-height   . 0.3)))
