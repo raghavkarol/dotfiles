@@ -19,7 +19,9 @@
 ")))
  '(compilation-error-regexp-alist
    (quote
-    (("^>>> \\(.*?\\):\\([0-9]+\\) -- \\(.+\\)$"
+    (("\\(.+\\)
+ *\\([0-9]+\\):\\(.+\\)" 1 2 nil nil 3)
+     ("^>>> \\(.*?\\):\\([0-9]+\\) -- \\(.+\\)$"
       (1 "%s.erl" "../test/%s.erl" "../src/%s.erl")
       2 nil nil 3)
      ("^\\(.*?\\)\\(?:_meck_original\\)?:\\(.*?\\) failed on line \\([0-9]+\\)
@@ -189,6 +191,7 @@ static char *gnus-pointer[] = {
  '(help-at-pt-display-when-idle (quote (flymake-overlay)) nil (help-at-pt))
  '(horizontal-scroll-bar-mode nil)
  '(httpd-port 9080)
+ '(indent-tabs-mode nil)
  '(jenkins-api-url "http://jenkins.issuu.com/job/Publish-Api/801/api/xml")
  '(linum-format (quote dynamic))
  '(mode-line-format
@@ -236,7 +239,7 @@ static char *gnus-pointer[] = {
   ("marmalade" . "http://marmalade-repo.org/packages/"))))
 '(package-selected-packages
 (quote
- (company-distel company blank-mode blackboard-theme zenburn-theme base16-theme synonyms synonymous python-mode gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode rfringe wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme magithub intellij-theme doom-themes github-browse-file virtualenvwrapper docker groovy-mode yaml-mode wsd-mode windata wgrep-helm web-mode sqlup-mode skewer-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm)))
+ (dockerfile-mode graphviz-dot-mode company-distel company blank-mode blackboard-theme zenburn-theme base16-theme synonyms synonymous python-mode gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode rfringe wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme magithub intellij-theme doom-themes github-browse-file virtualenvwrapper docker groovy-mode yaml-mode wsd-mode windata wgrep-helm web-mode sqlup-mode skewer-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(projectile-completion-system (quote helm))
  '(projectile-enable-caching t)
@@ -246,7 +249,8 @@ static char *gnus-pointer[] = {
  '(ropemacs-enable-shortcuts nil)
 '(safe-local-variable-values
 (quote
- ((eval setq derl-cookie "riak"))))
+ ((projectile-use-git-grep t)
+  (eval setq derl-cookie "riak"))))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
  '(speedbar-directory-button-trim-method (quote trim))
@@ -332,6 +336,7 @@ static char *gnus-pointer[] = {
  '(vc-annotate-very-old-color "#DC8CC3")
  '(visible-bell nil)
  '(wsd-style "napkin")
+ '(yas-indent-line (quote fixed))
 '(yas-prompt-functions
 (quote
  (yas-completing-prompt yas-x-prompt yas-dropdown-prompt yas-ido-prompt yas-no-prompt))))
