@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pal
+# key: pal
+# --
+ct:pal("$1 - ~p", [$1]),

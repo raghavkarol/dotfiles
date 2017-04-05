@@ -1,0 +1,7 @@
+# -*- mode: org -*-
+# name: src
+# key: src
+# --
+#+begin_src ${1:src} :results output
+$0
+#+end_src

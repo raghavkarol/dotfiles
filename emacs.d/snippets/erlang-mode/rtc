@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rtc
+# key: rtc
+# --
+recon_trace:calls({${1:<module>}, ${2:'_'}, ${3:'_'} }, 100).

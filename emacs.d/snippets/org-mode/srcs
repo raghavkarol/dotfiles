@@ -1,0 +1,7 @@
+# -*- mode: org -*-
+# name: srcs
+# key: srcs
+# --
+#+begin_src sh :results output
+$0
+#+end_src

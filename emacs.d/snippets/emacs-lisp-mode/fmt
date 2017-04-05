@@ -1,0 +1,4 @@
+# key: fmt
+# name: fmt
+# --
+(format "$1:  %S" $1)

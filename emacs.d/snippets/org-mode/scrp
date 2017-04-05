@@ -1,0 +1,7 @@
+# -*- mode: org -*-
+# name: srcp
+# key: srcp
+# --
+#+begin_src python :results output
+$0
+#+end_src

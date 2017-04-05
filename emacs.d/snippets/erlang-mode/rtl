@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rtl
+# key: rtl
+# --
+recon_trace:calls({${1:M}, ${2:F}, fun(_) -> return_trace() end}, 10, [{scope, local}]).

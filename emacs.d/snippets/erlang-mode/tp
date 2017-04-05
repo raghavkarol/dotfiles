@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: trace_print
+# key: tp
+# --
+io:format(user, "~n>>> ~s:~p -- ~p~n", [?MODULE, ?LINE, $1]),
