@@ -181,39 +181,9 @@
     (erase-buffer)
     (grep-mode)))
 
+
 (add-to-list 'display-buffer-alist
-             '("\\*compilation\\*"
-               (display-buffer-reuse-window)
-               (reusable-frames . visible)
-               (window-height   . 0.3)))
-(add-to-list 'display-buffer-alist
-             '("\\*riak_kv\\*"
-               (display-buffer-reuse-window)
-               (reusable-frames . visible)
-               (window-height   . 0.3)))
-(add-to-list 'display-buffer-alist
-             '("\\*riak_s3_api\\*"
-               (display-buffer-reuse-window)
-               (reusable-frames . visible)
-               (window-height   . 0.3)))
-(add-to-list 'display-buffer-alist
-             '("\\*dev[1-9]\\*"
-               (display-buffer-reuse-window)
-               (reusable-frames . visible)
-               (window-height   . 0.3)))
-(add-to-list 'display-buffer-alist
-             '("\\*erl_scripts\\*"
-               (display-buffer-reuse-window)
-               (reusable-frames . visible)
-               (window-height   . 0.3)))
-(add-to-list 'display-buffer-alist
-             '("\\*erlang-breadcrumbs\\*"
-               (display-buffer-reuse-window)
-               (reusable-frames . visible)
-               (window-height   . 0.3)))
-;;; Distel completion list
-(add-to-list 'display-buffer-alist
-             '("\\*Completions\\*"
+             '("\\*.+?\\*"
                (display-buffer-reuse-window)
                (reusable-frames . visible)
                (window-height   . 0.3)))
