@@ -43,4 +43,4 @@
 
 ;; Reload theme, switch-session does not restore all colors in the
 ;; session correctly
-(load-theme 'zenburn)
+(load-theme 'base16-3024)
