@@ -1,4 +1,4 @@
-# If you come from bash you might have to change your $PATH.
+s# If you come from bash you might have to change your $PATH.
 export PATH="$HOME/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
@@ -86,7 +86,7 @@ alias rebar="./rebar"
 alias mux="tmux"
 
 echo 'activating Erlang R16 for RIAK'
-. /Users/$USERNAME/erlang/R16B02/activate
+. /Users/$USERNAME/erlang/16.2-basho10/activate
 # echo 'activating Erlang OTP 19.2'
 # . /Users/$USER/erlang/19.2/activate
 
