@@ -1,0 +1,2 @@
+KERL_CONFIGURE_OPTIONS="--enable-darwin-64bit --enable-hipe --enable-vm-probes --with-dynamic-trace=dtrace --enable-kernel-poll --enable-threads --enable-smp-support --with-ssl=/usr/local/opt/openssl"
+KERL_CONFIGURE_DISABLE_APPLICATIONS="odbc"
