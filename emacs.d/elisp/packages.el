@@ -39,6 +39,12 @@
   :ensure t)
 (use-package magit
   :ensure t)
+(use-package eww
+  :ensure t)
+(use-package python-mode
+  :ensure t)
+(use-package jedi
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme
