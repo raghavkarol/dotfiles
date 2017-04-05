@@ -97,18 +97,21 @@
   (erlang-flush-compilation-errors-node erlang-node-name))
 
 (defun erlang-node-home (node)
-  (cond ((file-directory-p (format "~/github/riak_ee/deps/%s" node))
+  (cond ((file-directory-p (format "~/github/%s" node))
+         (format "~/github/%s" node))
+        ((file-directory-p (format "~/github/riak_ee/deps/%s" node))
          (format "~/github/riak_ee/deps/%s" node))
+        ((file-directory-p (format "~/github/riak_kv/deps/%s" node))
+         (format "~/github/riak_kv/deps/%s" node))
         ((file-directory-p (format "~/github/riak_ee/dev/%s" node))
          (format "~/github/riak_ee/"))
-        ((file-directory-p (format "~/github/%s" node))
-         (format "~/github/%s" node))
         ('t (error (format "Could not find home directory for node %s" node)))))
 
 (defun erlang-node-start-cmd (node)
   (cond ((string-match "dev[1-9]" node)
          (format "rlwrap dev/%s/bin/riak console -- dev" node))
         ('t
+         ;; Use -noshell when running EQC tests
          (format "rlwrap erl -setcookie riak -name %s@127.0.0.1 -- dev" node))))
 
 (defun erlang-start-node (node)
