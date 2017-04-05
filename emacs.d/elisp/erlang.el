@@ -17,8 +17,9 @@
 
 ;; Erlang runtime customization
 
-;; (setq erlang-home "/Users/raghav/erlang/R16B02/")
-(setq erlang-home "/Users/raghav/erlang/19.2/")
+(setq erlang-home "/Users/raghav/erlang/16.2-basho10/")
+;; (setq erlang-home "/Users/raghav/erlang/19.2/")
+(setq erlang-root-dir erlang-home)
 
 (defun erlang-get-current-version (lib)
   (car (file-expand-wildcards
