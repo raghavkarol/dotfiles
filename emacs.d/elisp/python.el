@@ -14,21 +14,13 @@
 ;; Jedi
 (defun customize-jedi-python-hook ()
   (jedi:setup)
+  (jedi:ac-setup)
   (setq jedi:setup-keys t)
   (setq jedi:complete-on-dot t)
-  (setq jedi:server-command
-        (list "/usr/local/bin/python" jedi:server-script))
-  ;; (define-key python-mode-map (kbd "RET") 'newline-and-indent)
   (local-set-key (kbd "M-.") 'jedi:goto-definition)
   (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker))
 
 (add-hook 'python-mode-hook 'customize-jedi-python-hook)
 (add-hook 'python-mode-hook 'projectile-mode)
-(add-hook 'inferior-python-mode-hook
-          (lambda () (auto-complete-mode)))
 (add-hook 'python-mode-hook 'yas-minor-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
-
-(require 'virtualenvwrapper)
-(venv-initialize-interactive-shells) ;; if you want interactive shell support
-(setq venv-location '("~/raghav/venv"))
