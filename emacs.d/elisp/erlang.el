@@ -16,8 +16,7 @@
   (local-set-key [return] 'newline-and-indent))
 
 ;; Erlang runtime customization
-
-(setq erlang-home "/Users/raghav/erlang/16.2-basho10/")
+(setq erlang-home (format "/Users/%s/erlang/16.2-basho10/" (user-real-login-name)))
 ;; (setq erlang-home "/Users/raghav/erlang/19.2/")
 (setq erlang-root-dir erlang-home)
 
@@ -47,7 +46,7 @@
 (add-hook 'erlang-mode-hook 'linum-mode)
 
 ;; Distel
-(add-to-list 'load-path "/Users/raghav/github/distel/elisp")
+(add-to-list 'load-path (format "/Users/%s/github/distel/elisp" (user-real-login-name)))
 (require 'distel)
 (distel-setup)
 
