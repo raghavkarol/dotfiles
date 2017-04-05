@@ -7,6 +7,12 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 (package-initialize) ; Added by package.el, don't delete, comment out instead
 
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(my-load 'packages)
 (my-load 'projectile)
 ;; (my-load 'rfringe)
 (my-load 'autopair)
