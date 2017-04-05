@@ -101,3 +101,4 @@ PYTHONPATH=/Users/$USER/github/python_util:$PYTHONPATH
 export PYTHONPATH
 
 # export GRADLE_OPTS=-Dorg.gradle.native=false
+fpath=(/usr/local/share/zsh-completions $fpath)
