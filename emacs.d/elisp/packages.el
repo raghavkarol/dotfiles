@@ -45,6 +45,12 @@
   :ensure t)
 (use-package jedi
   :ensure t)
+(use-package go-mode
+  :ensure t)
+(use-package go-guru
+  :ensure t)
+(use-package go-autocomplete
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme

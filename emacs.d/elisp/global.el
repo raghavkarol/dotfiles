@@ -30,6 +30,7 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 (exec-path-from-shell-copy-env "PYTHONPATH")
+(exec-path-from-shell-copy-env "GOPATH")
 
 ;; Disable scroll bars
 (when (>= emacs-major-version 25)
