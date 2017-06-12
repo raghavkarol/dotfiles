@@ -16,7 +16,7 @@
   (local-set-key [return] 'newline-and-indent))
 
 ;; Erlang runtime customization
-(setq erlang-home (format "/Users/%s/erlang/16.2-basho10/" (user-real-login-name)))
+(setq erlang-home (format "/Users/%s/erlang/R16B02/" (user-real-login-name)))
 ;; (setq erlang-home "/Users/raghav/erlang/19.2/")
 (setq erlang-root-dir erlang-home)
 
