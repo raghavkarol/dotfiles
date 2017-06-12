@@ -6,6 +6,12 @@
 (defun helm-ag--action-find-file (candidate)
   (helm-ag--find-file-action candidate 'elscreen-find-file (helm-ag--search-this-file-p)))
 
+;;; Copied from
+;; https://github.com/lewang/Emacs-helm/blob/master/helm-elscreen.el
+(defun helm-elscreen-find-file (file)
+  (helm-require-or-error 'elscreen 'helm-elscreen-find-file)
+  (elscreen-find-file file))
+
 (require 'helm-config)
 (helm-mode 1)                           ; Enable helm globally
 (global-set-key (kbd "M-o") 'helm-projectile)
