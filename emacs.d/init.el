@@ -36,6 +36,7 @@
 (my-load 'sql)
 (my-load 'expand-region)
 (my-load 'yas)
+(my-load 'haskell)
 (my-load 'go)
 (my-load 'global)
 
