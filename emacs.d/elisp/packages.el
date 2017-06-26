@@ -51,6 +51,8 @@
   :ensure t)
 (use-package go-autocomplete
   :ensure t)
+(use-package gore-mode
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme

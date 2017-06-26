@@ -102,3 +102,10 @@ export PYTHONPATH
 
 # export GRADLE_OPTS=-Dorg.gradle.native=false
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# Go
+GOPATH=/Users/raghav/go
+export GOPATH
+
+PATH=$PATH:$GOPATH/bin
+export PATH
