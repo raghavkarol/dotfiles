@@ -12,11 +12,11 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(my-load 'global)
 (my-load 'packages)
 (my-load 'projectile)
-;; (my-load 'rfringe)
 (my-load 'autopair)
-(my-load 'flymake)
+(my-load 'flycheck)
 (my-load 'elscreen)
 (my-load 'elscreen-sessions)
 (my-load 'erlang)
@@ -38,10 +38,7 @@
 (my-load 'yas)
 (my-load 'haskell)
 (my-load 'go)
-(my-load 'global)
 
-
-;;
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; Load saved sessions
