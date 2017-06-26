@@ -1,12 +1,7 @@
 (require 'auto-complete-config)
-;; (require 'rk-auto-complete-sql-with-database)
 
-(defun ac-sql-issuu()
-  ;; (add-to-list 'ac-sources 'ac-sql-watch-and-register-table-alias)
-  ;; (add-to-list 'ac-sources 'ac-sql-schemas)
-  ;; (add-to-list 'ac-sources 'ac-sql-tables)
-  ;; (add-to-list 'ac-sources 'ac-sql-columns)
-  nil)
+;; (add-to-list 'load-path "/Users/raghav/github/auto-complete-mysql")
+;; (require 'auto-complete-mysql)
 
 (setq ac-ignore-case nil)
 (ac-flyspell-workaround)
