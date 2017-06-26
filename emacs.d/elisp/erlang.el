@@ -182,10 +182,3 @@
     (read-only-mode 0)
     (erase-buffer)
     (grep-mode)))
-
-
-(add-to-list 'display-buffer-alist
-             '("\\*.+?\\*"
-               (display-buffer-reuse-window)
-               (reusable-frames . visible)
-               (window-height   . 0.3)))

@@ -1,3 +1,9 @@
+(add-to-list 'display-buffer-alist
+             '("\\*.+?\\*"
+               (display-buffer-reuse-window)
+               (reusable-frames . visible)
+               (window-height   . 0.3)))
+
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 (global-set-key (kbd "<f1>") 'magit-status)
 (global-set-key (kbd "M-h") 'dash-at-point)
