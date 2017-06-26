@@ -53,6 +53,10 @@
   :ensure t)
 (use-package gore-mode
   :ensure t)
+(use-package yaml-mode
+  :ensure t)
+(use-package magit-gerrit
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme

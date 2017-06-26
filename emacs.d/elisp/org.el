@@ -1,6 +1,5 @@
 (setq org-src-fontify-natively t)       ; syntax highlighting in code-blocks
 (global-set-key (kbd "C-c c") 'org-capture)
-(add-hook 'org-mode-hook 'ac-sql-issuu)
 (add-hook 'org-mode-hook 'auto-complete-mode)
 (add-hook 'org-mode-hook
           (lambda ()
