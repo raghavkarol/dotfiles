@@ -63,8 +63,6 @@
   :ensure t)
 (use-package cmake-ide
   :ensure t)
-(use-package magit-gerrit
-  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme
