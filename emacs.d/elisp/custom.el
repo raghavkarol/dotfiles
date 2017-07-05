@@ -16,6 +16,11 @@
  '(auto-save-default nil)
  '(blink-cursor-mode nil)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(c-default-style
+   (quote
+    ((java-mode . "java")
+     (awk-mode . "awk")
+     (other . "linux"))))
  '(column-number-mode t)
  '(compilation-environment (quote ("TERM=eterm-color
 ")))
@@ -244,7 +249,7 @@ static char *gnus-pointer[] = {
   ("marmalade" . "http://marmalade-repo.org/packages/"))))
 '(package-selected-packages
 (quote
- (cmake-ide irony irony-mode rtags cmake-mode gore-mode magit-gerrit flycheck go-guru go-autocomplete go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm elscreen auto-complete yasnippet yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode company-distel company blank-mode blackboard-theme zenburn-theme base16-theme synonyms synonymous python-mode gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode rfringe wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme magithub intellij-theme doom-themes github-browse-file virtualenvwrapper docker groovy-mode yaml-mode wsd-mode windata wgrep-helm web-mode sqlup-mode skewer-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm)))
+ (company-jedi company-go company cmake-ide irony irony-mode rtags cmake-mode gore-mode flycheck go-guru go-autocomplete go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm elscreen auto-complete yasnippet yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode blank-mode blackboard-theme zenburn-theme base16-theme synonyms synonymous python-mode gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode rfringe wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme magithub intellij-theme doom-themes github-browse-file virtualenvwrapper docker groovy-mode yaml-mode wsd-mode windata wgrep-helm web-mode sqlup-mode skewer-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(projectile-completion-system (quote helm))
  '(projectile-enable-caching t)
@@ -254,7 +259,8 @@ static char *gnus-pointer[] = {
  '(ropemacs-enable-shortcuts nil)
 '(safe-local-variable-values
 (quote
- ((projectile-use-git-grep t)
+ ((jedi:server-args "--virtual-env" "/Users/raghav/gerrit/firmware-integration-tests/_venv" "--sys-path" "/Users/raghav/gerrit/firmware-tests/")
+  (projectile-use-git-grep t)
   (eval setq derl-cookie "riak"))))
  '(send-mail-function (quote mailclient-send-it))
  '(show-paren-mode t)
