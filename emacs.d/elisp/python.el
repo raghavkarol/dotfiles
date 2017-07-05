@@ -11,16 +11,21 @@
  :doc-spec
  '(("(python)Index" nil "")))
 
-;; Jedi
-(defun customize-jedi-python-hook ()
+;;; Start a shell - python-mode virtualenv-activate function requires
+;;; a shell
+(shell)
+
+;;; Jedi Customization
+(defun jedi-python-hook ()
+  (add-to-list 'company-backends 'company-jedi)
+  (company-mode)
   (jedi:setup)
-  (jedi:ac-setup)
   (setq jedi:setup-keys t)
   (setq jedi:complete-on-dot t)
   (local-set-key (kbd "M-.") 'jedi:goto-definition)
   (local-set-key (kbd "M-,") 'jedi:goto-definition-pop-marker))
 
-(add-hook 'python-mode-hook 'customize-jedi-python-hook)
+;;; Hooks
 (add-hook 'python-mode-hook 'projectile-mode)
 (add-hook 'python-mode-hook 'yas-minor-mode)
-(add-hook 'python-mode-hook 'yas-minor-mode)
+(add-hook 'python-mode-hook 'jedi-python-hook)

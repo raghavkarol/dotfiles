@@ -50,4 +50,7 @@
 (setq c-default-style "java"
       c-basic-offset 4)
 
+
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+
 (speedbar 't)

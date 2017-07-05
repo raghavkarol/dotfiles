@@ -43,8 +43,6 @@
   :ensure t)
 (use-package python-mode
   :ensure t)
-(use-package jedi
-  :ensure t)
 (use-package go-mode
   :ensure t)
 (use-package go-guru
@@ -62,6 +60,10 @@
 (use-package rtags
   :ensure t)
 (use-package cmake-ide
+  :ensure t)
+(use-package jedi-core
+  :ensure t)
+(use-package company-jedi
   :ensure t)
 
 ;; Themes
