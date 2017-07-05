@@ -7,6 +7,10 @@
         autopair-insert-opening
         backward-sexp
         beginning-of-defun
+        c-electric-delete-forward
+        c-electric-lt-gt
+        c-electric-semi&comma
+        c-indent-line-or-region
         compile
         dabbrev-expand
         erlang-electric-comma

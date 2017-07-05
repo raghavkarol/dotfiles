@@ -38,6 +38,9 @@
 (my-load 'yas)
 (my-load 'haskell)
 (my-load 'go)
+(my-load 'cpp)
+(my-load 'cmake)
+(my-load 'auto-complete)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 
@@ -48,4 +51,4 @@
 
 ;; Reload theme, switch-session does not restore all colors in the
 ;; session correctly
-(load-theme 'base16-3024)
+(load-theme 'zenburn)

@@ -46,4 +46,8 @@
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Mark-Ring.html#Mark-Ring
 (setq set-mark-command-repeat-pop 't)
 
+;;; use 4 spaces for C/C++ indentation
+(setq c-default-style "java"
+      c-basic-offset 4)
+
 (speedbar 't)
