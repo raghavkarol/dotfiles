@@ -47,9 +47,7 @@
   :ensure t)
 (use-package go-guru
   :ensure t)
-(use-package go-autocomplete
-  :ensure t)
-(use-package gore-mode
+(use-package gorepl-mode
   :ensure t)
 (use-package yaml-mode
   :ensure t)

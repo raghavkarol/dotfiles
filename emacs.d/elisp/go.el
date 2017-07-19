@@ -4,15 +4,30 @@
 ;; go get -u github.com/golang/lint/golint
 ;; go get -u github.com/onsi/ginkgo/ginkgo
 ;; go get -u github.com/motemen/gore
+;; go get -u github.com/davecgh/go-spew/spew
+(setq company-tooltip-limit 20)                      ; bigger popup window
+(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+(setq company-echo-delay 0)                          ; remove annoying blinking
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+(require 'company)
+(require 'company-go)
+
 (add-hook 'go-mode-hook
           (lambda ()
             (flycheck-mode)
             (projectile-mode)
             (add-hook 'before-save-hook 'gofmt-before-save)
             (local-set-key (kbd "M-.") 'go-guru-definition)
-            (local-set-key (kbd "M-,") 'pop-tag-mark)))
+            (local-set-key (kbd "M-,") 'pop-tag-mark)
+            (company-mode)
+            (set (make-local-variable 'company-backends) '(company-go))
+            (gorepl-mode)
+            (local-set-key (kbd "C-M-x") 'gorepl-eval-line)))
 
-(add-to-list 'load-path (concat (getenv "GOPATH")  "/src/github.com/golang/lint/misc/emacs"))
+(add-to-list 'load-path
+             (concat (getenv "GOPATH") "/src/github.com/golang/lint/misc/emacs"))
+
 (require 'golint)
 
 (defvar cloud:buffer-name "cloud-backend")
