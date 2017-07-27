@@ -40,6 +40,8 @@
 (my-load 'go)
 (my-load 'cpp)
 (my-load 'cmake)
+(my-load 'airtame)
+(my-load 'airtame-device)
 (my-load 'auto-complete)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
