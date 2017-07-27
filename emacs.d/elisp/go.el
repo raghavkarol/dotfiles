@@ -13,20 +13,45 @@
 (require 'company)
 (require 'company-go)
 
-(add-hook 'go-mode-hook
-          (lambda ()
-            (flycheck-mode)
-            (projectile-mode)
-            (add-hook 'before-save-hook 'gofmt-before-save)
-            (local-set-key (kbd "M-.") 'go-guru-definition)
-            (local-set-key (kbd "M-,") 'pop-tag-mark)
-            (company-mode)
-            (set (make-local-variable 'company-backends) '(company-go))
-            (gorepl-mode)
-            (local-set-key (kbd "C-M-x") 'gorepl-eval-line)))
+(defun  go-mode-customization ()
+  (linum-mode)
+  (flycheck-mode)
+  (projectile-mode)
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (local-set-key (kbd "M-.") 'go-guru-definition)
+  (local-set-key (kbd "M-,") 'pop-tag-mark)
+  (company-mode)
+  (set (make-local-variable 'company-backends) '(company-go))
+  (gorepl-mode))
+
+(defun gorepl-mode-customization ()
+  (define-key gorepl-mode-map (kbd "C-c C-l") 'gorepl-run-reload-current-file)
+  (define-key gorepl-mode-map (kbd "C-M-x") #'gorepl-eval-region-or-line))
+
+(add-hook 'go-mode-hook 'go-mode-customization)
+(add-hook 'gorepl-mode-hook 'gorepl-mode-customization)
 
 (add-to-list 'load-path
              (concat (getenv "GOPATH") "/src/github.com/golang/lint/misc/emacs"))
+
+(defun gorepl-eval-region-or-line ()
+  (interactive)
+  (if (region-active-p)
+      (gorepl-eval-region
+       (region-beginning)
+       (region-end))
+    (gorepl-eval-line)))
+
+(defun gorepl-run-reload-current-file ()
+  (interactive)
+  (let ((process (get-buffer-process gorepl-buffer))
+        (current-buffer (current-buffer)))
+    (if process
+        (comint-send-string (get-buffer-process gorepl-buffer) ":quit\n"))
+    (sit-for 0.1) ; Must wait a bit for process termination to be detected
+    (gorepl-run-load-current-file)
+    (pop-to-buffer current-buffer)))
+
 
 (require 'golint)
 
