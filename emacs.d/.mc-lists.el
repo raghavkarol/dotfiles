@@ -11,6 +11,7 @@
         c-electric-lt-gt
         c-electric-semi&comma
         c-indent-line-or-region
+        comment-dwim
         compile
         dabbrev-expand
         erlang-electric-comma
