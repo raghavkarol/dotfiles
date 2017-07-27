@@ -1,9 +1,9 @@
-;; (add-to-list 'load-path "/Users/raghav/github/auto-complete-mysql")
-;; (add-to-list 'load-path "/Users/raghav/github/auto-complete-clang")
+(add-to-list 'load-path "/Users/raghav/github/auto-complete-mysql")
+(require 'auto-complete-mysql)
 
 (require 'auto-complete-config)
+;; (add-to-list 'load-path "/Users/raghav/github/auto-complete-clang")
 ;; (require 'auto-complete-clang)
-;; (require 'auto-complete-mysql)
 
 (setq ac-ignore-case nil)
 (ac-flyspell-workaround)
@@ -26,8 +26,16 @@
 (add-hook 'css-mode-hook 'ac-css-mode-setup)
 (add-hook 'auto-complete-mode-hook 'ac-common-setup)
 
-;; (defun my-ac-cc-mode-setup ()
-;;   (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
-;; (add-hook 'c-mode-common-hook 'my--cc-mode-setup)
-
-;; (global-auto-complete-mode t)
+(defun enable-mysql-autocomplete ()
+  (interactive)
+  (setq-default
+   ac-sources '(ac-0-sql-watch-and-register-table-alias
+                ac-1-sql-schemas
+                ac-1-sql-functions
+                ac-1-sql-tables
+                ac-1-sql-columns)))
+(defun disable-mysql-autocomplete ()
+  (interactive)
+  (setq-default
+   ac-sources '(ac-source-abbrev
+                ac-source-dictionary)))
