@@ -63,6 +63,11 @@
   :ensure t)
 (use-package company-jedi
   :ensure t)
+(use-package company
+  :ensure t)
+(use-package company-go
+  :ensure t)
+
 
 ;; Themes
 (use-package zenburn-theme
