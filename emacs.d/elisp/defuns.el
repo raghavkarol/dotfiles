@@ -164,3 +164,42 @@
   (let ((elscreen-actual (elscreen-get-screen-list))
         (elscreen-reorder (number-sequence 0 (1- (length (elscreen-get-screen-list))))))
     (elscreen-reorder-continuous1 (seq-sort '< elscreen-actual) elscreen-reorder)))
+
+
+;; Underscores to camel case confversion
+(defun mapcar-head (fn-head fn-rest list)
+  "Like MAPCAR, but applies a different function to the first element."
+  (if list
+      (cons (funcall fn-head (car list))
+            (mapcar fn-rest (cdr list)))))
+
+(defun upper-camelcase (s)
+  "Convert under_score string S to CamelCase string."
+  (mapconcat 'identity (mapcar
+                        '(lambda (word) (capitalize (downcase word)))
+                        (split-string s "_")) ""))
+(defun lower-camelcase (s)
+  "Convert under_score string S to camelCase string."
+  (mapconcat 'identity (mapcar-head
+                        '(lambda (word) (downcase word))
+                        '(lambda (word) (capitalize (downcase word)))
+                        (split-string s "_")) ""))
+
+(defun camelcase-region (camel-case-fun)
+  (let* ((start (region-beginning))
+         (end (region-end))
+         (new-string (funcall camel-case-fun (buffer-substring-no-properties start end))))
+    (save-excursion
+      (delete-region start end)
+      (goto-char start)
+      (insert new-string))))
+
+(defun upper-camelcase-region ()
+  (interactive)
+  (camelcase-region 'upper-camelcase))
+
+(defun lower-camelcase-region ()
+  (interactive)
+  (camelcase-region 'lower-camelcase))
+
+
