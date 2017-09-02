@@ -26,7 +26,6 @@
 (my-load 'org)
 (my-load 'dired)
 (my-load 'web)
-(my-load 'ox-freemind)
 (my-load 'ruby)
 (my-load 'helm)
 (my-load 'mc)
