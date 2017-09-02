@@ -7,30 +7,24 @@
 ;; go get -u github.com/davecgh/go-spew/spew
 
 ;;: Disable company mode
-;; (setq company-tooltip-limit 20)                      ; bigger popup window
-;; (setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
-;; (setq company-echo-delay 0)                          ; remove annoying blinking
-;; (setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
-;; (require 'company)
-;; (require 'company-go)
-(require 'auto-complete-config)
-(require 'go-autocomplete)
+(setq company-tooltip-limit 20)                      ; bigger popup window
+(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+(setq company-echo-delay 0)                          ; remove annoying blinking
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+(require 'company)
+(require 'company-go)
 
 (defun  go-mode-customization ()
   (linum-mode)
-  ;; (flycheck-mode)
-  (flymake-mode)
-  ;; (company-mode)
-  ;; (set (make-local-variable 'company-backends) '(company-go))
-  (auto-complete-mode)
+  (flycheck-mode)
+  (yas-minor-mode)
+  (company-mode)
+  (set (make-local-variable 'company-backends) '(company-go))
   (projectile-mode)
   (add-hook 'before-save-hook 'gofmt-before-save)
   (local-set-key (kbd "M-.") 'go-guru-definition)
   (local-set-key (kbd "M-,") 'pop-tag-mark)
   (gorepl-mode))
-
-(eval-after-load "go-mode"
-  '(require 'flymake-go))
 
 (defun gorepl-mode-customization ()
   (define-key gorepl-mode-map (kbd "C-c C-l") 'gorepl-run-reload-current-file)

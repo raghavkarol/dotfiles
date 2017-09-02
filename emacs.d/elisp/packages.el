@@ -67,8 +67,6 @@
   :ensure t)
 (use-package company-go
   :ensure t)
-(use-package go-autocomplete
-  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme
