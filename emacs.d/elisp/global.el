@@ -1,8 +1,20 @@
 (add-to-list 'display-buffer-alist
              '("\\*.+?\\*"
-               (display-buffer-reuse-window)
+               (display-buffer-at-bottom)
                (reusable-frames . visible)
                (window-height   . 0.3)))
+
+(add-to-list 'display-buffer-alist
+             '("\\*helm ag results\\*"
+               (display-buffer-at-bottom)
+               (reusable-frames . visible)
+               (window-height   . 0.3)))
+
+(add-to-list 'display-buffer-alist
+             '("\\*Gofmt Errors\\*"
+               (display-buffer-at-bottom)
+               (reusable-frames . visible)
+))
 
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 (global-set-key (kbd "<f1>") 'magit-status)
@@ -50,6 +62,7 @@
 (setq c-default-style "java"
       c-basic-offset 4)
 
+(set-fill-column 100)
 
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
