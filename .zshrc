@@ -51,7 +51,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx docker)
+plugins=(git osx docker npm)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -108,4 +108,11 @@ GOPATH=/Users/raghav/go
 export GOPATH
 
 PATH=$PATH:$GOPATH/bin
+# PATH=/usr/local/bin:$PATH
 export PATH
+
+export GERRIT_ROOT=~/gerrit
+
+alias cd-backend="cd $GOPATH/src/airtame/backend"
+alias cd-frontend="cd $GERRIT_ROOT/frontend"
+export PATH="/usr/local/opt/llvm/bin:$PATH"
