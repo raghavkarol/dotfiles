@@ -5,6 +5,7 @@
       '(
         about-emacs
         autopair-insert-opening
+        autopair-insert-or-skip-quote
         backward-sexp
         beginning-of-defun
         c-electric-delete-forward
@@ -18,6 +19,7 @@
         erlang-electric-gt
         erlang-electric-semicolon
         forward-sexp
+        helm-projectile-ag
         indent-for-tab-command
         kill-region
         mark-sexp

@@ -203,3 +203,6 @@
   (camelcase-region 'lower-camelcase))
 
 
+(defun xxx (s)
+  (downcase (replace-regexp-in-string "_" "-" yas-text))
+  )

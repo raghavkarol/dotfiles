@@ -82,11 +82,12 @@ export MANPATH="/usr/local/man:$MANPATH"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 alias rebar="./rebar"
 alias mux="tmux"
 
-echo 'activating Erlang R16 for RIAK'
-. /Users/$USERNAME/erlang/16.2-basho10/activate
+# echo 'activating Erlang R16 for RIAK'
+# . /Users/$USERNAME/erlang/R16B02/activate
 # echo 'activating Erlang OTP 19.2'
 # . /Users/$USER/erlang/19.2/activate
 
@@ -97,7 +98,7 @@ export HOMEBREW_GITHUB_API_TOKEN
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-PYTHONPATH=/Users/$USER/github/python_util:$PYTHONPATH
+ visPYTHONPATH=/Users/$USER/github/issuu_python:$PYTHONPATH
 export PYTHONPATH
 
 # export GRADLE_OPTS=-Dorg.gradle.native=false
@@ -116,3 +117,8 @@ export GERRIT_ROOT=~/gerrit
 alias cd-backend="cd $GOPATH/src/airtame/backend"
 alias cd-frontend="cd $GERRIT_ROOT/frontend"
 export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+alias emacs="emacsclient -a ''"
+alias vi=emacs
+alias vim=emacs
+export EDITOR=emacs

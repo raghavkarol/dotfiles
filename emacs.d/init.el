@@ -42,6 +42,7 @@
 (my-load 'airtame)
 (my-load 'airtame-device)
 (my-load 'auto-complete)
+(my-load 'tramp)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 

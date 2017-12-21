@@ -55,8 +55,6 @@
   :ensure t )
 (use-package flycheck
   :ensure t)
-(use-package rtags
-  :ensure t)
 (use-package cmake-ide
   :ensure t)
 (use-package jedi-core
@@ -66,6 +64,10 @@
 (use-package company
   :ensure t)
 (use-package company-go
+  :ensure t)
+(use-package groovy-mode
+  :ensure t)
+(use-package docker-tramp
   :ensure t)
 
 ;; Themes

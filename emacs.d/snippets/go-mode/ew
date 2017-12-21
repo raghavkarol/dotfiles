@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ew
+# key: ew
+# --
+errors.Wrap(err, $1)

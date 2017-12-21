@@ -65,7 +65,7 @@
 (setq c-default-style "java"
       c-basic-offset 4)
 
-(set-fill-column 100)
+(setq fill-column 100)
 
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 

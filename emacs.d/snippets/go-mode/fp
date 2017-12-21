@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: fp
+# key: fp
+# --
+if value, set := os.LookupEnv("$1"); set {
+   $2Value, err := strconv.$3(value)
+   if err != nil {
+      return errors.Wrapf(err, "could not convert %v to $4", value)
+   }
+   opts.$5 = $2Value
+}
+
+flag.${2:$(capitalize yas-text)}Var(&opts.$5, "${1:$(downcase (replace-regexp-in-string "_" "-" yas-text))}", opts.$5, "${1:$(downcase (replace-regexp-in-string "_" "-" yas-text))} is $0")
