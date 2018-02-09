@@ -5,4 +5,4 @@
 if value, set := os.LookupEnv("$1"); set {
    opts.$2 = value
 }
-flag.StrVar(&opts.$2, "${1:$(downcase (replace-regexp-in-string "_" "-" yas-text))}", opts.$2, "${1:$(downcase (replace-regexp-in-string "_" "-" yas-text))} is $0")
+flag.StringVar(&opts.$2, "${1:$(downcase (replace-regexp-in-string "_" "-" yas-text))}", opts.$2, "${1:$(downcase (replace-regexp-in-string "_" "-" yas-text))} is $0")

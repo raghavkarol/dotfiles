@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: errInt
+# key: errInt
+# --
+if err != nil {
+    handleError(w, http.StatusInternalServerError, "Internal Server Error")
+}

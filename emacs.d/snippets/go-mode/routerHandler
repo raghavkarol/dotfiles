@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: routerHandler
+# key: routerHandler
+# --
+func ${1:name}Handler(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+}
