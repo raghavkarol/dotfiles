@@ -69,6 +69,14 @@
   :ensure t)
 (use-package docker-tramp
   :ensure t)
+(use-package rjsx-mode
+  :ensure t)
+(use-package prettier-js
+  :ensure t)
+(use-package json-mode
+  :ensure t)
+(use-package skewer-mode
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme
