@@ -25,8 +25,6 @@
   :ensure t)
 (use-package virtualenvwrapper
   :ensure t)
-(use-package rfringe
-  :ensure t)
 (use-package enh-ruby-mode
   :ensure t)
 (use-package slime
@@ -71,11 +69,11 @@
   :ensure t)
 (use-package rjsx-mode
   :ensure t)
-(use-package prettier-js
-  :ensure t)
 (use-package json-mode
   :ensure t)
 (use-package skewer-mode
+  :ensure t)
+(use-package js2-refactor
   :ensure t)
 
 ;; Themes
