@@ -5,6 +5,7 @@
 ;; go get -u github.com/onsi/ginkgo/ginkgo
 ;; go get -u github.com/motemen/gore
 ;; go get -u github.com/davecgh/go-spew/spew
+;; go get -u golang.org/x/tools/cmd/goimports
 
 (setq company-tooltip-limit 20)          ; bigger popup window
 (setq company-idle-delay .5) ; decrease delay before autocompletion popup shows
@@ -21,6 +22,7 @@
   (set (make-local-variable 'company-backends) '(company-go))
   (company-mode)
   (projectile-mode)
+  (setq gofmt-command "goimports")
   (add-hook 'before-save-hook 'gofmt-before-save)
   (local-set-key (kbd "M-.") 'go-guru-definition)
   (local-set-key (kbd "M-,") 'pop-tag-mark)
