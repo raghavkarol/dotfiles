@@ -28,6 +28,7 @@
         org-end-of-line
         paredit-forward-delete
         paredit-forward-kill-word
+        rjsx-delete-creates-full-tag
         split-line
         wgrep-finish-edit
         yas-abort-snippet
