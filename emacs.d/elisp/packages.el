@@ -65,8 +65,6 @@
   :ensure t)
 (use-package groovy-mode
   :ensure t)
-(use-package docker-tramp
-  :ensure t)
 (use-package rjsx-mode
   :ensure t)
 (use-package json-mode
@@ -74,6 +72,10 @@
 (use-package skewer-mode
   :ensure t)
 (use-package js2-refactor
+  :ensure t)
+(use-package xref-js2
+  :ensure t)
+(use-package helm-xref
   :ensure t)
 
 ;; Themes
