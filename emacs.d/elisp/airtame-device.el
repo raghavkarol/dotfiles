@@ -1,17 +1,30 @@
-(defconst airtame-device-link-local-ip
+(defconst link-local-ip
   "169.254.13.37")
 
-(defconst airtame-device-comint-buffer-name
-  (format "airtame-%s" airtame-device-link-local-ip))
+(defconst ssh-connection-string
+  (format "%s@%s" "root" link-local-ip))
 
-(defconst airtame-device-ssh-connection-string
-  (format "%s@%s" "root" airtame-device-link-local-ip))
+(defun comint-buffer-name (prefix)
+  (format "%s-%s" prefix airtame-device-link-local-ip))
 
-(defun airtame-ssh-device-link-local()
+(defun airtame-ssh()
   (interactive)
-  (let ((buffer (make-comint airtame-device-comint-buffer-name
+  (let ((buffer (make-comint (comint-buffer-name "ssh")
                              "ssh"
                              nil
-                             airtame-device-ssh-connection-string)))
+                             "-q"
+                             ssh-connection-string)))
+    (display-buffer buffer)
+    (format "created buffer %s" (buffer-name buffer))))
+
+(defun airtame-journalctl-f()
+  (interactive)
+  (let ((buffer (make-comint (comint-buffer-name "journalctl-f")
+                             "ssh"
+                             nil
+                             "-q"
+                             ssh-connection-string
+                             "journalctl"
+                             "-f")))
     (display-buffer buffer)
     (format "created buffer %s" (buffer-name buffer))))

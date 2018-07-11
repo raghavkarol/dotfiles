@@ -81,6 +81,14 @@
   :ensure t)
 (use-package docker
   :ensure t)
+(use-package magit-gerrit
+  :ensure t)
+(use-package import-js
+  :ensure t)
+(use-package nginx-mode
+  :ensure t)
+(use-package company-nginx
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme

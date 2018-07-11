@@ -2,4 +2,4 @@
 # name: lp
 # key: lp
 # --
-log.Printf("[DEBUG] $1 %v", $1)
+log.Printf(">>> $1 %v", $1)

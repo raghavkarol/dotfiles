@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: psql_segment
+# key: psql_segment
+# --
+#+begin_src sql :engine postgresql :cmdline -U raghav -h segment.internal.airtame.com segment -v ON_ERROR_STOP=1
+$0
+#+end_src

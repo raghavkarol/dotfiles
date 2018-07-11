@@ -44,6 +44,8 @@
 (my-load 'auto-complete)
 (my-load 'tramp)
 (my-load 'react)
+(my-load 'gerrit)
+(my-load 'nginx)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 
@@ -54,4 +56,5 @@
 
 ;; Reload theme, switch-session does not restore all colors in the
 ;; session correctly
+;; (load-theme 'sanityinc-tomorrow-eighties)
 (load-theme 'zenburn)

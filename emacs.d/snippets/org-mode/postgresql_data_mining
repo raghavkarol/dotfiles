@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: psql_dm
+# key: psql_dm
+# --
+#+begin_src sql :engine postgresql :cmdline "--host=data-mining.internal.airtame.com -U uvximxwoankurp -d d4u3nko9lkjs25 "
+
+#+end_src

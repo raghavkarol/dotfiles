@@ -98,7 +98,7 @@ export HOMEBREW_GITHUB_API_TOKEN
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
- visPYTHONPATH=/Users/$USER/github/issuu_python:$PYTHONPATH
+PYTHONPATH=/Users/$USER/github/issuu_python:$PYTHONPATH
 export PYTHONPATH
 
 # export GRADLE_OPTS=-Dorg.gradle.native=false
@@ -122,3 +122,4 @@ alias emacs="emacsclient -a ''"
 alias vi=emacs
 alias vim=emacs
 export EDITOR=emacs
+export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"

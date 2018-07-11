@@ -203,6 +203,15 @@
   (camelcase-region 'lower-camelcase))
 
 
-(defun xxx (s)
-  (downcase (replace-regexp-in-string "_" "-" yas-text))
-  )
+;;;
+(setq cloud-reviewers '("keating@airtame.com" "bogdan@airtame.com" "niklas@airtame.com"))
+
+(defun magit-gerrit-add-cloud-reviewers ()
+  (interactive)
+  "ssh -x -p 29418 user@gerrit gerrit set-reviewers --project toplvlroot/prjname --add email@addr"
+
+  (dolist (email cloud-reviewers)
+    (gerrit-ssh-cmd "set-reviewers"
+                    "--project" (magit-gerrit-get-project)
+                    "--add" email
+                    (cdr-safe (assoc 'id (magit-gerrit-review-at-point))))))
