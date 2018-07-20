@@ -89,6 +89,8 @@
   :ensure t)
 (use-package company-nginx
   :ensure t)
+(use-package go-dlv
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme

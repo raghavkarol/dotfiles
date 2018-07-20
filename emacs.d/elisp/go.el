@@ -14,6 +14,7 @@
 
 (require 'company)
 (require 'company-go)
+(require 'go-dlv)
 
 (defun  go-mode-customization ()
   (linum-mode)
