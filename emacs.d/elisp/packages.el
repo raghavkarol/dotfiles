@@ -77,9 +77,9 @@
   :ensure t)
 (use-package helm-xref
   :ensure t)
-(use-package docker-tramp
-  :ensure t)
 (use-package docker
+  :ensure t)
+(use-package docker-tramp
   :ensure t)
 (use-package magit-gerrit
   :ensure t)
@@ -91,6 +91,11 @@
   :ensure t)
 (use-package go-dlv
   :ensure t)
+(use-package elixir-mode
+  :ensure t)
+(use-package alchemist
+  :ensure t)
+
 
 ;; Themes
 (use-package zenburn-theme

@@ -43,7 +43,6 @@
 (add-hook 'erlang-mode-hook 'erlang-editing-hook)
 (add-hook 'erlang-mode-hook 'projectile-mode)
 (add-hook 'erlang-mode-hook 'yas-minor-mode)
-(add-hook 'erlang-mode-hook 'linum-mode)
 
 ;; Distel
 (add-to-list 'load-path (format "/Users/%s/github/distel/elisp" (user-real-login-name)))

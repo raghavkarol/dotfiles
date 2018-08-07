@@ -17,7 +17,6 @@
 (require 'go-dlv)
 
 (defun  go-mode-customization ()
-  (linum-mode)
   (flycheck-mode)
   (yas-minor-mode)
   (set (make-local-variable 'company-backends) '(company-go))

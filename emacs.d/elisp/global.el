@@ -70,3 +70,4 @@
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 
 (speedbar 't)
+(global-display-line-numbers-mode)
