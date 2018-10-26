@@ -203,14 +203,24 @@
   (camelcase-region 'lower-camelcase))
 
 
-;;;
-(setq cloud-reviewers '("keating@airtame.com" "bogdan@airtame.com" "niklas@airtame.com"))
+(setq cloud-reviewers '("keating@airtame.com" "bogdan@airtame.com"))
 
 (defun magit-gerrit-add-cloud-reviewers ()
   (interactive)
   "ssh -x -p 29418 user@gerrit gerrit set-reviewers --project toplvlroot/prjname --add email@addr"
 
   (dolist (email cloud-reviewers)
+    (gerrit-ssh-cmd "set-reviewers"
+                    "--project" (magit-gerrit-get-project)
+                    "--add" email
+                    (cdr-safe (assoc 'id (magit-gerrit-review-at-point))))))
+
+(setq ops-reviewers '("jakob@airtame.com" "peter.hrvola@airtame.com"))
+(defun magit-gerrit-add-ops-reviewers ()
+  (interactive)
+  "ssh -x -p 29418 user@gerrit gerrit set-reviewers --project toplvlroot/prjname --add email@addr"
+
+  (dolist (email ops-reviewers)
     (gerrit-ssh-cmd "set-reviewers"
                     "--project" (magit-gerrit-get-project)
                     "--add" email
