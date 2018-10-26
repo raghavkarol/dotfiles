@@ -58,3 +58,5 @@
 ;; session correctly
 ;; (load-theme 'sanityinc-tomorrow-eighties)
 (load-theme 'zenburn)
+
+(server-start)
