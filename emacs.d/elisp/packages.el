@@ -96,6 +96,16 @@
 (use-package alchemist
   :ensure t)
 
+(use-package helm-swoop
+  :ensure t)
+(use-package terraform-mode
+  :ensure t)
+(use-package ansible
+  :ensure t)
+(use-package company-ansible
+  :ensure t)
+(use-package helm-tramp
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme
