@@ -1,6 +1,41 @@
 ;; -----------------------------------------------------------------------------
 ;; Erlang Mode
 ;; -----------------------------------------------------------------------------
+
+(defun erlang-get-current-version (lib)
+  (car (file-expand-wildcards
+        (format "%slib/%s" erlang-home lib))))
+
+(setq erlang-version  "20.3")
+(setq erlang-home (format "/Users/%s/erlang/%s/" (user-real-login-name) erlang-version))
+(setq erlang-root-dir erlang-home)
+
+(add-to-list 'load-path (erlang-get-current-version "tools-*/emacs"))
+(add-to-list 'exec-path (concat erlang-home "bin"))
+
+(require 'erlang-start)
+
+(setq erlang-electric-commands nil)
+
+;; EQC Emacs Mode -- Configuration Start
+(add-to-list 'load-path (erlang-get-current-version "eqc-*/emacs"))
+(autoload 'eqc-erlang-mode-hook "eqc-ext" "EQC Mode" t)
+(add-hook 'erlang-mode-hook 'eqc-erlang-mode-hook)
+(setq eqc-max-menu-length 30)
+(setq eqc-root-dir (erlang-get-current-version "eqc-*"))
+
+;; Erlang hooks
+(add-hook 'erlang-mode-hook 'erlang-key-bindings)
+(add-hook 'erlang-mode-hook 'erlang-editing-hook)
+(add-hook 'erlang-mode-hook 'projectile-mode)
+(add-hook 'erlang-mode-hook 'yas-minor-mode)
+
+;; Distel
+
+(add-to-list 'load-path (format "/Users/%s/github/raghavkarol/distel/%s/elisp" (user-real-login-name) erlang-version))
+(require 'distel)
+(distel-setup)
+
 ;; Hook Definitions
 (defun erlang-key-bindings()
   (local-set-key (kbd "C-x c") 'show-compilation-window)
@@ -14,41 +49,6 @@
 (defun erlang-editing-hook()
   (imenu-add-to-menubar "imenu")
   (local-set-key [return] 'newline-and-indent))
-
-;; Erlang runtime customization
-(setq erlang-home (format "/Users/%s/erlang/R16B02/" (user-real-login-name)))
-;; (setq erlang-home "/Users/raghav/erlang/19.2/")
-(setq erlang-root-dir erlang-home)
-
-(defun erlang-get-current-version (lib)
-  (car (file-expand-wildcards
-        (format "%slib/%s" erlang-home lib))))
-
-(add-to-list 'load-path (erlang-get-current-version "tools-*/emacs"))
-(add-to-list 'exec-path (concat erlang-home "bin"))
-
-(setq erlang-electric-commands nil)
-(require 'erlang-start)
-
-;; EQC Emacs Mode -- Configuration Start
-(add-to-list 'load-path (erlang-get-current-version "eqc-*/emacs"))
-(autoload 'eqc-erlang-mode-hook "eqc-ext" "EQC Mode" t)
-(add-hook 'erlang-mode-hook 'eqc-erlang-mode-hook)
-(setq eqc-max-menu-length 30)
-(setq eqc-root-dir (erlang-get-current-version "eqc-*"))
-;; EQC Emacs Mode -- Configuration End
-
-;; Erlang hooks
-(add-hook 'erlang-mode-hook 'erlang-key-bindings)
-(add-hook 'erlang-mode-hook 'erlang-editing-hook)
-(add-hook 'erlang-mode-hook 'projectile-mode)
-(add-hook 'erlang-mode-hook 'yas-minor-mode)
-
-;; Distel
-(add-to-list 'load-path (format "/Users/%s/github/distel/elisp" (user-real-login-name)))
-(require 'distel)
-(distel-setup)
-
 
 (defun show-compilation-window ()
   (interactive)
