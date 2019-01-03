@@ -26,6 +26,11 @@
 (global-set-key (kbd "C-M-r")  'compile)
 (global-set-key (kbd "M-s")  'helm-do-ag)
 
+;;; Use the same keybinds as tmux to split windows
+(global-set-key (kbd "C-x %") 'split-window-horizontally)
+(global-set-key (kbd "C-x \"") 'split-window-vertically)
+
+
 (setq inhibit-startup-message t)
 (setq-default indent-tabs-mode nil)
 (setq split-width-threshold nil)        ; For wide screens
