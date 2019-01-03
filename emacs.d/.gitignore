@@ -1,0 +1,15 @@
+# Emacs
+*.elc
+
+# Metadata for packages
+bookmarks
+eshell/
+forge-database.sqlite
+projectile-bookmarks.eld
+projectile.cache
+recentf
+url/
+
+# Metadata for persistent sessions
+current-desktop-session
+desktop-sessions/
