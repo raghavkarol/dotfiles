@@ -1025,9 +1025,7 @@ is ommitted, current screen will survive."
   (interactive)
   (let ((next-screen (string-to-number (string last-command-event))))
     (if (and (<= 0 next-screen) (<= next-screen 9))
-        (cond ((eq next-screen 0) (elscreen-goto 9))
-              ('t (elscreen-goto (- next-screen 1)))))))
-
+        (elscreen-goto next-screen))))
 (defalias 'elscreen-jump-0 'elscreen-jump)
 (defalias 'elscreen-jump-9 'elscreen-jump)
 
@@ -1521,7 +1519,7 @@ Use \\[toggle-read-only] to permit editing."
                          half-space
                          (propertize
                           (format "%d%s%s%s"
-                                  (+ screen 1)
+                                  screen
                                   (elscreen-status-label screen)
                                   half-space
                                   (elscreen-tab-escape-%

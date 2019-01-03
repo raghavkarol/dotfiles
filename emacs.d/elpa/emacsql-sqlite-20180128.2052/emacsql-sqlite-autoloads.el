@@ -6,15 +6,19 @@
                          (or (file-name-directory #$) (car load-path))))
 
 
-;;;### (autoloads nil "emacsql-sqlite" "emacsql-sqlite.el" (0 0 0
-;;;;;;  0))
-;;; Generated autoloads from emacsql-sqlite.el
+;;;### (autoloads "actual autoloads are elsewhere" "emacsql-sqlite"
+;;;;;;  "../../../../../../.emacs.d/elpa/emacsql-sqlite-20180128.2052/emacsql-sqlite.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../../../.emacs.d/elpa/emacsql-sqlite-20180128.2052/emacsql-sqlite.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "emacsql-sqlite" '("emacsql-sqlite-")))
 
 ;;;***
 
-;;;### (autoloads nil nil ("emacsql-sqlite-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("../../../../../../.emacs.d/elpa/emacsql-sqlite-20180128.2052/emacsql-sqlite-autoloads.el"
+;;;;;;  "../../../../../../.emacs.d/elpa/emacsql-sqlite-20180128.2052/emacsql-sqlite-pkg.el"
+;;;;;;  "../../../../../../.emacs.d/elpa/emacsql-sqlite-20180128.2052/emacsql-sqlite.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

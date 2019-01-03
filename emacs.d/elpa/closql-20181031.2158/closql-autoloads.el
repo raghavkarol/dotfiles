@@ -6,10 +6,17 @@
                          (or (file-name-directory #$) (car load-path))))
 
 
-;;;### (autoloads nil "closql" "closql.el" (0 0 0 0))
-;;; Generated autoloads from closql.el
+;;;### (autoloads "actual autoloads are elsewhere" "closql" "../../../../../../.emacs.d/elpa/closql-20181031.2158/closql.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../../../.emacs.d/elpa/closql-20181031.2158/closql.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "closql" '("closql-" "eieio-")))
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../../.emacs.d/elpa/closql-20181031.2158/closql-autoloads.el"
+;;;;;;  "../../../../../../.emacs.d/elpa/closql-20181031.2158/closql.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 
