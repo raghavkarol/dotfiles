@@ -1,3 +1,7 @@
+;;;
+(setq reload-packages nil)
+
+;; Path for global settings file
 (setq custom-file "~/.emacs.d/elisp/custom.el")
 (load custom-file 'noerror)
 
@@ -12,8 +16,10 @@
   (package-refresh-contents)
   (package-install 'use-package))
 
+(when reload-packages
+  (my-load 'packages))
+
 (my-load 'global)
-(my-load 'packages)
 (my-load 'projectile)
 (my-load 'autopair)
 (my-load 'flycheck)
@@ -21,7 +27,6 @@
 (my-load 'elscreen-sessions)
 (my-load 'erlang)
 (my-load 'python)
-(my-load 'auto-complete)
 (my-load 'js2-mode)
 (my-load 'org)
 (my-load 'dired)
@@ -35,17 +40,14 @@
 (my-load 'sql)
 (my-load 'expand-region)
 (my-load 'yas)
-(my-load 'haskell)
-(my-load 'go)
-(my-load 'cpp)
-(my-load 'cmake)
-(my-load 'airtame)
-(my-load 'airtame-device)
-(my-load 'auto-complete)
 (my-load 'tramp)
 (my-load 'react)
-(my-load 'gerrit)
-(my-load 'nginx)
+(my-load 'go)
+;; (my-load 'haskell)
+;; (my-load 'cpp)
+;; (my-load 'cmake)
+;; (my-load 'airtame-device)
+;; (my-load 'gerrit)
 
 (setq magit-last-seen-setup-instructions "1.4.0")
 
