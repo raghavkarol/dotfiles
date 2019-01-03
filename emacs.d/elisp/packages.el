@@ -3,9 +3,9 @@
   :ensure t)
 (use-package autopair
   :ensure t)
-(use-package elscreen-persist
-  :ensure t)
 (use-package elscreen
+ :ensure t)
+(use-package paredit
   :ensure t)
 (use-package exec-path-from-shell
   :ensure t)
@@ -14,6 +14,8 @@
 (use-package helm-ag
   :ensure t)
 (use-package helm-projectile
+  :ensure t)
+(use-package helm-elscreen
   :ensure t)
 (use-package expand-region
   :ensure t)
@@ -95,6 +97,8 @@
   :ensure t)
 (use-package alchemist
   :ensure t)
+(use-package magithub
+  :ensure t)
 
 (use-package helm-swoop
   :ensure t)
@@ -105,6 +109,8 @@
 (use-package company-ansible
   :ensure t)
 (use-package helm-tramp
+  :ensure t)
+(use-package dash-at-point
   :ensure t)
 
 ;; Themes
