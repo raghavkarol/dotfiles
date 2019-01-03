@@ -515,7 +515,7 @@ project."
                                             (run-hooks 'projectile-idle-timer-hook)))))))
   :type 'boolean)
 
-(defvar projectile-projects-cache nil
+(defvar projectile-projects-cache (make-hash-table :test 'equal)
   "A hashmap used to cache project file names to speed up related operations.")
 
 (defvar projectile-projects-cache-time nil
