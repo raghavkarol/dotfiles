@@ -1,5 +1,10 @@
 # If you come from bash you might have to change your $PATH.
-export PATH="$HOME/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.5.0/bin:$PATH"
+export PATH="$HOME/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/findutils/libexec/gnubin:$PATH"
+
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
@@ -51,7 +56,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx docker npm)
+plugins=(git osx docker zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,14 +87,11 @@ export MANPATH="/usr/local/man:$MANPATH"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-alias rebar="./rebar"
-alias mux="tmux"
-
-# echo 'activating Erlang R16 for RIAK'
-# . /Users/$USERNAME/erlang/R16B02/activate
-# echo 'activating Erlang OTP 19.2'
-# . /Users/$USER/erlang/19.2/activate
+alias emacsc="emacsclient -a ''"
+alias emacs='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
+alias vi='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
+alias vim='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
+alias ls='ls --color=auto'
 
 HOMEBREW_GITHUB_API_TOKEN=46a0e8e8cf0176ed3692b231801af910dea7dcf5
 export HOMEBREW_GITHUB_API_TOKEN
@@ -101,25 +103,32 @@ export LANG=en_US.UTF-8
 PYTHONPATH=/Users/$USER/github/issuu_python:$PYTHONPATH
 export PYTHONPATH
 
-# export GRADLE_OPTS=-Dorg.gradle.native=false
-fpath=(/usr/local/share/zsh-completions $fpath)
-
 # Go
-GOPATH=/Users/raghav/go
+GOPATH=~/go
 export GOPATH
 
-PATH=$PATH:$GOPATH/bin
-# PATH=/usr/local/bin:$PATH
-export PATH
+export PATH="/Users/rkarol-admin/.gem/ruby/2.5.0/bin:$PATH"
 
-export GERRIT_ROOT=~/gerrit
+# tmuxinator auto-completions need to be sourced putting. It doesn't
+# work even when the file is on the fpath
+if [[ -f /usr/local/lib/ruby/gems/2.5.0/gems/tmuxinator-0.13.0/ ]]
+then
+    source "/usr/local/lib/ruby/gems/2.5.0/gems/tmuxinator-0.13.0/completion/tmuxinator.zsh"
+fi
 
-alias cd-backend="cd $GOPATH/src/airtame/backend"
-alias cd-frontend="cd $GERRIT_ROOT/frontend"
-export PATH="/usr/local/opt/llvm/bin:$PATH"
+# erl_version=21.1
+# echo "Activating erlang version ${erl_version}"
+# source "/Users/rkarol-admin/erlang/${erl_version}/activate"
 
-alias emacs="emacsclient -a ''"
-alias vi=emacs
-alias vim=emacs
-export EDITOR=emacs
-export PATH="/usr/local/opt/postgresql@9.5/bin:$PATH"
+# Running inside dsh
+if [[ $(uname) == "Linux" ]]
+then
+    echo "$HOME/.zshrc: setup zsh for running in dsh container"
+    prompt='${ret_status} %{$fg[green]%}*DSH*%{$reset_color%} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info) '
+    export ENVIRON=raghav-karol
+fi
+
+# ZSH auto-completions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+eval "$(hub alias -s)"
