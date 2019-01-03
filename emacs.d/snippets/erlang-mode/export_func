@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: exp
+# key: exp
+# --
+-export([$1/${2:0}]).
