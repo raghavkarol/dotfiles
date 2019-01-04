@@ -97,8 +97,6 @@
   :ensure t)
 (use-package alchemist
   :ensure t)
-(use-package magithub
-  :ensure t)
 
 (use-package helm-swoop
   :ensure t)
