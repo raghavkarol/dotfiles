@@ -92,6 +92,7 @@ alias emacs='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias vi='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias vim='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias ls='ls --color=auto'
+alias .='source'
 
 # For PYTHON's ValueError: unknown locale: UTF-8 errors
 export LC_ALL=en_US.UTF-8
