@@ -131,4 +131,4 @@ source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 eval "$(hub alias -s)"
 
 # Source in secrets
-source .zshrc.secrets
+source ~/.zshrc.secrets
