@@ -93,9 +93,6 @@ alias vi='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias vim='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias ls='ls --color=auto'
 
-HOMEBREW_GITHUB_API_TOKEN=46a0e8e8cf0176ed3692b231801af910dea7dcf5
-export HOMEBREW_GITHUB_API_TOKEN
-
 # For PYTHON's ValueError: unknown locale: UTF-8 errors
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -132,3 +129,6 @@ fi
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 eval "$(hub alias -s)"
+
+# Source in secrets
+source .zshrc.secrets
