@@ -133,3 +133,6 @@ eval "$(hub alias -s)"
 
 # Source in secrets
 source ~/.zshrc.secrets
+
+# Add identity for eeedev
+ssh-add ~/.ssh/platform-eee-dev_route105-infra-external.pem
