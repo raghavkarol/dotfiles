@@ -97,6 +97,8 @@
   :ensure t)
 (use-package alchemist
   :ensure t)
+(use-package string-inflection
+  :ensure t)
 
 (use-package helm-swoop
   :ensure t)
