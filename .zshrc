@@ -2,7 +2,11 @@
 export PATH="$GOPATH/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/lib/ruby/gems/2.5.0/bin:$PATH"
-export PATH="$HOME/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/findutils/libexec/gnubin:$PATH"
+
+export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
+export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
@@ -56,7 +60,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git osx docker zsh-completions)
+plugins=(git osx docker tmuxinator zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -109,21 +113,26 @@ export PATH="/Users/rkarol-admin/.gem/ruby/2.5.0/bin:$PATH"
 
 # tmuxinator auto-completions need to be sourced putting. It doesn't
 # work even when the file is on the fpath
-if [[ -f /usr/local/lib/ruby/gems/2.5.0/gems/tmuxinator-0.13.0/ ]]
+readonly tmuxinator_completions=/usr/local/lib/ruby/gems/2.5.0/gems/tmuxinator-0.13.0/completion/tmuxinator.zsh
+if [[ -f $tmuxinator_completions ]]
 then
-    source "/usr/local/lib/ruby/gems/2.5.0/gems/tmuxinator-0.13.0/completion/tmuxinator.zsh"
+    source $tmuxinator_completions
 fi
 
 # erl_version=21.1
 # echo "Activating erlang version ${erl_version}"
 # source "/Users/rkarol-admin/erlang/${erl_version}/activate"
 
+# AL AWS envrionment
+export ENVIRON=raghav-karol
+export AWS_REGION=us-west-2
+export PROFILE=eee              # AWS PROFILE see ~/.aws/credentials
+
 # Running inside dsh
 if [[ $(uname) == "Linux" ]]
 then
     echo "$HOME/.zshrc: setup zsh for running in dsh container"
     prompt='${ret_status} %{$fg[green]%}*DSH*%{$reset_color%} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info) '
-    export ENVIRON=raghav-karol
 fi
 
 # ZSH auto-completions
@@ -134,5 +143,4 @@ eval "$(hub alias -s)"
 # Source in secrets
 source ~/.zshrc.secrets
 
-# Add identity for eeedev
-ssh-add ~/.ssh/platform-eee-dev_route105-infra-external.pem
+export EDITOR='emacsclient -q'
