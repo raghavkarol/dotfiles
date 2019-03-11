@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: state_node
+# key: state_node
+# --
+$1 [label="enter:\<${2:?}\>|$1"]

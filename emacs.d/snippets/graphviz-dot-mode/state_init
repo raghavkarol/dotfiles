@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: state_init
+# key: state_init
+# --
+init [shape=circle, style=filled, fillcolor=black, fixedsize=true]

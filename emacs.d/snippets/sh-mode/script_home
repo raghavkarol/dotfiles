@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: script_home
+# key: script_home
+# --
+readonly script_home=$( cd $( dirname "\${BASH_SOURCE[0]}" ) ; pwd)

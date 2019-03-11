@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: statem
+# key: statem
+# --
+// -*- mode: graphviz-dot-mode;
+digraph {
+  rankdir=LR
+  node [shape=record]
+
+  init [shape=circle, style=filled, fillcolor=black, fixedsize=true]
+  stop [shape=doublecircle, label="", style=filled]
+
+}

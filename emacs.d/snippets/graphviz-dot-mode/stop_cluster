@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: stop_cluter
+# key: stop_cluster
+# --
+  subgraph cluster_stop {
+    label="stop"
+
+    node [shape=doublecircle label="" style=filled]
+    stop_${1:reason} [xlabel="$1"]
+
+  }

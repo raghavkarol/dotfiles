@@ -112,6 +112,10 @@
   :ensure t)
 (use-package dash-at-point
   :ensure t)
+(use-package graphviz-dot-mode
+  :ensure t)
+(use-package wgrep
+  :ensure t)
 
 ;; Themes
 (use-package zenburn-theme
