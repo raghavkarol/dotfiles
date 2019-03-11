@@ -225,3 +225,48 @@
                     "--project" (magit-gerrit-get-project)
                     "--add" email
                     (cdr-safe (assoc 'id (magit-gerrit-review-at-point))))))
+
+;;; Transparency functions for emacs from: https://www.emacswiki.org/emacs/TransparentEmacs
+(defun toggle-transparency ()
+  (interactive)
+  (let ((alpha (frame-parameter nil 'alpha)))
+    (set-frame-parameter
+     nil 'alpha
+     (if (eql (cond ((numberp alpha) alpha)
+                    ((numberp (cdr alpha)) (cdr alpha))
+                    ;; Also handle undocumented (<active> <inactive>) form.
+                    ((numberp (cadr alpha)) (cadr alpha)))
+              100)
+         '(85 . 50) '(100 . 100)))))
+
+(defun transparency (value)
+   "Sets the transparency of the frame window. 0=transparent/100=opaque"
+   (interactive "nTransparency Value 0 - 100 opaque:")
+   (set-frame-parameter (selected-frame) 'alpha value))
+
+
+;;; -----------------------------------------------------------------------------
+;;; Frame management
+;;; -----------------------------------------------------------------------------
+(defun frame-has-name (frame name)
+  (string= (frame-parameter frame 'name) name))
+
+(defun speedbar-frame (frame)
+  (frame-has-name frame "Speedbar 1.0"))
+
+(defun scratch-frame (frame)
+  (frame-has-name frame "*scratch"))
+
+(defun get-speedbar-frame ()
+  (elt
+   (seq-take-while #'speedbar-frame (frame-list)) 0))
+
+(defun get-main-frame ()
+  (elt
+   (seq-take-while (lambda (frame) (frame-has-name frame "*scratch*"))
+                   (frame-list)) 0))
+
+(defun dual-screen-frames ()
+  (interactive)
+  (set-frame-size (get-main-frame) 210 72)
+  (set-frame-size (get-speedbar-frame) 30 73))
