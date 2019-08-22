@@ -16,8 +16,7 @@
 (add-to-list 'display-buffer-alist
              '("\\*Gofmt Errors\\*"
                (display-buffer-at-bottom)
-               (reusable-frames . visible)
-))
+               (reusable-frames . visible)))
 
 (global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
 (global-set-key (kbd "<f1>") 'magit-status)
@@ -40,9 +39,10 @@
 (display-time)
 
 ;; mac keyboard customizations for emacs - override from ns-win.el a
-(setq mac-command-modifier 'meta)       ; mac-command-modifier is cmd
 (setq mac-function-modifier 'ctrl)      ; mac-function-modifer is fn
+(setq mac-command-modifier 'meta)       ; mac-command-modifier is cmd
 (setq mac-option-modifier 'meta)        ; mac-option-modifier is meta
+(setq mac-control-modifier 'ctrl)       ; mac-control-modifier is ctrl
 
 ;; White space cleanup on writing files
 (add-hook 'write-file-hooks 'delete-trailing-blank-lines)
@@ -73,6 +73,9 @@
 (setq fill-column 100)
 
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
+
+(add-hook 'prog-mode-hook
+          (lambda () (yafolding-mode)))
 
 (speedbar 't)
 (global-display-line-numbers-mode)
