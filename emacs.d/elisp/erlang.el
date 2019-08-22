@@ -181,3 +181,26 @@
     (read-only-mode 0)
     (erase-buffer)
     (grep-mode)))
+
+(defun erl-output-separator ()
+  (erl-eval "io:format(\"--------------------------------------------------------------------------------~n\")."))
+
+(defun to-file-url (path)
+ (format "file://%s" path))
+
+(defun test-logs-dir ()
+  (format "%s/%s" erl-dev-tools-project-root "_build/test/logs"))
+
+(defun erl-open-ct-suite-log ()
+  (interactive)
+  (let ((url (format "%s/%s" (test-logs-dir) "suite.log.latest.html")))
+    (eww (to-file-url url))))
+
+(defun erl-open-ct-test-log ()
+  (interactive)
+  (let* ((test-name (downcase (erlang-function-name)))
+         (suite-name (downcase (file-name-sans-extension (buffer-name))))
+         (test-pattern (format "%s.%s" suite-name test-name))
+         (test-files (sort (directory-files-recursively (test-logs-dir) test-pattern) 'string>))
+         (latest-test-file (car test-files)))
+    (eww (to-file-url latest-test-file))))
