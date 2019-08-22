@@ -9,7 +9,10 @@ export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
+#
+export PATH="/Users/rkarol-admin/.cask/bin:$PATH"
 
+export PATH=/Applications/Postgres.app/Contents/Versions/11/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
 
