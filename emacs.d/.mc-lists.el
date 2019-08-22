@@ -29,6 +29,7 @@
         paredit-forward-delete
         paredit-forward-kill-word
         rjsx-delete-creates-full-tag
+        sh-assignment
         split-line
         wgrep-finish-edit
         yas-abort-snippet
