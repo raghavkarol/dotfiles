@@ -2,6 +2,6 @@
 # name: srcp
 # key: srcp
 # --
-#+begin_src python :results output
+#+BEGIN_SRC python :results output
 $0
-#+end_src
+#+END_SRC

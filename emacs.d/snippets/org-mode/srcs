@@ -2,6 +2,6 @@
 # name: srcs
 # key: srcs
 # --
-#+begin_src bash :results output
+#+BEGIN_SRC bash :results output
 $0
-#+end_src
+#+END_SRC
