@@ -36,13 +36,18 @@
 (require 'distel)
 (distel-setup)
 
+(require 'company)
+(require 'company-distel)
+(add-to-list 'company-backends 'company-distel)
+
+
 ;; Hook Definitions
 (defun erlang-key-bindings()
-  (local-set-key (kbd "C-x c") 'show-compilation-window)
-  (local-set-key (kbd "C-x e") 'erlang-run-suite)
+  ;; (local-set-key (kbd "C-x c") 'show-compilation-window)
+  ;; (local-set-key (kbd "C-x e") 'erlang-run-suite)
   (local-set-key (kbd "C-x C-e") 'erlang-run-testcase)
   (local-set-key (kbd "C-x C-r") 'erlang-repeat-test)
-  (local-set-key (kbd "C-M-x") 'erl-compile-reload-buffer)
+  (local-set-key (kbd "C-M-x") 'erl-compile-reload-changed)
   (local-set-key (kbd "C-c .") 'erl-find-source-under-point)
   (local-set-key (kbd "C-c ,") 'erl-find-source-unwind))
 
@@ -94,28 +99,25 @@
 (defun erlang-flush-compilation ()
   (erlang-flush-compilation-errors-node erlang-node-name))
 
-(defun erlang-node-home (node)
-  (cond ((file-directory-p (format "~/github/%s" node))
-         (format "~/github/%s" node))
-        ((file-directory-p (format "~/github/riak_ee/deps/%s" node))
-         (format "~/github/riak_ee/deps/%s" node))
-        ((file-directory-p (format "~/github/riak_kv/deps/%s" node))
-         (format "~/github/riak_kv/deps/%s" node))
-        ((file-directory-p (format "~/github/riak_ee/dev/%s" node))
-         (format "~/github/riak_ee/"))
-        ('t (error (format "Could not find home directory for node %s" node)))))
-
-(defun erlang-node-start-cmd (node)
+(defun erlang-basho-node-start-cmd (node)
   (cond ((string-match "dev[1-9]" node)
          (format "rlwrap dev/%s/bin/riak console -- dev" node))
         ('t
          ;; Use -noshell when running EQC tests
          (format "rlwrap erl -setcookie riak -name %s@127.0.0.1 -- dev" node))))
 
+(defun erlang-alertlogic-node-start-cmd ()
+  (format "~/bin/run_erl_node"))
+
+(defun erlang-node-home (node)
+  (let ((dir (format "~/github/alertlogic/%s" node)))
+    (cond ((file-directory-p (format "~/github/alertlogic/%s" node)) dir)
+          ('t (error (format "Could not find home directory for node %s" node))))))
+
 (defun erlang-start-node (node)
   (let* ((node-home (erlang-node-home node))
-         (node-start-cmd (erlang-node-start-cmd node))
-         (buffer (make-comint node "/usr/local/bin/zsh" nil "--login")))
+         (node-start-cmd (erlang-alertlogic-node-start-cmd))
+         (buffer (make-comint node "/bin/zsh" nil "--login")))
     (with-current-buffer buffer
       (next-error-follow-minor-mode)
       (compilation-minor-mode 't))
@@ -160,7 +162,7 @@
    (line-beginning-position)
    (line-end-position)))
 
-(defun erlang-breadmcrumbs-show ()
+(defun erlang-breadcrumbs-show ()
   (interactive)
   (display-buffer(get-buffer-create erlang-breadcrumb-buffer-name)))
 
@@ -181,9 +183,6 @@
     (read-only-mode 0)
     (erase-buffer)
     (grep-mode)))
-
-(defun erl-output-separator ()
-  (erl-eval "io:format(\"--------------------------------------------------------------------------------~n\")."))
 
 (defun to-file-url (path)
  (format "file://%s" path))
