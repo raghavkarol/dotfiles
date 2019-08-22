@@ -28,6 +28,7 @@
 (add-hook 'erlang-mode-hook 'erlang-editing-hook)
 (add-hook 'erlang-mode-hook 'projectile-mode)
 (add-hook 'erlang-mode-hook 'yas-minor-mode)
+(add-hook 'erlang-mode-hook 'flycheck-mode)
 
 ;; Distel
 
