@@ -184,6 +184,13 @@
     (erase-buffer)
     (grep-mode)))
 
+(defun eww-other-window (url)
+  (save-excursion
+    (split-window-vertically)
+    (other-window 1)
+    (eww url)
+    (other-window 1)))
+
 (defun to-file-url (path)
  (format "file://%s" path))
 
@@ -193,7 +200,7 @@
 (defun erl-open-ct-suite-log ()
   (interactive)
   (let ((url (format "%s/%s" (test-logs-dir) "suite.log.latest.html")))
-    (eww (to-file-url url))))
+    (eww-other-window (to-file-url url))))
 
 (defun erl-open-ct-test-log ()
   (interactive)
@@ -202,4 +209,4 @@
          (test-pattern (format "%s.%s" suite-name test-name))
          (test-files (sort (directory-files-recursively (test-logs-dir) test-pattern) 'string>))
          (latest-test-file (car test-files)))
-    (eww (to-file-url latest-test-file))))
+    (eww-other-window (to-file-url latest-test-afile))))
