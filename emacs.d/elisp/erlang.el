@@ -1,16 +1,15 @@
 ;; -----------------------------------------------------------------------------
 ;; Erlang Mode
 ;; -----------------------------------------------------------------------------
-
-(defun erlang-get-current-version (lib)
+(defun erlang-get-current-version (erlang-home lib)
   (car (file-expand-wildcards
         (format "%slib/%s" erlang-home lib))))
 
-(setq erlang-version  "20.3")
+(setq erlang-version  "20.1.7")
 (setq erlang-home (format "/Users/%s/erlang/%s/" (user-real-login-name) erlang-version))
 (setq erlang-root-dir erlang-home)
 
-(add-to-list 'load-path (erlang-get-current-version "tools-*/emacs"))
+(add-to-list 'load-path (erlang-get-current-version erlang-home "tools-*/emacs"))
 (add-to-list 'exec-path (concat erlang-home "bin"))
 
 (require 'erlang-start)
@@ -18,11 +17,11 @@
 (setq erlang-electric-commands nil)
 
 ;; EQC Emacs Mode -- Configuration Start
-(add-to-list 'load-path (erlang-get-current-version "eqc-*/emacs"))
+(add-to-list 'load-path (erlang-get-current-version erlang-home "eqc-*/emacs"))
 (autoload 'eqc-erlang-mode-hook "eqc-ext" "EQC Mode" t)
 (add-hook 'erlang-mode-hook 'eqc-erlang-mode-hook)
 (setq eqc-max-menu-length 30)
-(setq eqc-root-dir (erlang-get-current-version "eqc-*"))
+(setq eqc-root-dir (erlang-get-current-version erlang-home "eqc-*"))
 
 ;; Erlang hooks
 (add-hook 'erlang-mode-hook 'erlang-key-bindings)
