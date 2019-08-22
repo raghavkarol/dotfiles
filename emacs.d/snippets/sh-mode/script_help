@@ -1,0 +1,39 @@
+#!/bin/bash
+# -*- mode: snippet -*-
+# name: script_help
+# key: script_help
+# --
+# +begin_help
+# Usage
+# -----
+#  ${1:script_name} ${2:opts}
+#
+# Example
+# -------
+#  $3
+#
+# +end_help
+
+set -euo pipefail
+
+readonly prog=$(basename \${BASH_SOURCE[0]})
+readonly script_home=$( cd $( dirname "\${BASH_SOURCE[0]}" ) ; pwd)
+readonly script_name=$( basename "\${BASH_SOURCE[0]}" )
+source   $script_home/common_functions
+
+function usage {
+    print_inline_help $script_home/$script_name
+}
+
+while getopts ":h" o; do
+    case $o in
+        h)
+          usage
+          exit 0
+          ;;
+        o)
+            org=\${OPTARG}
+            ;;
+    esac
+done
+shift \$((OPTIND-1))

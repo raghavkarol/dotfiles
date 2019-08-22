@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: env_default
+# key: env_default
+# --
+: \$\{${1:var}:=${2:value}\}

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: lc
+# key: lc
+# --
+[${3:action} || ${2:elem} <- ${1:list} ]
