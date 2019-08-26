@@ -38,12 +38,6 @@
 (column-number-mode 1)
 (display-time)
 
-;; mac keyboard customizations for emacs - override from ns-win.el a
-(setq mac-function-modifier 'ctrl)      ; mac-function-modifer is fn
-(setq mac-command-modifier 'meta)       ; mac-command-modifier is cmd
-(setq mac-option-modifier 'meta)        ; mac-option-modifier is meta
-(setq mac-control-modifier 'ctrl)       ; mac-control-modifier is ctrl
-
 ;; White space cleanup on writing files
 (add-hook 'write-file-hooks 'delete-trailing-blank-lines)
 (add-hook 'write-file-hooks 'delete-trailing-whitespace)
