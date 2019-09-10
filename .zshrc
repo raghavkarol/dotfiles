@@ -129,7 +129,7 @@ fi
 # AL AWS envrionment
 export ENVIRON=raghav-karol
 export AWS_REGION=us-west-2
-export PROFILE=eee              # AWS PROFILE see ~/.aws/credentials
+export AWS_PROFILE=eee              # AWS PROFILE see ~/.aws/credentials
 
 # Running inside dsh
 if [[ $(uname) == "Linux" ]]
