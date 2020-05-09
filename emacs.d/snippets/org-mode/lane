@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: lane
+# key: lane
+# --
+perl -F${1::} -lane '{print \$F[${2:0}]}'

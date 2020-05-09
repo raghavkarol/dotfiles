@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: var_with_default
+# key: var_with_default
+# --
+${1:name}=\$\{${2:var}:-${3:default_value}\}

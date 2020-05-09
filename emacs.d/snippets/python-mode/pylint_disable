@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pylint_disable
+# key: pylint_disable
+# --
+# pylint: disable=${1:line-too-long}

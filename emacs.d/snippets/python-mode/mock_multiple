@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: mock_multiple
+# key: mock_multiple
+# --
+    with mock.patch('$1', return_value=$2) as $3, \\
+         mock.patch('$4', return_value=$5}) as $6:

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: py-dir-locals
+# key: py-dir-locals
+# --
+;; -*- lisp -*-
+((nil . ((compile-command . "(cd ~/algithub/${1:lwa_baseline_demo} ; make)")
+         (jedi:server-args . ("--virtual-env" "~/$1/${2:_venv}")))))

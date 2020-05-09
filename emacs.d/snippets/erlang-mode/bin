@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: bin
+# key: bin
+# --
+<<"$1">>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ssh
+# key: ssh
+# --
+ssh -t \$(pdsh -g ecs-ae docker ps -f name=${1:aertaenglogmsgs} -q | head -1 | perl -F: -lane '{print $F[0]}')

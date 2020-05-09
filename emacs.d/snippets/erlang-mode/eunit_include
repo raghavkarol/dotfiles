@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: eunit_include
+# key: eunit_include
+# --
+-ifdef(TEST).
+-include_lib("eunit/include/eunit.hrl").
+-endif.

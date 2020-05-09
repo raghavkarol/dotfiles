@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: dpm
+# key: dpm
+# --
+io:format(">>> {$1}: ~p ~n", [{$1}]),

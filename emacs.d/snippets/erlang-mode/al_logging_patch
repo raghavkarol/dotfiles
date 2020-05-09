@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: al_logging_patch
+# key: al_logging_patch
+# --
+{log_levels, [
+          {all, [
+             {aims_cache_etag_srv, error},
+             {aims_cache, error},
+             {al_servicec, error},
+             {al_sd2, error},
+             {al_service_rest_handler, error},
+             {al_sd2_cluster, error},
+             {al_sd2_offline, error},
+             {al_sd2_lib, error},
+             {al_sd2_srv, error},
+             {al_sd2_tuning, error}]}]}

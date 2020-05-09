@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: stderr_to_stdout
+# key: stderr_to_stdout
+# --
+2>&1

@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name: trigger
+# key: trigger
+# --
+name: ${1:Name}
+display_name: ${1:$(replace-regexp-in-string "_" " " (string-inflection-capital-underscore-function yas-text))}
+desc: >-
+  Triggers when ${1:$(downcase (replace-regexp-in-string "_" " " (string-inflection-capital-underscore-function yas-text)))}
+expression: >-
+  SELECT
+    time_recv,
+    ingest_id,
+    parsed.rule_id,
+    parsed.rule_name AS "Rule Name",
+    message
+  FROM
+    logmsgs
+  WHERE ()
+observation:
+  generate: security:SchneiderBundle/$1:1.0.0
+  keys:
+    key: key1
+  properties:
+    prop1  : prop1
+  parents: ingest_id

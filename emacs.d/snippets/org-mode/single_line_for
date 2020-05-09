@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: single_line_for
+# key: single_line_for
+# --
+for ${1:i} in ${2:list}; do ${3:echo $i}; done

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: dp
+# key: dp
+# --
+print(f">>> $1: {$1}")

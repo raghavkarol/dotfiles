@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: dp
+# key: dp
+# --
+io:format("********** >>> ~p:~p $1: ~p ~n", [?MODULE, ?LINE, $1]),

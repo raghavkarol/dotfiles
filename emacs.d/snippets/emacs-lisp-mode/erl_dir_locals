@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: erl-dir-locals
+# key: erl-dir-locals
+# --
+((nil . ((compile-command . "(cd ~/github/alertlogic/$1 ; source .setenv ; rebar3 compile)")))
+ (erlang-mode . ((eval . (erl-connect nil "$1"))
+                 (eval . (setq erl-dev-tools-project-root "/Users/rkarol-admin/github/alertlogic/$1")))))

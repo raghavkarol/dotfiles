@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: xxx
+# key: xxx
+# --
+        elif key == 'state':
+            self.body[key] = value

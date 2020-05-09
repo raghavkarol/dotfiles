@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rc
+# key: rc
+# --
+docker exec -it \$(docker ps -f name=${1:aefrenglogmsgs}  -q | head -1) /usr/lib/${2:aefr_eng}/bin/$2 remote_console

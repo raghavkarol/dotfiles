@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: obs
+# key: obs
+# --
+"$schema": http://alertlogic.com/ae/observation-def-1.0.0-schema.json#
+version: 1.0.0
+taxonomy: security
+name: ${1:Name}
+visibility: test
+class: demo:activity
+subclass: activity
+severity: low
+summary: ${1:$(downcase (replace-regexp-in-string "_" " " (string-inflection-capital-underscore-function yas-text)))}
+desc: ${1:$(downcase (replace-regexp-in-string "_" " " (string-inflection-capital-underscore-function yas-text)))}
+elaborations: []
+aggregations: []
+unique: 1hour
+keys:
+    - ${2:key1}
+properties:
+  attacker: false
+  victim: false
+  ${3:prop1}: ${4:false}
