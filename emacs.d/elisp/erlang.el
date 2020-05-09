@@ -5,7 +5,7 @@
   (car (file-expand-wildcards
         (format "%slib/%s" erlang-home lib))))
 
-(setq erlang-version  "20.1.7")
+(setq erlang-version  "21.3.8.4")
 (setq erlang-home (format "/Users/%s/erlang/%s/" (user-real-login-name) erlang-version))
 (setq erlang-root-dir erlang-home)
 
@@ -17,11 +17,13 @@
 (setq erlang-electric-commands nil)
 
 ;; EQC Emacs Mode -- Configuration Start
-(add-to-list 'load-path (erlang-get-current-version erlang-home "eqc-*/emacs"))
-(autoload 'eqc-erlang-mode-hook "eqc-ext" "EQC Mode" t)
-(add-hook 'erlang-mode-hook 'eqc-erlang-mode-hook)
-(setq eqc-max-menu-length 30)
-(setq eqc-root-dir (erlang-get-current-version erlang-home "eqc-*"))
+(setq eqc-installed nil)
+(when eqc-installed
+  (add-to-list 'load-path (erlang-get-current-version erlang-home "eqc-*/emacs"))
+  (autoload 'eqc-erlang-mode-hook "eqc-ext" "EQC Mode" t)
+  (add-hook 'erlang-mode-hook 'eqc-erlang-mode-hook)
+  (setq eqc-max-menu-length 30)
+  (setq eqc-root-dir (erlang-get-current-version erlang-home "eqc-*")))
 
 ;; Erlang hooks
 (add-hook 'erlang-mode-hook 'erlang-key-bindings)
@@ -186,10 +188,8 @@
 
 (defun eww-other-window (url)
   (save-excursion
-    (split-window-vertically)
-    (other-window 1)
-    (eww url)
-    (other-window 1)))
+    (progn (eww url)
+           (quit-window))))
 
 (defun to-file-url (path)
  (format "file://%s" path))
@@ -199,14 +199,28 @@
 
 (defun erl-open-ct-suite-log ()
   (interactive)
-  (let ((url (format "%s/%s" (test-logs-dir) "suite.log.latest.html")))
-    (eww-other-window (to-file-url url))))
+  (let ((file (format "%s/%s" (test-logs-dir) "suite.log.latest.html")))
+    (message (format "opening: %s" file))
+    (eww-other-window (to-file-url file))))
 
 (defun erl-open-ct-test-log ()
   (interactive)
-  (let* ((test-name (downcase (erlang-function-name)))
-         (suite-name (downcase (file-name-sans-extension (buffer-name))))
+  (let* ((test-name erl-run-testcase-current-function-name)
+         (suite-name erl-run-testcase-current-module-name)
          (test-pattern (format "%s.%s" suite-name test-name))
          (test-files (sort (directory-files-recursively (test-logs-dir) test-pattern) 'string>))
          (latest-test-file (car test-files)))
-    (eww-other-window (to-file-url latest-test-afile))))
+    (message (format "opening: %s" latest-test-file))
+    (eww-other-window (to-file-url latest-test-file))))
+
+(defun erl-connect (_ node-name)
+  "Connect to an erlang node
+
+node-name is the name of the host without the hostname e.g., aefr_eng
+
+The first argument to this function is prefix argument C-u but
+and is not used.
+"
+  (interactive "P\ns node name: ")
+  (setq erl-nodename-cache (intern (format "%s@%s" node-name (system-name))))
+  (setq derl-cookie node-name))
