@@ -101,6 +101,14 @@ alias vim='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias ls='ls --color=auto'
 alias .='source'
 
+alias lwa_demo='cd ~/algithub/lwa_demo'
+alias lwa_baseline_demo='cd ~/algithub/lwa_baseline_demo'
+alias lwa_pkey_demo='cd ~/algithub/lwa_pkey_demo'
+alias aefr_eng='cd ~/algithub/aefr_eng'
+alias aerta='cd ~/algithub/aerta'
+alias aesessions_user='cd ~/algithub/aesessions_user'
+alias aelwasdk='cd  ~/algithub/lwa_baseline_demo/_venv/src/aelwasdk'
+
 # For PYTHON's ValueError: unknown locale: UTF-8 errors
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -129,7 +137,9 @@ fi
 # AL AWS envrionment
 export ENVIRON=raghav-karol
 export AWS_REGION=us-west-2
-export AWS_PROFILE=eee              # AWS PROFILE see ~/.aws/credentials
+export AWS_PROFILE=integration              # AWS PROFILE see ~/.aws/credentials
+export github_user=raghav-karol             # For LWA makefiles
+
 
 # Running inside dsh
 if [[ $(uname) == "Linux" ]]
@@ -145,5 +155,10 @@ eval "$(hub alias -s)"
 
 # Source in secrets
 source ~/.zshrc.secrets
+
+# Source in aims token generation functions
+source ~/bin/aims_token
+
+source ~/bin/alertlogic.hosts
 
 export EDITOR='emacsclient -q'
