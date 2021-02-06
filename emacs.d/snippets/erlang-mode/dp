@@ -2,4 +2,4 @@
 # name: dp
 # key: dp
 # --
-io:format("********** >>> ~p:~p $1: ~p ~n", [?MODULE, ?LINE, $1]),
+io:format("~s:~p: `(erlang-function-name)` $1: ~p ~n", [string:replace(code:which(?MODULE), ".beam", ".erl"), ?LINE, $1]),

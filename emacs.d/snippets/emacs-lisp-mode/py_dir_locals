@@ -4,4 +4,4 @@
 # --
 ;; -*- lisp -*-
 ((nil . ((compile-command . "(cd ~/algithub/${1:lwa_baseline_demo} ; make)")
-         (jedi:server-args . ("--virtual-env" "~/$1/${2:_venv}")))))
+         (jedi:server-args . ("--virtual-env" "~/algithub/$1/${2:_venv}")))))

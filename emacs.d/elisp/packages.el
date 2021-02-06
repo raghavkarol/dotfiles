@@ -9,14 +9,6 @@
   :ensure t)
 (use-package exec-path-from-shell
   :ensure t)
-(use-package helm
-  :ensure t)
-(use-package helm-ag
-  :ensure t)
-(use-package helm-projectile
-  :ensure t)
-(use-package helm-elscreen
-  :ensure t)
 (use-package expand-region
   :ensure t)
 (use-package js2-mode
@@ -49,6 +41,8 @@
   :ensure t)
 (use-package gorepl-mode
   :ensure t)
+(use-package go-dlv
+  :ensure t)
 (use-package yaml-mode
   :ensure t)
 (use-package cmake-mode
@@ -77,21 +71,15 @@
   :ensure t)
 (use-package xref-js2
   :ensure t)
-(use-package helm-xref
-  :ensure t)
 (use-package docker
   :ensure t)
 (use-package docker-tramp
   :ensure t)
 (use-package magit-gerrit
   :ensure t)
-(use-package import-js
-  :ensure t)
 (use-package nginx-mode
   :ensure t)
 (use-package company-nginx
-  :ensure t)
-(use-package go-dlv
   :ensure t)
 (use-package elixir-mode
   :ensure t)
@@ -99,22 +87,29 @@
   :ensure t)
 (use-package string-inflection
   :ensure t)
-
-(use-package helm-swoop
+(use-package ag
   :ensure t)
+(use-package counsel
+  :ensure t)
+(use-package ivy
+  :ensure t)
+
 (use-package terraform-mode
   :ensure t)
 (use-package ansible
   :ensure t)
 (use-package company-ansible
   :ensure t)
-(use-package helm-tramp
-  :ensure t)
 (use-package dash-at-point
   :ensure t)
 (use-package graphviz-dot-mode
   :ensure t)
 (use-package wgrep
+  :ensure t)
+
+(use-package ivy
+  :ensure t)
+(use-package undo-tree
   :ensure t)
 
 ;; Themes

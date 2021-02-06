@@ -1,11 +1,13 @@
-;; go get -u github.com/nsf/gocode
+;; go get golang.org/x/tools/gopls
+;; go get -u golang.org/x/lint/golint
 ;; go get -u golang.org/x/tools/cmd/godoc
 ;; go get -u golang.org/x/tools/cmd/guru
-;; go get -u github.com/golang/lint/golint
+;; go get -u golang.org/x/tools/cmd/goimports
+;;
 ;; go get -u github.com/onsi/ginkgo/ginkgo
 ;; go get -u github.com/motemen/gore
 ;; go get -u github.com/davecgh/go-spew/spew
-;; go get -u golang.org/x/tools/cmd/goimports
+
 
 (setq company-tooltip-limit 20)          ; bigger popup window
 (setq company-idle-delay .5) ; decrease delay before autocompletion popup shows
@@ -14,7 +16,6 @@
 
 (require 'company)
 (require 'company-go)
-(require 'go-dlv)
 
 (defun  go-mode-customization ()
   (flycheck-mode)

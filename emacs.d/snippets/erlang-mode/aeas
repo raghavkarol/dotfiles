@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: aeas
-# key: aeas
-# --
-{ok, ${2:_Apps}} = application:ensure_all_started($1).

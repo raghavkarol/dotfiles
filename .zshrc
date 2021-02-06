@@ -1,7 +1,6 @@
 # If you come from bash you might have to change your $PATH.
-export PATH="$GOPATH/bin:$PATH"
+export PATH="/usr/local/opt/python@3.7/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/usr/local/lib/ruby/gems/2.5.0/bin:$PATH"
 
 export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="/usr/local/opt/findutils/libexec/gnubin:$PATH"
@@ -9,10 +8,11 @@ export PATH="/usr/local/opt/grep/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
-#
 export PATH="/Users/rkarol-admin/.cask/bin:$PATH"
+export PATH="/Users/rkarol-admin/.gem/ruby/2.5.0/bin:$PATH"
+export PATH="$GOPATH/bin:$PATH"
+# export PATH=/Applications/Postgres.app/Contents/Versions/11/bin:$PATH
 
-export PATH=/Applications/Postgres.app/Contents/Versions/11/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/$USER/.oh-my-zsh
 
@@ -94,10 +94,11 @@ export MANPATH="/usr/local/man:$MANPATH"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias emacsc="emacsclient -a ''"
-alias emacs='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
-alias vi='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
-alias vim='emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
+alias emacs="emacsclient -a ''"
+alias vi="emacsclient -a ''"
+alias vim="emacsclient -a ''"
+
+alias emacst='/usr/local/bin/emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias ls='ls --color=auto'
 alias .='source'
 
@@ -108,6 +109,9 @@ alias aefr_eng='cd ~/algithub/aefr_eng'
 alias aerta='cd ~/algithub/aerta'
 alias aesessions_user='cd ~/algithub/aesessions_user'
 alias aelwasdk='cd  ~/algithub/lwa_baseline_demo/_venv/src/aelwasdk'
+alias ae='./aesolo'
+alias m='with_memo'
+alias mm='with_memo -M'
 
 # For PYTHON's ValueError: unknown locale: UTF-8 errors
 export LC_ALL=en_US.UTF-8
@@ -119,8 +123,6 @@ export PYTHONPATH
 # Go
 GOPATH=~/go
 export GOPATH
-
-export PATH="/Users/rkarol-admin/.gem/ruby/2.5.0/bin:$PATH"
 
 # tmuxinator auto-completions need to be sourced putting. It doesn't
 # work even when the file is on the fpath
@@ -135,7 +137,7 @@ fi
 # source "/Users/rkarol-admin/erlang/${erl_version}/activate"
 
 # AL AWS envrionment
-export ENVIRON=raghav-karol
+export ENVIRON=global-integration
 export AWS_REGION=us-west-2
 export AWS_PROFILE=integration              # AWS PROFILE see ~/.aws/credentials
 export github_user=raghav-karol             # For LWA makefiles
@@ -158,7 +160,7 @@ source ~/.zshrc.secrets
 
 # Source in aims token generation functions
 source ~/bin/aims_token
-
 source ~/bin/alertlogic.hosts
 
 export EDITOR='emacsclient -q'
+export vi='emacsclient -q'

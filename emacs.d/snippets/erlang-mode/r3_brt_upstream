@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: r3_brt_upstream
-# key: r3_brt_upstream
-# --
-{brt_upstream, [
-    {upstream, {git, "https://github.com/${1:user}/${2:repo}.git"}},
-    {mirror, upstream, master}
-]}.

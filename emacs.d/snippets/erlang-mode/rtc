@@ -2,4 +2,4 @@
 # name: rtc
 # key: rtc
 # --
-recon_trace:calls({${1:<module>}, ${2:'_'}, ${3:'_'} }, 100).
+recon_trace:calls({${1:module}, ${2:'_'}, ${3:fun(_) -> return_trace() end}}, 100, [{scope, local}]).

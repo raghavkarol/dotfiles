@@ -19,6 +19,7 @@
         erlang-electric-gt
         erlang-electric-semicolon
         forward-sexp
+        helm-confirm-and-exit-minibuffer
         helm-projectile-ag
         indent-for-tab-command
         kill-region
@@ -39,6 +40,7 @@
 (setq mc/cmds-to-run-once
       '(
         autopair-skip-close-maybe
+        counsel-M-x
         helm-M-x
         mac-mwheel-scroll
         org-self-insert-command

@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: ct_all_func
-# key: ct_all_func
-# --
-all() ->
-    IsTestFun = fun (<<"test_", _/binary>>) -> true;
-                    (_) -> false
-                end,
-    [Function || {Function, 1} <- ?MODULE:module_info(exports), IsTestFun(atom_to_binary(Function, 'utf8'))].

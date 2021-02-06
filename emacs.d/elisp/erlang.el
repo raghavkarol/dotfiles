@@ -11,7 +11,6 @@
 
 (add-to-list 'load-path (erlang-get-current-version erlang-home "tools-*/emacs"))
 (add-to-list 'exec-path (concat erlang-home "bin"))
-
 (require 'erlang-start)
 
 (setq erlang-electric-commands nil)
@@ -31,16 +30,17 @@
 (add-hook 'erlang-mode-hook 'projectile-mode)
 (add-hook 'erlang-mode-hook 'yas-minor-mode)
 (add-hook 'erlang-mode-hook 'flycheck-mode)
+(add-hook 'erlang-mode-hook 'idle-highlight-mode)
 
 ;; Distel
-
-(add-to-list 'load-path (format "/Users/%s/github/raghavkarol/distel/%s/elisp" (user-real-login-name) erlang-version))
-(require 'distel)
-(distel-setup)
 
 (require 'company)
 (require 'company-distel)
 (add-to-list 'company-backends 'company-distel)
+
+(add-to-list 'load-path (format "/Users/%s/github/raghavkarol/distel/%s/elisp" (user-real-login-name) erlang-version))
+(require 'distel)
+(distel-setup)
 
 
 ;; Hook Definitions
@@ -229,36 +229,13 @@ and is not used.
 ;; Watch functions for running ct testcases
 ;; -----------------------------------------------------------------------------
 (defun erl-eval (expr)
+  "Evalute an erlang expression using distel
+
+Wrapper function to evaluate an erlang expression using distel."
   (erl-eval-expression erl-nodename-cache expr))
 
-(defun erl-compile-reload-buffer ()
-  (interactive)
-  (erl-eval (format "user_action:compile_and_reload(\"%s\")." (buffer-file-name))))
-
-(defun erl-compile-reload-changed ()
-  (interactive)
-  (erl-eval (format "user_action:compile_and_reload_all_changes().")))
-
-(defun erl-compile-buffer ()
-  (interactive)
-  (erl-eval (format "user_action:compile(\"%s\")." (buffer-file-name))))
-
-(defun erl-compile-changed ()
-  (interactive)
-  (erl-eval (format "user_action:compile_all_changes().")))
-
-
-(defun erl-run-testcase ()
-  (interactive)
-  (erl-run-testcase-with-options "[]"))
-
-(defun erl-run-testcase-nocompile ()
-  (interactive)
-  (erl-run-testcase-with-options "[no_compile]"))
-
-(defun erl-run-testcase-repeat()
-  (interactive)
-  (erl-eval "user_action:test()."))
+(setq erl-run-testcase-current-function-name nil)
+(setq erl-run-testcase-current-module-name nil)
 
 (defun erl-run-suite ()
   (interactive)
@@ -269,6 +246,25 @@ and is not used.
           ('t
            (erl-eval (format "user_action:test(eunit, \"%s\")." file-name))))))
 
+(defun erl-run-testcase-with-options (test-options)
+  "
+   "
+  (let ((function-name (erlang-function-name))
+        (file-name (buffer-file-name)))
+    (setq erl-run-testcase-current-function-name function-name)
+    (setq erl-run-testcase-current-module-name module-name)
+    (cond ((string-match "_SUITE$" module-name)
+           (erl-eval
+            (erl-eval (format "edt_api:run_test({ct, %s})." file-name))))
+          ((string-match "_test_?$" function-name)
+           (erl-eval (format "edt_api:run_test({eunit, %s})." file-name)))
+          ('t
+           (erl-eval (format "{error, %s}" file-name))))))
+
+
+(defun erl-run-testcase ()
+  (interactive)
+  (erl-run-testcase-with-options "[]"))
 
 ;;; Find if current directory is test
 (defun erlang-discover-test-dir (path)
@@ -284,26 +280,6 @@ and is not used.
   (let ((dir-name (erlang-discover-test-dir (buffer-file-name))))
     (erl-eval (format "user_action:test(ct, \"%s\")." dir-name))))
 
-(setq erl-run-testcase-current-function-name nil)
-(setq erl-run-testcase-current-module-name nil)
-
-(defun erl-run-testcase-with-options (test-options)
-  (let ((function-name (erlang-function-name))
-        (file-name (buffer-file-name))
-        (module-name (erlang-module-name)))
-    (setq erl-run-testcase-current-function-name function-name)
-    (setq erl-run-testcase-current-module-name module-name)
-    (cond ((string-match "_SUITE$" module-name)
-           (erl-eval
-            (format "user_action:test(ct, \"%s\", %s, %s)."
-                    file-name function-name test-options)))
-          ((string-match "_test_?$" function-name)
-           (erl-eval (format "user_action:test(eunit, \"%s\", %s, %s)."
-                             file-name function-name test-options)))
-          ('t
-           (erl-eval (format "user_action:test(eqc, \"%s\", %s, %s)."
-                             file-name function-name test-options))))))
-
 (defun erlang-function-name()
   (save-excursion
     (beginning-of-defun)
@@ -315,13 +291,3 @@ and is not used.
 
 (defun erlang-module-name ()
   (file-name-base (buffer-file-name)))
-
-;; watchmedo shell-command --patterns='*_flag' --wait --command="./rebar skip_deps=true compile && make dialyzer-quick && cat dialyzer_unhandled_warnings && echo '==> riak_kv (dialyzer) DONE' "
-(defun erl-run-dialyzer()
-  (interactive)
-  (call-process "touch" nil nil nil
-                "/Users/raghav/github/riak_ee/deps/riak_kv/dialyzer_watch_flag"))
-
-(defun erl-kill-dialyzer()
-  (interactive)
-  (call-process "pkill" nil nil nil "make"))
