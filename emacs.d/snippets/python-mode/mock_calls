@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: mock_calls
+# key: mock_calls
+# --
+$1.call_args_list

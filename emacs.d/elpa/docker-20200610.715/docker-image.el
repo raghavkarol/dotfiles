@@ -209,7 +209,7 @@ and FLIP is a boolean to specify the sort order."
 
 (define-derived-mode docker-image-mode tabulated-list-mode "Images Menu"
   "Major mode for handling a list of docker images."
-  (setq tabulated-list-format [("Repository" 30 t)("Tag" 20 t)("Id" 16 t)("Created" 23 t)("Size" 10 docker-image-human-size-predicate)])
+  (setq tabulated-list-format [("Repository" 120 t)("Tag" 20 t)("Id" 16 t)("Created" 23 t)("Size" 10 docker-image-human-size-predicate)])
   (setq tabulated-list-padding 2)
   (setq tabulated-list-sort-key docker-image-default-sort-key)
   (add-hook 'tabulated-list-revert-hook 'docker-image-refresh nil t)

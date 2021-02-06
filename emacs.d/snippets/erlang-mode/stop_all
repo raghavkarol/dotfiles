@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: stop_all
+# key: stop_all
+# --
+[ application:stop(A) ||{A, _, _} <- application:which_applications(), not lists:member(A, [kernel, stdlib]) ].

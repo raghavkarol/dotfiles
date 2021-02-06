@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: dlog
+# key: dlog
+# --
+?TLOG_INFO(Context, "$1:~p", [$1]),

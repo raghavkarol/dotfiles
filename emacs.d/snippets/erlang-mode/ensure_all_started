@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ensure_all_started
+# key: ensure_all_started
+# --
+{ok, ${2:_Apps}} = application:ensure_all_started($1).

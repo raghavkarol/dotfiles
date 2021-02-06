@@ -1,0 +1,2 @@
+((magit-dispatch)
+ (magit-fetch))
