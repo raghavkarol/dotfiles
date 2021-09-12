@@ -35,6 +35,7 @@
   (define-key gorepl-mode-map (kbd "C-M-x") #'gorepl-eval-region-or-line))
 
 (add-hook 'go-mode-hook 'go-mode-customization)
+(add-hook 'go-mode-hook 'eglot-ensure)
 (add-hook 'gorepl-mode-hook 'gorepl-mode-customization)
 
 (add-to-list 'load-path

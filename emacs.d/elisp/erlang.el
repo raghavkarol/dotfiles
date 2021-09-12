@@ -24,6 +24,22 @@
   (setq eqc-max-menu-length 30)
   (setq eqc-root-dir (erlang-get-current-version erlang-home "eqc-*")))
 
+(flycheck-define-checker erlang-edt-flycheck
+  "An Erlang syntax checker using the edt  server."
+  :command ("~/bin/flycheck_edt" (eval (buffer-file-name)))
+  :error-parser flycheck-parse-with-patterns-without-color
+  :error-patterns
+  ((warning line-start
+            (file-name) ":" line ": Warning:" (message) line-end)
+   (error line-start
+          (file-name) ":" line ": " (message) line-end))
+  :modes erlang-mode
+  :enabled flycheck-rebar3-project-root
+  :predicate flycheck-buffer-saved-p
+  :working-directory flycheck-rebar3-project-root)
+
+(add-to-list 'flycheck-checkers 'erlang-edt-flycheck)
+
 ;; Erlang hooks
 (add-hook 'erlang-mode-hook 'erlang-key-bindings)
 (add-hook 'erlang-mode-hook 'erlang-editing-hook)
@@ -32,24 +48,26 @@
 (add-hook 'erlang-mode-hook 'flycheck-mode)
 (add-hook 'erlang-mode-hook 'idle-highlight-mode)
 
+(add-hook 'after-save-hook 'erlfmt-after-save)
+
 ;; Distel
 
 (require 'company)
-(require 'company-distel)
-(add-to-list 'company-backends 'company-distel)
 
 (add-to-list 'load-path (format "/Users/%s/github/raghavkarol/distel/%s/elisp" (user-real-login-name) erlang-version))
 (require 'distel)
 (distel-setup)
 
+(require 'company-distel)
+(add-to-list 'company-backends 'company-distel)
 
 ;; Hook Definitions
 (defun erlang-key-bindings()
   ;; (local-set-key (kbd "C-x c") 'show-compilation-window)
-  ;; (local-set-key (kbd "C-x e") 'erlang-run-suite)
+  (local-set-key (kbd "C-x e") 'erlang-run-suite)
   (local-set-key (kbd "C-x C-e") 'erlang-run-testcase)
   (local-set-key (kbd "C-x C-r") 'erlang-repeat-test)
-  (local-set-key (kbd "C-M-x") 'erl-compile-reload-changed)
+  ;; (local-set-key (kbd "C-M-x") 'erl-compile-reload-changed)
   (local-set-key (kbd "C-c .") 'erl-find-source-under-point)
   (local-set-key (kbd "C-c ,") 'erl-find-source-unwind))
 
@@ -291,3 +309,74 @@ Wrapper function to evaluate an erlang expression using distel."
 
 (defun erlang-module-name ()
   (file-name-base (buffer-file-name)))
+
+(defun erlfmt-after-save ()
+  "Runs erfmt before saving a file "
+  (interactive)
+  (when (eq major-mode 'erlang-mode) (erlfmt)))
+
+(defun erlfmt()
+  "Run erlfmt"
+  (interactive)
+  (message "running erlfmt")
+  (when (string-match-p "aewatchdog" (buffer-file-name))
+    (shell-command (concat "rebar3 fmt --write " (buffer-file-name)) nil nil)
+    (with-current-buffer (buffer-name)
+      (revert-buffer nil t))))
+
+;;; Tmux automatiion
+(defun erl-emamux-tmux-run-line()
+  "Add . suffix to a line and run in tmux"
+  (interactive)
+  (emamux:send-command
+   (let ((line (emamux-get-line)))
+     (setq line
+           (cond ((string-suffix-p "," line) (string-remove-suffix "," line))
+                 ((string-suffix-p "." line) (string-remove-suffix "." line))
+                 (t line)))
+     (concat line "."))))
+
+(define-key erlang-mode-map (kbd "C-j") 'erl-emamux-tmux-run-line)
+
+;;; EDT helper functions
+(defun erl-user-default-fun-p (funcall)
+  (with-current-buffer (get-buffer "user_default.erl")
+    (save-excursion
+      (save-match-data
+        (goto-char (point-min))
+        (search-forward funcall nil t)))))
+
+(defun erl-user-default-remove-last ()
+  (interactive)
+  (with-current-buffer (get-buffer "user_default.erl")
+    (undo-tree-undo)
+    (save-buffer)))
+
+(defun erl-insert-user-default (funcall)
+  (let ((module (erlang-module-name)))
+    (with-current-buffer (get-buffer "user_default.erl")
+      (save-excursion
+        (goto-char (point-max))
+        (insert "\n")
+        (insert (format "%s ->\n    %s:%s." funcall module funcall))
+        (save-buffer)))))
+
+(defun erl-edt-profile-trace (mod func)
+  (emamux:send-command (format "edt_profile:trace_opts([{%s, %s, #{capture => true}}], #{track_calls => true})." mod func)))
+
+(defun erl-edt-trace ()
+  "Enables edt_trace for the function selected in the region"
+  (interactive)
+  (let ((mod (erlang-module-name))
+        (func (buffer-substring-no-properties (point) (mark))))
+    erl-edt-profile-trace (mod func)))
+
+(defun erl-edt-summary ()
+  "Prints the profile summary"
+  (interactive)
+  (emamux:send-command (format "edt_profile_pprint:summary().")))
+
+(defun erl-edt-call-graph ()
+  "Prints the profile call graph"
+  (interactive)
+  (emamux:send-command (format "edt_profile_pprint:call_graph().")))

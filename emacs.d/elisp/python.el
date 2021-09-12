@@ -30,6 +30,7 @@
 (add-hook 'python-mode-hook 'yas-minor-mode)
 (add-hook 'python-mode-hook 'jedi-python-hook)
 (add-hook 'python-mode-hook 'idle-highlight-mode)
+(add-hook 'python-mode-hook 'flycheck-mode)
 
 (define-key python-mode-map (kbd "C-j") 'emamux-tmux-run-line)
 (define-key python-mode-map (kbd "C-M-x") 'emamux-tmux-run-sexp)

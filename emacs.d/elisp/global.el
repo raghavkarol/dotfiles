@@ -126,3 +126,7 @@
   (emamux-change-session 'nil)
   (emamux-change-window 'nil)
   (emamux-change-pane 'nil))
+
+(defmacro my-insert (code)
+  "Evalue code and insert the result at the point"
+  `(insert (format "%s", code)))
