@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: kill
+# key: kill
+# --
+ssh -t $(pdsh -g ecs-ae hostname | grep $1 | perl -F: -lane '{print \$F[0]}') sudo init 0

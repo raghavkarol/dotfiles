@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: arg-subparser
+# key: arg-subparser
+# --
+    $1 = subparsers.add_parser('$1', help='')
+    $1.add_argument('--sub-command', help='')
+    $1.set_defaults(func=cmd_$1)

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: teq
+# key: teq
+# --
+if $1 != ${2:nil} {
+   t.Errorf("$1 expected %v actual %v", $2, $1)
+}

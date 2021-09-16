@@ -1,3 +1,6 @@
+;;; Enable which function module
+(which-function-mode 1)
+
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
 
@@ -75,7 +78,7 @@
 ;;;
 ;;; Emamux utility functions
 ;;;
-(defun emamux-get-line ()
+ (defun emamux-get-line ()
   "Get the current line of text"
   (cond ((region-active-p)
          (buffer-substring-no-properties

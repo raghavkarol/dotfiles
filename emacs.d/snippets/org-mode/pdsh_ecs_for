@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: pdsh_ecs_for
+# key: pdsh_ecs_for
+# --
+pdsh -g ecs-ae 'for i in $(docker ps -q -f name=$1-.+-$1 ); \
+ do docker exec $i /usr/lib/$1/bin/$1 eval "$3" ;\
+done'

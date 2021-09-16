@@ -319,7 +319,9 @@ Wrapper function to evaluate an erlang expression using distel."
   "Run erlfmt"
   (interactive)
   (message "running erlfmt")
-  (when (string-match-p "aewatchdog" (buffer-file-name))
+  (when (or (string-match-p "/edt/" (buffer-file-name))
+            (string-match-p "/aecontent/" (buffer-file-name))
+            (string-match-p "/aewatchdog/" (buffer-file-name)))
     (shell-command (concat "rebar3 fmt --write " (buffer-file-name)) nil nil)
     (with-current-buffer (buffer-name)
       (revert-buffer nil t))))
@@ -346,13 +348,13 @@ Wrapper function to evaluate an erlang expression using distel."
         (goto-char (point-min))
         (search-forward funcall nil t)))))
 
-(defun erl-user-default-remove-last ()
+(defun erl-user-default-undo ()
   (interactive)
   (with-current-buffer (get-buffer "user_default.erl")
     (undo-tree-undo)
     (save-buffer)))
 
-(defun erl-insert-user-default (funcall)
+(defun erl-user-default-add-1 (funcall)
   (let ((module (erlang-module-name)))
     (with-current-buffer (get-buffer "user_default.erl")
       (save-excursion
@@ -361,6 +363,11 @@ Wrapper function to evaluate an erlang expression using distel."
         (insert (format "%s ->\n    %s:%s." funcall module funcall))
         (save-buffer)))))
 
+(defun erl-user-default-add ()
+  (interactive)
+  (let ((funcall (buffer-substring-no-properties (point) (mark))))
+    (erl-user-default-add-1 funcall)))
+
 (defun erl-edt-profile-trace (mod func)
   (emamux:send-command (format "edt_profile:trace_opts([{%s, %s, #{capture => true}}], #{track_calls => true})." mod func)))
 
@@ -368,15 +375,52 @@ Wrapper function to evaluate an erlang expression using distel."
   "Enables edt_trace for the function selected in the region"
   (interactive)
   (let ((mod (erlang-module-name))
-        (func (buffer-substring-no-properties (point) (mark))))
-    erl-edt-profile-trace (mod func)))
+       (func (buffer-substring-no-properties (point) (mark))))
+    (erl-edt-profile-trace mod func)))
 
-(defun erl-edt-summary ()
-  "Prints the profile summary"
-  (interactive)
-  (emamux:send-command (format "edt_profile_pprint:summary().")))
+(defun edt-command-in-buffer (cmd buffer-name)
+  (let ((buffer (get-buffer-create buffer-name)))
+    (with-current-buffer buffer
+      (read-only-mode 0)
+      (erase-buffer)
+      (shell-command cmd buffer)
+      (erlang-mode)
+      (yafolding-mode)
+      (local-set-key "q" 'delete-window)
+      (local-set-key "i" 'edt-stat-call)
+      (display-buffer-at-bottom buffer '((window-height . 30)))
+      (read-only-mode 1))))
 
-(defun erl-edt-call-graph ()
-  "Prints the profile call graph"
+(defun edt-call-graph ()
   (interactive)
-  (emamux:send-command (format "edt_profile_pprint:call_graph().")))
+  (let* ((service "aerta")
+         (cmd (format "docker exec %s curl -s http://localhost:65000/edt/trace/call_graph" service)))
+    (edt-command-in-buffer cmd "*call graph*")))
+
+(defun edt-call-summary ()
+  (interactive)
+  (let* ((service "aerta")
+         (cmd (format "docker exec %s curl -s http://localhost:65000/edt/trace/summary" service)))
+    (edt-command-in-buffer cmd "*summary*")))
+
+(defun edt-stat-call ()
+  (interactive)
+  (let* ((service "aerta")
+         (beg-pos (save-excursion (beginning-of-line) (point)))
+         (end-pos (save-excursion (end-of-line) (point)))
+         (line (buffer-substring-no-properties beg-pos end-pos))
+         (id (nth 2 (split-string line)))
+         (cmd (format "docker exec %s curl -s 'http://localhost:65000/edt/trace/stat_call?id=%s'" service id)))
+    (edt-command-in-buffer cmd "*stat call*")))
+
+(defun edt-call-graph-move-to-call ()
+  ;; - Find function make mark-sexp
+  ;; - Find module name erlang-module-name
+  ;;  - Use it to move the call graph to the correct function
+  ;;    - forward
+  ;;    - backward
+  ;;    - error
+  ;;
+  (set-window-point
+   (get-buffer-window "*call graph*")
+   (with-current-buffer (get-buffer "*call graph*") (search-forward "aerta_rules:expand_rta"))))

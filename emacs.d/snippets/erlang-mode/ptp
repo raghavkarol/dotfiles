@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ptp
+# key: ptp
+# --
+persistent_term:put(${1:key}, ${2:Value}),

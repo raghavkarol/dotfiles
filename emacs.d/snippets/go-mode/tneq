@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tneq
+# key: tneq
+# --
+if $1 != {$2:nil} {
+   t.Errorf("$1 is $2")
+}

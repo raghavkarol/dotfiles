@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: arg-parser-main
+# key: arg-parser-main
+# --
+    try:
+        args = parser.parse_args()
+        if 'func' in args:
+            args.func(args)
+        else:
+            parser.print_usage()
+    except Exception as e:
+        print(f'ERROR: {e}')
+        print(f'{traceback.format_exc()}')
