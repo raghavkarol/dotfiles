@@ -26,7 +26,7 @@ environment: integration|production
 region:      us-east-1| us-west-2| eu-west-1
 "
   (emamux:run-command (format "ssh %s" environment))
-  (emamux:run-command (format "sudo jump-host %s-%s"
+  (emamux:run-command (format "ssh %s-%s"
                               (if (string= environment "production")
                                   "global-services"
                                 "global-integration")

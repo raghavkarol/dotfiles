@@ -2,6 +2,12 @@
 # name: erl-dir-locals
 # key: erl-dir-locals
 # --
-((nil . ((compile-command . "(cd ~/github/alertlogic/$1 ; source .setenv ; rebar3 compile)")))
+((nil . ((compile-command . "(cd ~/github/alertlogic/$1 ; source .setenv ; rebar3 test)")))
  (erlang-mode . ((eval . (erl-connect-node nil "$1"))
-                 (eval . (setq erl-dev-tools-project-root "/Users/rkarol-admin/github/alertlogic/$1")))))
+                 (eval . (progn
+                           (make-variable-buffer-local 'emamux:session)
+                           (make-variable-buffer-local 'emamux:window)
+                           (make-variable-buffer-local 'emamux:pane)
+                           (setq emamux:session "working")
+                           (setq emamux:window "$1")
+                           (setq emamux:pane "1"))))))

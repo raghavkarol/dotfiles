@@ -20,6 +20,7 @@
   ("--ff"))
  (magit-commit nil)
  (magit-diff
+  (("--" "src/aetag_api.erl"))
   ("--no-ext-diff" "--stat")
   (("--" "tests/test_lwa_host_probe_tagset.py"))
   (("--" "./"))
@@ -30,14 +31,15 @@
   (("--" "etc/aesessions_user-env.template"))
   (("--" "etc/aeshard_demo-env.template"))
   (("--" "cfn/ae-engines.yaml")
-   "-U30" "--function-context")
-  (("--" "src/al_sd2_lib.erl")))
+   "-U30" "--function-context"))
  (magit-diff:-U "10" "30")
  (magit-dispatch nil)
  (magit-ediff nil)
  (magit-fetch nil)
  (magit-gitignore nil)
  (magit-log
+  (("--" "src/aefr_eng_config.erl"))
+  (("--" "aetuner/server/update_analytic.py"))
   (("--" "config/aesolo.config"))
   (("--" "src/aefr_eng.erl"))
   (("--" "etc/aerta-env.template"))
@@ -45,12 +47,10 @@
   (("--" "src/aetrigger_eng.erl"))
   (("--" "src/aefr_eng_metrics_srv.erl"))
   (("--" "./"))
-  (("--" "src/aetrigger_eng_publish.erl"))
-  (("--" "py/main.py"))
-  ("-n256" "--graph" "--decorate"))
+  (("--" "src/aetrigger_eng_publish.erl")))
  (magit-merge nil)
- (magit-pull nil
-             ("--rebase"))
+ (magit-pull
+  ("--rebase"))
  (magit-push
   ("--force-with-lease")
   ("--force")

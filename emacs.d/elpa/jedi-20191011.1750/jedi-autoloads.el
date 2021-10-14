@@ -6,8 +6,9 @@
                          (or (file-name-directory #$) (car load-path))))
 
 
-;;;### (autoloads nil "jedi" "jedi.el" (0 0 0 0))
-;;; Generated autoloads from jedi.el
+;;;### (autoloads nil "jedi" "../../../../../../.emacs.d/elpa/jedi-20191011.1750/jedi.el"
+;;;;;;  "cf92d8dabcdf6e0e0fae737991b6d5d9")
+;;; Generated autoloads from ../../../../../../.emacs.d/elpa/jedi-20191011.1750/jedi.el
 
 (autoload 'jedi:ac-setup "jedi" "\
 Add Jedi AC sources to `ac-sources'.
@@ -29,8 +30,20 @@ Complete code at point.
 (autoload 'jedi:auto-complete-mode "jedi" nil nil nil)
 
 (setq jedi:setup-function #'jedi:ac-setup jedi:mode-function #'jedi:auto-complete-mode)
+
+;;;### (autoloads "actual autoloads are elsewhere" "jedi" "../../../../../../.emacs.d/elpa/jedi-20191011.1750/jedi.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../../../.emacs.d/elpa/jedi-20191011.1750/jedi.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "jedi" '("jedi:")))
+
+;;;***
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../../../.emacs.d/elpa/jedi-20191011.1750/jedi-autoloads.el"
+;;;;;;  "../../../../../../.emacs.d/elpa/jedi-20191011.1750/jedi.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

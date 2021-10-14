@@ -256,7 +256,27 @@ static char *gnus-pointer[] = {
  '(ring-bell-function 'ignore)
  '(ropemacs-enable-shortcuts nil)
  '(safe-local-variable-values
-   '((eval progn
+   '((jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_winlogin/_venv")
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_win_login/_venv")
+     (eval progn
+           (make-variable-buffer-local 'emamux:session)
+           (make-variable-buffer-local 'emamux:window)
+           (make-variable-buffer-local 'emamux:pane)
+           (make-variable-buffer-local 'edt-docker-container)
+           (setq edt-docker-container "aerta")
+           (setq emamux:session "working")
+           (setq emamux:window "aerta")
+           (setq emamux:pane "1"))
+     (eval progn
+           (make-variable-buffer-local 'emamux:session)
+           (make-variable-buffer-local 'emamux:window)
+           (make-variable-buffer-local 'emamux:pane)
+           (make-variable-buffer-local 'edt-docker-container)
+           (setq edt-docker-container "aerta_eng_logmsgs")
+           (setq emamux:session "working")
+           (setq emamux:window "aerta_eng")
+           (setq emamux:pane "1"))
+     (eval progn
            (make-variable-buffer-local 'emamux:session)
            (make-variable-buffer-local 'emamux:window)
            (make-variable-buffer-local 'emamux:pane)

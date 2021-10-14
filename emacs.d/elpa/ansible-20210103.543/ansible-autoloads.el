@@ -6,8 +6,9 @@
                          (or (file-name-directory #$) (car load-path))))
 
 
-;;;### (autoloads nil "ansible" "ansible.el" (0 0 0 0))
-;;; Generated autoloads from ansible.el
+;;;### (autoloads nil "ansible" "../../../../../../.emacs.d/elpa/ansible-20210103.543/ansible.el"
+;;;;;;  "2f1a5b5f347c0f81143669f0e207ce2f")
+;;; Generated autoloads from ../../../../../../.emacs.d/elpa/ansible-20210103.543/ansible.el
 
 (defvar ansible-key-map (make-sparse-keymap) "\
 Keymap for Ansible.")
@@ -24,12 +25,21 @@ ARG is `toggle'; disable the mode otherwise.
 
 (autoload 'ansible-dict-initialize "ansible" "\
 Initialize Ansible auto-complete." nil nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "ansible" "../../../../../../.emacs.d/elpa/ansible-20210103.543/ansible.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../../../.emacs.d/elpa/ansible-20210103.543/ansible.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ansible" '("ansible-")))
 
 ;;;***
+
+;;;***
 
-;;;### (autoloads nil nil ("ansible-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("../../../../../../.emacs.d/elpa/ansible-20210103.543/ansible-autoloads.el"
+;;;;;;  "../../../../../../.emacs.d/elpa/ansible-20210103.543/ansible-pkg.el"
+;;;;;;  "../../../../../../.emacs.d/elpa/ansible-20210103.543/ansible.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 
