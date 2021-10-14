@@ -101,6 +101,7 @@ alias vim="emacsclient -a ''"
 alias emacst='/usr/local/bin/emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias ls='ls --color=auto'
 alias .='source'
+alias yaegi='rlwrap yaegi'
 
 alias lwa_demo='cd ~/algithub/lwa_demo'
 alias lwa_baseline_demo='cd ~/algithub/lwa_baseline_demo'
@@ -110,8 +111,10 @@ alias aerta='cd ~/algithub/aerta'
 alias aesessions_user='cd ~/algithub/aesessions_user'
 alias aelwasdk='cd  ~/algithub/lwa_baseline_demo/_venv/src/aelwasdk'
 alias ae='./aesolo'
+alias lwa='./lwa'
 alias m='with_memo'
 alias mm='with_memo -M'
+
 
 # For PYTHON's ValueError: unknown locale: UTF-8 errors
 export LC_ALL=en_US.UTF-8
@@ -132,16 +135,11 @@ then
     source $tmuxinator_completions
 fi
 
-# erl_version=21.1
-# echo "Activating erlang version ${erl_version}"
-# source "/Users/rkarol-admin/erlang/${erl_version}/activate"
-
 # AL AWS envrionment
 export ENVIRON=global-integration
 export AWS_REGION=us-west-2
 export AWS_PROFILE=integration              # AWS PROFILE see ~/.aws/credentials
 export github_user=raghav-karol             # For LWA makefiles
-
 
 # Running inside dsh
 if [[ $(uname) == "Linux" ]]
@@ -164,3 +162,16 @@ source ~/bin/alertlogic.hosts
 
 export EDITOR='emacsclient -q'
 export vi='emacsclient -q'
+
+# opam configuration
+test -r /Users/rkarol-admin/.opam/opam-init/init.zsh && . /Users/rkarol-admin/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+export LWA_UPDATE_CHECK=0
+
+erl_version=21.3.8.4
+echo "Staring zsh with erl ${erl_version}"
+source "/Users/rkarol-admin/erlang/${erl_version}/activate"
+
+echo "Starting ssh agent "
+pgrep -qf ssh-agent || eval $(ssh-agent) > /dev/null
+ssh-add
