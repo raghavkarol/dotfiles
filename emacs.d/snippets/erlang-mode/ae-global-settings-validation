@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: vvv
+# key: vvv
+# --
+validation(<<"${1:app}">>, <<"${2:param}">>, X) ${3:when is_integer(X)}->
+    {$1, $2, X}${4.}

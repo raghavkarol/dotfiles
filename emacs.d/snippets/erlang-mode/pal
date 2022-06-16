@@ -2,4 +2,4 @@
 # name: pal
 # key: pal
 # --
-ct:pal("$1: ~p", [$1]),
+ct:pal(">>> ~p:~p::~p $1: ~p", [?MODULE, ?FUNCTION_NAME, ?LINE, $1]),

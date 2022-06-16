@@ -2,4 +2,4 @@
 # name: pdsh_ecs
 # key: pdsh_ecs
 # --
-pdsh -g ${1:ecs-ae} ${2:docker ps}
+pdsh -g ${1:ecs-ae} sudo ${2:docker ps}

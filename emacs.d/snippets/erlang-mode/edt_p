@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: edt_p
+# key: edt_p
+# --
+edt_profile:trace_opts([{${1:module}, ${2:'_'}, ${3:'_'}, #{capture=>true}}], #{track_calls=>true, max_calls=>100}).
