@@ -246,7 +246,7 @@ static char *gnus-pointer[] = {
    '(("gnu" . "http://elpa.gnu.org/packages/")
      ("melpa" . "http://melpa.org/packages/")))
  '(package-selected-packages
-   '(format-all eglot golint ag wakatime-mode applescript-mode undo-tree ivy ein emamux string-inflection yafolding company-distel forge elscreen alchemist elixir-mode company-nginx nginx-mode nginx import-js gerrit-download magit-gerrit js-doc helm-xref pug-mode indium js2-refactor ac-js2 skewer-mode tern-auto-complete company-tern json-mode prettier-jsx rjsx-mode docker-tramp color-theme-sanityinc-tomorrow groovy flymake-go go-autocomplete gorepl-mode nodejs-repl company-jedi cmake-ide irony irony-mode cmake-mode flycheck go-guru go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm auto-complete yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode blank-mode blackboard-theme zenburn-theme synonyms synonymous gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme intellij-theme doom-themes github-browse-file virtualenvwrapper docker yaml-mode windata wgrep-helm web-mode sqlup-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm))
+   '(format-all eglot golint ag wakatime-mode applescript-mode undo-tree ivy ein emamux string-inflection yafolding company-distel forge elscreen alchemist elixir-mode company-nginx nginx-mode nginx gerrit-download magit-gerrit js-doc helm-xref pug-mode indium js2-refactor ac-js2 skewer-mode tern-auto-complete company-tern json-mode prettier-jsx rjsx-mode docker-tramp color-theme-sanityinc-tomorrow groovy flymake-go go-autocomplete gorepl-mode nodejs-repl company-jedi cmake-ide irony irony-mode cmake-mode flycheck go-guru go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm auto-complete yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode blank-mode blackboard-theme zenburn-theme synonyms synonymous gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme intellij-theme doom-themes github-browse-file virtualenvwrapper docker yaml-mode windata wgrep-helm web-mode sqlup-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(projectile-completion-system 'ivy)
  '(projectile-enable-caching t)
@@ -256,7 +256,14 @@ static char *gnus-pointer[] = {
  '(ring-bell-function 'ignore)
  '(ropemacs-enable-shortcuts nil)
  '(safe-local-variable-values
-   '((jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_winlogin/_venv")
+   '((eval erl-connect-node nil "aetrigger_eng")
+     (eval progn
+           (make-variable-buffer-local 'emamux:session)
+           (make-variable-buffer-local 'emamux:window)
+           (make-variable-buffer-local 'emamux:pane)
+           (make-variable-buffer-local 'edt-docker-container)
+           (setq edt-docker-container "aerta"))
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_winlogin/_venv")
      (jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_win_login/_venv")
      (eval progn
            (make-variable-buffer-local 'emamux:session)

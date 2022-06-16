@@ -100,10 +100,20 @@
           (save-excursion (backward-sexp) (point))
           (point)))))
 
-(defun emamux-tmux-run-line ()
+(defvar *emamux-last-line*)
+
+(defun emamux-tmux-run-line (&optional line)
   "Run a line of text as returned in the currently connected tmux session"
   (interactive)
-  (emamux:send-command (emamux-get-line)))
+  (when (not line)
+    (setq line (emamux-get-line)))
+  (setq *emamux-last-line* line)
+  (emamux:send-command line))
+
+(defun emamux-tmux-run-last()
+  "Run a line of text as returned in the currently connected tmux session"
+  (interactive)
+  (emamux:send-command *emamux-last-line*))
 
 (defun emamux-tmux-run-sexp ()
   "Run a line of text as returned in the currently connected tmux session"

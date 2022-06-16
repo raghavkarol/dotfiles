@@ -90,9 +90,15 @@ region:      us-east-1| us-west-2| eu-west-1
         ((string-match "aefr_eng" service)
          (list (concat (replace-regexp-in-string  "_" "" service) "-")
                "aefr_eng"))
+        ((string-match "aefr_ofl" service)
+         (list (concat (replace-regexp-in-string  "_" "" service) "-")
+               "aefr_eng"))
         ((string-match "aerta_eng" service)
          (list (concat (replace-regexp-in-string  "_" "" service) "-")
                "aerta_eng"))
+        ((string-match "aerta_workers" service)
+         (list (concat (replace-regexp-in-string  "_" "" service) "-")
+               "aerta"))
         ((cl-member service '("aefr" "aerta" "aetag" "aepublish" "aecontent" "aewatchdog") :test #'string=)
          (list (concat service "-.+-" service) service))
         (t (error (format "unknown service: %s" service)))))
@@ -100,14 +106,17 @@ region:      us-east-1| us-west-2| eu-west-1
 (defun service-connect (service &rest rest)
   (progn
     (emamux:run-command
-     (format "ssh -t $(pdsh -g ecs-ae docker ps %s -q | perl -F: -lane '{print $F[0]}' | sed -n 1p)"
+     (format "ssh -t $(pdsh -g ecs-ae sudo docker ps %s -q | perl -F: -lane '{print $F[0]}' | sed -n 1p)"
              (if rest
                  (format "-f id=%s" (car rest))
                (format "-f name=%s" (car (docker-name service))))))
     (emamux:run-command
-     (format "docker exec -it $(docker ps %s -q | perl -F: -lane '{print $F[0]}' | sed -n 1p) /usr/lib/%s/bin/%s remote_console"
+     (format "sudo docker exec -it $(sudo docker ps %s -q | perl -F: -lane '{print $F[0]}' | sed -n 1p) /usr/lib/%s/bin/%s remote_console"
              (if rest
                  (format "-f id=%s" (car rest))
                (format "-f name=%s" (car (docker-name service))))
              (cadr (docker-name service))
              (cadr (docker-name service))))))
+
+
+(docker-name "aerta_workers")
