@@ -204,6 +204,8 @@
     (erase-buffer)
     (grep-mode)))
 
+;;; Common test log viewing
+
 (defun eww-other-window (url)
   (save-excursion
     (progn (eww url)
@@ -215,13 +217,13 @@
 (defun test-logs-dir ()
   (format "%s" "_build/test/logs"))
 
-(defun erl-open-ct-suite-log ()
+(defun erl-eww-ct-suite-log ()
   (interactive)
   (let ((file (format "%s/%s" (test-logs-dir) "suite.log.latest.html")))
     (message (format "opening: %s" file))
     (eww-other-window (to-file-url file))))
 
-(defun erl-open-ct-test-log ()
+(defun erl-eww-open-ct-test-log ()
   (interactive)
   (let* ((test-name erl-run-testcase-current-function-name)
          (suite-name erl-run-testcase-current-module-name)
@@ -230,6 +232,75 @@
          (latest-test-file (car test-files)))
     (message (format "opening: %s" latest-test-file))
     (eww-other-window (to-file-url latest-test-file))))
+
+(defun ct-test-files (suite test-case)
+  (directory-files-recursively "../_build/test/logs" (format "%s\\.%s\\.html" suite test-case)))
+
+;;; Extract the date
+(defun ct-parse-timestamp (html-file)
+  "parse a common test file for timestamp and filename
+
+example of html file .../_build/test/logs/ct_run.aefr@host.2022-06-14_16.50.11/lib.aefr.aefr_SUITE.logs/run.2022-06-14_16.50.11/aefr_suite.create_expiration_ok.html
+
+returns "
+  (cons html-file (last (split-string  html-file "/") 2)))
+
+(defun sort-max-ts (f1 f2)
+  (string-greaterp (nth 1 f1) (nth 1 f2)))
+
+(defun latest-ct-log (files)
+  (nth 0 (nth 0 (sort (mapcar 'ct-parse-timestamp files) 'sort-max-ts))))
+
+(defun ct-open-test-log (suite test-case)
+  (save-excursion
+    (split-window-sensibly)
+    (other-window 1)
+    (eww-open-file (file-truename (latest-ct-log (ct-test-files (string-trim suite) (string-trim test-case)))))
+    (with-current-buffer (current-buffer)
+        (local-set-key (kbd "q") 'delete-window))
+    (other-window 1)))
+
+(defun erl-ct-open-test-log ()
+  (interactive)
+  (ct-open-test-log (erlang-module-name) (erlang-function-name)))
+
+(setq spec "aefr_SUITE:init_per_suite")
+
+(defun erl-parse-function-name (spec)
+  "Extract erlang function name
+
+Return the function name for spec where spec can be
+
+aefr_SUITE:init_per_suite  returns  init_per_suite
+init_per_suite             returns  init_per_suite
+"
+  (cond
+   ((string-match-p ":" spec) (nth 1 (split-string spec ":")))
+   (t spec)))
+
+(defun erl-parse-module-name (spec)
+  "Extract erlang function name
+
+Return the function name for spec where spec can be
+
+aefr_SUITE:init_per_suite  returns  aefr_SUITE
+init_per_suite             returns  (erlang-module-name)
+"
+  (cond
+   ((string-match-p ":" spec) (nth 0 (split-string spec ":")))
+   (t (erlang-module-name))))
+
+(defun erl-ct-open-test-log-by-name (spec)
+  "Open logs for a common test by name
+
+Opens logs for an erlang test by name where the name can be a like
+
+- aefr_SUITE:test_something
+- test_something :: assumes the current module contains the test case
+"
+  (interactive "MTest Case: ")
+  (ct-open-test-log (erl-parse-module-name spec)
+                    (erl-parse-function-name spec)))
 
 (defun erl-connect-node (_ node-name)
   "Connect to an erlang node
@@ -319,26 +390,68 @@ Wrapper function to evaluate an erlang expression using distel."
   (interactive)
   (message "running erlfmt")
   (when (or (string-match-p "/edt/" (buffer-file-name))
+            (string-match-p "/aefr/" (buffer-file-name))
+            (string-match-p "/aetag/" (buffer-file-name))
+            (string-match-p "/aerta/" (buffer-file-name))
+            (string-match-p "/aefr_eng/" (buffer-file-name))
             (string-match-p "/aecontent/" (buffer-file-name))
+            (string-match-p "/aepublish/" (buffer-file-name))
             (string-match-p "/aewatchdog/" (buffer-file-name))
+            (string-match-p "/aetrigger_eng/" (buffer-file-name))
+            (string-match-p "/ae_search_lib_common/" (buffer-file-name))
             (string-match-p "/aeextend/" (buffer-file-name)))
     (shell-command (concat "rebar3 fmt --write " (buffer-file-name)) nil nil)
     (with-current-buffer (buffer-name)
       (revert-buffer nil t))))
 
-;;; Tmux automatiion
-(defun erl-emamux-tmux-run-line()
+(defun ensure-ends-with-dot (line)
   "Add . suffix to a line and run in tmux"
+  (setq line
+        (cond ((string-suffix-p "," line) (string-remove-suffix "," line))
+              ((string-suffix-p "." line) (string-remove-suffix "." line))
+              (t line)))
+  (string-trim (concat line ".")))
+
+
+;;; Tmux automatiion
+(defvar *emamux-last-line*
+  "Last erlang line run")
+
+(defun erl-emamux-copy-last-value ()
+  "Copy the last value from the erlang node connected to the tmux session"
   (interactive)
-  (emamux:send-command
-   (let ((line (emamux-get-line)))
-     (setq line
-           (cond ((string-suffix-p "," line) (string-remove-suffix "," line))
-                 ((string-suffix-p "." line) (string-remove-suffix "." line))
-                 (t line)))
-     (concat line "."))))
+  (emamux-tmux-run-line "ae_erl_scripts:copy(v(-1))."))
+
+(defun erl-emamux-paste-last-value ()
+  "Paste the last value from the erlang node connected to the tmux session"
+  (interactive)
+  (shell-command "AWS_PROFILE=integration AWS_REGION=us-west-2 ~/bin/erl_pbcopy" (current-buffer)))
+
+(defun erl-emamux-forget-binding ()
+  "Forget the variable a the point"
+  (interactive)
+  (emamux-tmux-run-line (format "f(%s)." (string-trim (emamux-get-line)))))
+
+(defun emamux-edt-add-test-post-action ()
+  "Register the current module as an edt_post_action"
+  (interactive)
+  (emamux-tmux-run-line (format "edt_post_action:add({test, %s})." (erlang-module-name))))
+
+(defun erl-emamux-tmux-run-line()
+  "Run an erlang expression in the attached tmux console"
+  (interactive)
+  (let ((line (ensure-ends-with-dot (emamux-get-line))))
+    (setq *emamux-last-line* line)
+    (emamux-tmux-run-line line)))
+
+(defun erl-emamux-tmux-rerun-line()
+  "Rerun the last line run using erl-emamux-tmux-run-line "
+  (interactive)
+  (emamux-tmux-run-line *emamux-last-line*))
 
 (define-key erlang-mode-map (kbd "C-j") 'erl-emamux-tmux-run-line)
+(define-key erlang-mode-map (kbd "C-r") 'erl-emamux-tmux-rerun-line)
+(define-key erlang-mode-map (kbd "C-x f") 'erl-emamux-forget-binding)
 
 (defvar edt-docker-container
   nil
@@ -375,7 +488,7 @@ Wrapper function to evaluate an erlang expression using distel."
     (save-buffer)))
 
 (defun erl-user-default-add-1 (funcall)
-  "ONLY works for a singleuser_default.erl module"
+  "ONLY works for a single user_default.erl module"
   (let ((module (erlang-module-name)))
     (when (not (file-exists-p "user_default.erl"))
       (with-current-buffer (find-file-noselect "user_default.erl")
@@ -460,3 +573,16 @@ Wrapper function to evaluate an erlang expression using distel."
   (set-window-point
    (get-buffer-window "*call graph*")
    (with-current-buffer (get-buffer "*call graph*") (search-forward "aerta_rules:expand_rta"))))
+
+(defun erl-edt-ct-log-dir ()
+  (cond
+   ((string-match-p "_checkouts/" (buffer-file-name)) "../../../_build/test/logs")
+   ('t "_build/test/logs/")))
+
+(defun erl-eww-open-coverage-file ()
+  "open the latest coverage file for a common test case"
+  (interactive)
+  (let* ((ct-log-dir (erl-edt-ct-log-dir))
+         (module (erlang-module-name))
+         (latest-test-dir (car (reverse (directory-files ct-log-dir nil "ct_run.")))))
+    (eww-open-file (format "%s/%s/%s.COVER.html" ct-log-dir latest-test-dir module))))
