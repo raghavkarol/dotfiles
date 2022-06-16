@@ -138,8 +138,8 @@ fi
 # AL AWS envrionment
 export ENVIRON=global-integration
 export AWS_REGION=us-west-2
-export AWS_PROFILE=integration              # AWS PROFILE see ~/.aws/credentials
-export github_user=raghav-karol             # For LWA makefiles
+export AWS_PROFILE=global-integration # AWS PROFILE see ~/.aws/credentials
+export github_user=raghav-karol       # For LWA makefiles
 
 # Running inside dsh
 if [[ $(uname) == "Linux" ]]
@@ -168,10 +168,11 @@ test -r /Users/rkarol-admin/.opam/opam-init/init.zsh && . /Users/rkarol-admin/.o
 
 export LWA_UPDATE_CHECK=0
 
-erl_version=21.3.8.4
+erl_version=21.3.8.21
 echo "Staring zsh with erl ${erl_version}"
 source "/Users/rkarol-admin/erlang/${erl_version}/activate"
 
 echo "Starting ssh agent "
 pgrep -qf ssh-agent || eval $(ssh-agent) > /dev/null
 ssh-add
+export PATH="/usr/local/opt/openjdk/bin:$PATH"

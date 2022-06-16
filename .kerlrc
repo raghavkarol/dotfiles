@@ -3,6 +3,6 @@
 
 KERL_CONFIGURE_OPTIONS="--with-wx --without-javac --disable-hipe --with-ssl=$(brew --prefix openssl)"
 KERL_CONFIGURE_DISABLE_APPLICATIONS="odbc"
-KERL_ENABLE_PROMPT=1
-KERL_PROMPT_FORMAT="(erl %RELEASE%) "
+# KERL_ENABLE_PROMPT=0
+# KERL_PROMPT_FORMAT="(erl %RELEASE%) "
 KERL_BUILD_BACKEND=git
