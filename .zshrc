@@ -120,9 +120,6 @@ alias mm='with_memo -M'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-PYTHONPATH=/Users/$USER/github/issuu_python:$PYTHONPATH
-export PYTHONPATH
-
 # Go
 GOPATH=~/go
 export GOPATH
