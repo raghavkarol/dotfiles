@@ -28,6 +28,11 @@
 ;;; Use the same keybinds as tmux to split windows
 (global-set-key (kbd "C-x %") 'split-window-horizontally)
 (global-set-key (kbd "C-x \"") 'split-window-vertically)
+;;; Org-capture and org-mobile sync
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c C-p") 'org-mobile-push)
+(global-set-key (kbd "C-c C-f") 'org-mobile-full)
+
 
 (setq inhibit-startup-message t)
 (setq-default indent-tabs-mode nil)
