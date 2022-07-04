@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: arg-verbose
+# key: arg-verbose
+# --
+    parser.add_argument(
+        '-v',
+        '--verbose',
+        action='count',
+        default=0,
+        help='Run in verbose mode, use -vvv for max verbosity')
