@@ -32,6 +32,8 @@ export PATH="$GOPATH/bin:$PATH"
 
 ## my scripts should be the first in the PATH
 export PATH="$HOME/bin:$PATH"
+## Use source installation for ae-tools
+export PATH=$HOME/github/alertlogic/ae_tools/bin:$PATH
 
 # MANPATH
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -65,10 +67,10 @@ alias vim="emacsclient -a ''"
 alias emacst='/usr/local/bin/emacs -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias ls='ls --color=auto'
 alias .='source'
-alias ae='./aesolo'
 alias lwa='./lwa'
 alias m='with_memo'
 alias mm='with_memo -M'
+# alias ae='./aesolo'
 eval "$(hub alias -s)"
 
 # Environment
@@ -91,10 +93,6 @@ export AWS_REGION=us-west-2
 export AWS_PROFILE=global-integration # AWS PROFILE see ~/.aws/credentials
 export github_user=raghav-karol       # For LWA makefiles
 export LWA_UPDATE_CHECK=0
-
-## Source in aims token generation functions
-source ~/bin/aims_token
-source ~/bin/alertlogic.hosts
 
 # Source in secrets
 source ~/.zshrc.secrets
