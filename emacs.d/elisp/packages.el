@@ -71,8 +71,6 @@
   :ensure t)
 (use-package xref-js2
   :ensure t)
-(use-package docker
-  :ensure t)
 (use-package docker-tramp
   :ensure t)
 (use-package magit-gerrit

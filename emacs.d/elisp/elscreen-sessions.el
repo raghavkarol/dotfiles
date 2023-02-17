@@ -13,6 +13,8 @@
 
 (defvar my-session-loaded nil)
 
+(defvar my-session-name-save nil)
+
 (defun elscreen-save-file (name)
   (concat my-session-dir name "/elscreen"))
 
@@ -23,15 +25,16 @@
   (with-temp-buffer (insert-file-contents my-current-session) (buffer-string)))
 
 (defun my-session-get-name (prompt)
-  (completing-read prompt (and (file-exists-p my-session-dir)
-                               (setq filter-out-dirs
-                                     (if my-session-loaded
-                                         (list "." ".." (my-current-session-name))
-                                       (list "." "..")))
-                               (remove-if
-                                    (lambda (w) (member w filter-out-dirs))
-                                    (directory-files my-session-dir)))
-                   nil nil nil my-session-name-hist))
+  (completing-read
+   prompt (and (file-exists-p my-session-dir)
+               (setq filter-out-dirs
+                     (if my-session-loaded
+                         (list "." ".." (my-current-session-name))
+                       (list "." "..")))
+               (remove-if
+                (lambda (w) (member w filter-out-dirs))
+                (directory-files my-session-dir)))
+   nil nil nil my-session-name-hist))
 
 (defun my-save-session (name)
   (make-directory (my-session-save-dir name) t)
@@ -78,3 +81,14 @@
   (switch-session name)
   (session-changed name)
   (delete-directory (my-session-save-dir delete-session-name) t))
+
+;;; Customizations
+
+(defun gtd-session ()
+  (interactive)
+  (setq my-session-name-save (my-current-session-name))
+  (switch-session "gtd"))
+
+(defun last-session ()
+  (interactive)
+  (switch-session my-session-name-save))

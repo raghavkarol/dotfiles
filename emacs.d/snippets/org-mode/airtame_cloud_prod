@@ -1,9 +1,0 @@
-# -*- mode: org -*-
-# name: sql_prod
-# key: sql_prod
-# --
-#+begin_src sql :engine mysql :dbhost (airtame-cloud-db-config 'prod 'host) :dbuser (airtame-cloud-db-config 'prod 'user) :dbpassword (airtame-cloud-db-config 'prod 'password) :database cloud
-$0
-#+end_src
-
-#+RESULTS:

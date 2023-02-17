@@ -1,9 +1,0 @@
-# -*- mode: org -*-
-# name: sqld
-# key: sqld
-# --
-#+begin_src sql :engine mysql :dbhost (airtame-cloud-db-config 'dev 'host) :dbuser (airtame-cloud-db-config 'dev 'user) :dbpassword (airtame-cloud-db-config 'dev 'password) :database cloud
-$0
-#+end_src
-
-#+RESULTS:

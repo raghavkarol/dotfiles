@@ -4,6 +4,11 @@
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
 
+
+;;; For emacs 28
+;;; To use command and option as M-key
+(setq mac-command-modifier 'meta)
+
 (add-to-list 'display-buffer-alist
              '("\\*.+?\\*"
                (display-buffer-at-bottom)
@@ -53,6 +58,7 @@
 
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
+
 (exec-path-from-shell-copy-env "PYTHONPATH")
 (exec-path-from-shell-copy-env "GOPATH")
 (exec-path-from-shell-copy-env "PATH")
@@ -73,6 +79,7 @@
 
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
 (add-hook 'prog-mode-hook (lambda () (yafolding-mode)))
+(add-hook 'yaml-mode-hook (lambda () (yafolding-mode)))
 
 (global-display-line-numbers-mode)
 (setq magit-last-seen-setup-instructions "1.4.0")

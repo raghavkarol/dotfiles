@@ -2,4 +2,4 @@
 # name: dp
 # key: dp
 # --
-import sys ; frame = sys._getframe() ; print(f'{frame.f_code.co_filename}:{frame.f_lineno}::>>> $1:{$1}')
+import sys ; frame = sys._getframe() ; print(f'{frame.f_code.co_filename}:{frame.f_lineno}::>>> $1={$1}')

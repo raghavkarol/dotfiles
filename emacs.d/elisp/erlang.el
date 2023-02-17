@@ -9,7 +9,7 @@
 (setq erlang-home (format "/Users/%s/erlang/%s/" (user-real-login-name) erlang-version))
 (setq erlang-root-dir erlang-home)
 
-(add-to-list 'load-path (erlang-get-current-version erlang-home "tools-*/emacs"))
+(add-to-list 'load-path "/Users/rkarol-admin/github/raghavkarol/otp/lib/tools/emacs")
 (add-to-list 'exec-path (concat erlang-home "bin"))
 (require 'erlang-start)
 
@@ -64,9 +64,9 @@
 ;; Hook Definitions
 (defun erlang-key-bindings()
   ;; (local-set-key (kbd "C-x c") 'show-compilation-window)
-  (local-set-key (kbd "C-x e") 'erlang-run-suite)
-  (local-set-key (kbd "C-x C-e") 'erlang-run-testcase)
-  (local-set-key (kbd "C-x C-r") 'erlang-repeat-test)
+  ;; (local-set-key (kbd "C-x e") 'erlang-run-suite)
+  ;; (local-set-key (kbd "C-x C-e") 'erlang-run-testcase)
+  ;; (local-set-key (kbd "C-x C-r") 'erlang-repeat-test)
   ;; (local-set-key (kbd "C-M-x") 'erl-compile-reload-changed)
   (local-set-key (kbd "C-c .") 'erl-find-source-under-point)
   (local-set-key (kbd "C-c ,") 'erl-find-source-unwind))
@@ -233,8 +233,12 @@
     (message (format "opening: %s" latest-test-file))
     (eww-other-window (to-file-url latest-test-file))))
 
-(defun ct-test-files (suite test-case)
-  (directory-files-recursively "../_build/test/logs" (format "%s\\.%s\\.html" suite test-case)))
+(defun ct-logs-directory (filename)
+  (cond ((string-match "_checkouts/" filename) "../../../_build/test/logs")
+        (t "../_build/test/logs")))
+
+(defun ct-test-files (filename suite test-case)
+  (directory-files-recursively (ct-logs-directory filename) (format "%s\\.%s\\.html" suite test-case)))
 
 ;;; Extract the date
 (defun ct-parse-timestamp (html-file)
@@ -251,18 +255,35 @@ returns "
 (defun latest-ct-log (files)
   (nth 0 (nth 0 (sort (mapcar 'ct-parse-timestamp files) 'sort-max-ts))))
 
-(defun ct-open-test-log (suite test-case)
+(defvar *ct-logs-last-filename* nil)
+(defvar *ct-logs-last-suite* nil)
+(defvar *ct-logs-last-test-case* nil)
+
+(defun ct-open-test-log (filename suite test-case)
+  (setq *ct-logs-last-suite* suite)
+  (setq *ct-logs-last-test-case* test-case)
+  (setq *ct-logs-last-filename* filename)
   (save-excursion
     (split-window-sensibly)
     (other-window 1)
-    (eww-open-file (file-truename (latest-ct-log (ct-test-files (string-trim suite) (string-trim test-case)))))
+    (eww-open-file (file-truename (latest-ct-log (ct-test-files filename (string-trim suite) (string-trim test-case)))))
     (with-current-buffer (current-buffer)
-        (local-set-key (kbd "q") 'delete-window))
-    (other-window 1)))
+      (local-set-key (kbd "g") 'erl-ct-reload-test-log)
+      (local-set-key (kbd "q") 'delete-window)
+      (other-window 1))))
+
+(defun erl-ct-reload-test-log ()
+  (interactive)
+  (delete-window)
+  (erl-ct-open-test-log-last))
+
+(defun erl-ct-open-test-log-last ()
+  (interactive)
+  (ct-open-test-log *ct-logs-last-filename* *ct-logs-last-suite* *ct-logs-last-test-case*))
 
 (defun erl-ct-open-test-log ()
   (interactive)
-  (ct-open-test-log (erlang-module-name) (erlang-function-name)))
+  (ct-open-test-log (buffer-file-name) (erlang-module-name) (erlang-function-name)))
 
 (setq spec "aefr_SUITE:init_per_suite")
 
@@ -389,17 +410,20 @@ Wrapper function to evaluate an erlang expression using distel."
   "Run erlfmt"
   (interactive)
   (message "running erlfmt")
-  (when (or (string-match-p "/edt/" (buffer-file-name))
-            (string-match-p "/aefr/" (buffer-file-name))
-            (string-match-p "/aetag/" (buffer-file-name))
-            (string-match-p "/aerta/" (buffer-file-name))
-            (string-match-p "/aefr_eng/" (buffer-file-name))
-            (string-match-p "/aecontent/" (buffer-file-name))
-            (string-match-p "/aepublish/" (buffer-file-name))
-            (string-match-p "/aewatchdog/" (buffer-file-name))
-            (string-match-p "/aetrigger_eng/" (buffer-file-name))
+  (when (or (string-match-p "/ae_ds/" (buffer-file-name))
             (string-match-p "/ae_search_lib_common/" (buffer-file-name))
-            (string-match-p "/aeextend/" (buffer-file-name)))
+            (string-match-p "/aecontent/" (buffer-file-name))
+            (string-match-p "/aeextend/" (buffer-file-name))
+            (string-match-p "/aefr/" (buffer-file-name))
+            (string-match-p "/aefr_eng/" (buffer-file-name))
+            (string-match-p "/aelwa_eng/" (buffer-file-name))
+            (string-match-p "/aepublish/" (buffer-file-name))
+            (string-match-p "/aerta/" (buffer-file-name))
+            (string-match-p "/aerta_eng/" (buffer-file-name))
+            (string-match-p "/aetag/" (buffer-file-name))
+            (string-match-p "/aetrigger_eng/" (buffer-file-name))
+            (string-match-p "/aewatchdog/" (buffer-file-name))
+            (string-match-p "/edt/" (buffer-file-name)))
     (shell-command (concat "rebar3 fmt --write " (buffer-file-name)) nil nil)
     (with-current-buffer (buffer-name)
       (revert-buffer nil t))))
@@ -449,9 +473,26 @@ Wrapper function to evaluate an erlang expression using distel."
   (interactive)
   (emamux-tmux-run-line *emamux-last-line*))
 
+(defun erl-emamux-tmux-select-current-testcase ()
+  "Run the current testcase"
+  (interactive)
+  (emamux-tmux-run-line
+   (format "edt_post_action:add(test, fun() -> edt_api:test(%s, %s) end), edt_api:test(%s, %s)."
+           (erlang-module-name) (erlang-function-name) (erlang-module-name) (erlang-function-name))))
+
+(defun erl-emamux-tmux-select-current-suite ()
+  "Run the current testcase"
+  (interactive)
+  (emamux-tmux-run-line
+   (format "edt_post_action:add(test, fun() -> edt_api:test(%s) end), edt_api:test(%s)."
+           (erlang-module-name) (erlang-module-name))))
+
+
 (define-key erlang-mode-map (kbd "C-j") 'erl-emamux-tmux-run-line)
 (define-key erlang-mode-map (kbd "C-r") 'erl-emamux-tmux-rerun-line)
 (define-key erlang-mode-map (kbd "C-x f") 'erl-emamux-forget-binding)
+
+
 
 (defvar edt-docker-container
   nil

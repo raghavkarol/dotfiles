@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tc
+# key: tc
+# --
+test_$1(_Config) ->
+  $2
+  ok.
