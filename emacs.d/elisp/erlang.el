@@ -9,7 +9,7 @@
 (setq erlang-home (format "/Users/%s/erlang/%s/" (user-real-login-name) erlang-version))
 (setq erlang-root-dir erlang-home)
 
-(add-to-list 'load-path "/Users/rkarol-admin/github/raghavkarol/otp/lib/tools/emacs")
+(add-to-list 'load-path (format "/Users/%s/github/raghavkarol/otp/lib/tools/emacs" (user-real-login-name)))
 (add-to-list 'exec-path (concat erlang-home "bin"))
 (require 'erlang-start)
 
@@ -413,6 +413,7 @@ Wrapper function to evaluate an erlang expression using distel."
   (when (or (string-match-p "/ae_ds/" (buffer-file-name))
             (string-match-p "/ae_search_lib_common/" (buffer-file-name))
             (string-match-p "/aecontent/" (buffer-file-name))
+            (string-match-p "/aeforeman/" (buffer-file-name))
             (string-match-p "/aeextend/" (buffer-file-name))
             (string-match-p "/aefr/" (buffer-file-name))
             (string-match-p "/aefr_eng/" (buffer-file-name))
@@ -424,6 +425,7 @@ Wrapper function to evaluate an erlang expression using distel."
             (string-match-p "/aetrigger_eng/" (buffer-file-name))
             (string-match-p "/aewatchdog/" (buffer-file-name))
             (string-match-p "/edt/" (buffer-file-name)))
+    (message (concat "rebar3 fmt --write " (buffer-file-name)))
     (shell-command (concat "rebar3 fmt --write " (buffer-file-name)) nil nil)
     (with-current-buffer (buffer-name)
       (revert-buffer nil t))))
