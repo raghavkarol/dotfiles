@@ -1,6 +1,5 @@
 ;;; Syntax highlighting in code-blocks
 (setq org-src-fontify-natively t)
-(add-hook 'org-mode-hook 'auto-complete-mode)
 
 (defun yas/org-very-safe-expand ()
   (let ((yas/fallback-behavior 'return-nil)) (yas/expand)))
