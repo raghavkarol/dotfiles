@@ -115,3 +115,26 @@
   :ensure t)
 (use-package base16-theme
   :ensure t)
+
+;; org-roam
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory "~/org/roam")
+  (org-roam-completion-everywhere 't)
+  :bind
+  (("C-c n i" . org-roam-node-insert)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n l" . org-roam-buffer-toggle)
+   :map org-mode-map
+   ("C-M-i" . completion-at-point))
+  :config
+  (org-roam-setup))
+
+(use-package org-roam-ui
+  :ensure t
+  :config
+  (setq org-roam-ui-sync-theme t
+        org-roam-ui-follow t
+        org-roam-ui-update-on-save t
+        org-roam-ui-open-on-start t))
