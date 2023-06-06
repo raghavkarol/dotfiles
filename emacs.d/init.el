@@ -1,3 +1,15 @@
+;;; For emacs 28
+;;; To use command and option as M-key
+(setq mac-command-modifier 'meta)
+
+;;; Temporary solution until I can install karabiner
+;;; Key mappings in Iterm2 General -> Profiles -> Key Mappings
+;;;  § `
+;;;  ± ~
+;;; and here in Emacs
+(global-set-key (kbd "§") "`")
+(global-set-key (kbd "±") "~")
+
 ;; Path for global settings file
 (setq custom-file "~/.emacs.d/elisp/custom.el")
 (load custom-file 'noerror)
