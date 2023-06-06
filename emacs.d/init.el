@@ -4,7 +4,17 @@
 (load "~/.emacs.d/elisp/defuns" 'noerror)
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+
+(add-to-list
+ 'package-archives
+ '("melpa-stable" . "http://stable.melpa.org/packages/")
+ t)
+;; ;; For org-roam-ui
+;; (add-to-list
+;;  'package-archives
+;;  '("melpa" . "http://melpa.org/packages/")
+;;  t)
+
 (package-initialize) ; Added by package.el, don't delete, comment out instead
 
 (unless (package-installed-p 'use-package)
@@ -52,7 +62,8 @@
   (my-load 'slime)
   (my-load 'sql)
   (my-load 'tramp)
-  (my-load 'web))
+  (my-load 'web)
+  (my-load 'org-roam))
 
 (my-load 'global)
 
@@ -66,3 +77,13 @@
 ;; Reload theme, switch-session does not restore all colors in the
 ;; session correctly
 (load-theme 'zenburn)
+
+(setq global-auto-complete-mode nil)
+
+;;; Bug in emacs 28.2, Fixed in master branch
+;;
+;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=59081
+;;
+;; See https://emacs.stackexchange.com/questions/74289/emacs-28-2-error-in-macos-ventura-image-type-invalid-image-type-svg
+;;
+(setq image-types (cons 'svg image-types))
