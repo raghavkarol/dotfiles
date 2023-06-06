@@ -10,14 +10,15 @@ export PATH="${HOMEBREW}/bin:$PATH"
 export PATH="${HOMEBREW}/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="${HOMEBREW}/opt/findutils/libexec/gnubin:$PATH"
 export PATH="${HOMEBREW}/opt/grep/libexec/gnubin:$PATH"
-export PATH="/Users/raghav.karol/erlang/21.3.8.21/bin/:$PATH"
-# export PATH="/usr/local/opt/openjdk/bin:$PATH"
-export PATH="/Users/raghav.karol/.cask/bin:$PATH" # Emacs package manager for MELPA
+export PATH="${HOMEBREW}/opt/openjdk/bin:$PATH"
 export PATH="/Applications/Emacs.app/Contents/MacOS/bin/:$PATH"
+export PATH="${HOME}/.cask/bin:$PATH" # Emacs package manager for MELPA
+export PATH="${HOME}/erlang/21.3.8.21/bin/:$PATH"
+export PATH="${HOME}/github/alertlogic/ae_tools/bin:$PATH"
+export PATH="${HOME}/bin:$PATH"
+
 # ## Go is added to the path like this /etc/paths.d/go
 # export PATH="$GOPATH/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/github/alertlogic/ae_tools/bin:$PATH"
 
 ## MANPATH
 
@@ -46,16 +47,18 @@ source ${ZSH_CUSTOM}/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ## Alias
 
+
+alias .='source'
 alias emacs="emacsclient -a ''"
-alias vi="emacsclient -a ''"
-alias vim="emacsclient -a ''"
 alias emacst='/Applications/Emacs.app/Contents/MacOS/Emacs -nw -q --load ~/.emacs.d/elisp/terminal_mode.el'
 alias ls='ls --color=auto'
-alias .='source'
-
 alias lwa='./lwa'
 alias m='with_memo'
 alias mm='with_memo -M'
+alias txs='tmuxinator start'
+alias vi="emacsclient -a ''"
+alias vim="emacsclient -a ''"
+alias aesolo=./aesolo
 eval "$(hub alias -s)"
 
 ## Environment
@@ -80,3 +83,10 @@ export LWA_UPDATE_CHECK=0
 ## Go
 GOPATH=~/go
 export GOPATH
+
+# See: https://github.com/erlang/rebar3/issues/644#issuecomment-1148809618
+function rebar3 () {
+    set -o localoptions -o localtraps
+    trap 'stty sane' INT
+    command rebar3 "$@"
+}
