@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: rebar-dep-zstd
+# key: rebar-dep-zstd
+# --
+{zstd, {git, "https://github.com/alertlogic/zstd-erlang", {branch, master}}},

@@ -12,6 +12,6 @@ pdsh -g ecs-ae 'for i in \$(sudo docker ps -q -f name=${1:service}-.+-$1 ); \\
             Module = binary_to_atom(al_conv:to_binary(filename:rootname(Name)), utf8), \\
             code:load_binary(Module, Name, Bin2) \\
           end, \\
-    Load(\\"${2:us-west-2}\\", \\"global-${3:integration}\\", \\"$1/${4:module}.beam\\").\\
+    Load(iwsutil:region(), iwsutil:environ(), \\"$1/${2:module}.beam\\").\\
  " ;\\
 done'

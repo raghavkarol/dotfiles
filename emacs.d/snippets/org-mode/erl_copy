@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: erl_copy
+# key: erl_copy
+# --
+Copy = fun(Path, Value) -> erlcloud_s3:put_object(al_conv:to_string(<<(iwsutil:region())/binary, "-", (iwsutil:environ())/binary, "-ae-scratch">>),  Path, base64:encode( term_to_binary(Value) ), iwsutil:config()) end.
