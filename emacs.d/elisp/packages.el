@@ -115,6 +115,8 @@
   :ensure t)
 (use-package base16-theme
   :ensure t)
+(use-package org-re-reveal
+  :ensure t)
 
 ;; org-roam
 (use-package org-roam

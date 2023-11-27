@@ -17,15 +17,8 @@
 
 (require 'package)
 
-(add-to-list
- 'package-archives
- '("melpa-stable" . "http://stable.melpa.org/packages/")
- t)
-;; ;; For org-roam-ui
-;; (add-to-list
-;;  'package-archives
-;;  '("melpa" . "http://melpa.org/packages/")
-;;  t)
+;; (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 (package-initialize) ; Added by package.el, don't delete, comment out instead
 

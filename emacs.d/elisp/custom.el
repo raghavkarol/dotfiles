@@ -223,10 +223,13 @@ static char *gnus-pointer[] = {
  '(neo-theme 'nerd)
  '(neo-window-position 'right)
  '(org-agenda-custom-commands
-   '(("n" "Agenda and all TODOs"
-      ((agenda "" nil)
-       (alltodo "" nil))
-      nil)))
+   '(("e" "Errands" todo ""
+      ((org-agenda-files
+        '("~/org/gtd/errands.org"))))
+     ("f" "Focused" tags-todo "computer focused" nil)
+     ("h" "Home" tags ""
+      ((org-agenda-files
+        '("~/org/gtd/home.org"))))))
  '(org-agenda-files '("~/org/gtd/"))
  '(org-agenda-sticky t)
  '(org-babel-load-languages
@@ -255,7 +258,7 @@ static char *gnus-pointer[] = {
  '(org-src-tab-acts-natively t)
  '(org-todo-keywords '((sequence "TODO" "WAIT" "DONE")))
  '(package-selected-packages
-   '(org-roam-ui svg org-roam jinja2-mode format-all eglot golint ag wakatime-mode applescript-mode undo-tree ivy ein emamux string-inflection yafolding company-distel forge elscreen alchemist elixir-mode company-nginx nginx-mode nginx gerrit-download magit-gerrit js-doc helm-xref pug-mode indium js2-refactor ac-js2 skewer-mode tern-auto-complete company-tern json-mode prettier-jsx rjsx-mode docker-tramp color-theme-sanityinc-tomorrow groovy flymake-go go-autocomplete gorepl-mode nodejs-repl company-jedi cmake-ide irony irony-mode cmake-mode flycheck go-guru go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm auto-complete yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode blank-mode blackboard-theme zenburn-theme synonyms synonymous gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme intellij-theme doom-themes github-browse-file virtualenvwrapper docker yaml-mode windata wgrep-helm web-mode sqlup-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm))
+   '(org-reveal org-re-reveal org-roam-ui svg org-roam jinja2-mode format-all eglot golint ag wakatime-mode applescript-mode undo-tree ivy ein emamux string-inflection yafolding company-distel forge elscreen alchemist elixir-mode company-nginx nginx-mode nginx gerrit-download magit-gerrit js-doc helm-xref pug-mode indium js2-refactor ac-js2 skewer-mode tern-auto-complete company-tern json-mode prettier-jsx rjsx-mode docker-tramp color-theme-sanityinc-tomorrow groovy flymake-go go-autocomplete gorepl-mode nodejs-repl company-jedi cmake-ide irony irony-mode cmake-mode flycheck go-guru go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm auto-complete yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode blank-mode blackboard-theme zenburn-theme synonyms synonymous gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme intellij-theme doom-themes github-browse-file virtualenvwrapper docker yaml-mode windata wgrep-helm web-mode sqlup-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(projectile-completion-system 'ivy)
  '(projectile-enable-caching t)
@@ -265,7 +268,15 @@ static char *gnus-pointer[] = {
  '(ring-bell-function 'ignore)
  '(ropemacs-enable-shortcuts nil)
  '(safe-local-variable-values
-   '((eval progn
+   '((jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_rt_fwd/_venv")
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_dupobs_detect/_venv")
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/proc_mon/_venv")
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_beacon_detect/_venv")
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/lwa_fortra_fwd/_venv")
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/leetcode/_venv")
+     (jedi:server-args "--virtual-env" "~/github/alertlogic/aelwasdk/_venv")
+     (eval setq derl-cookie "aetrigger_eng")
+     (eval progn
            (setq emamux:session "working")
            (setq emamux:window "aepublish")
            (setq emamux:pane "1"))

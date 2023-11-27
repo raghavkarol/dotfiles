@@ -102,7 +102,7 @@ region:      us-east-1| us-west-2| eu-west-1
         ((string-match "aerta_workers" service)
          (list (concat (replace-regexp-in-string  "_" "" service) "-")
                "aerta"))
-        ((cl-member service '("aefr" "aerta" "aetag" "aepublish" "aecontent" "aewatchdog") :test #'string=)
+        ((cl-member service '("aefr" "aerta" "aetag" "aepublish" "aecontent" "aewatchdog" "aecoral") :test #'string=)
          (list (concat service "-.+-" service) service))
         (t (error (format "unknown service: %s" service)))))
 

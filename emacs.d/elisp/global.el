@@ -1,13 +1,11 @@
 ;;; Enable which function module
 (which-function-mode 1)
 
+(defun disable-auto-complete()
+  (auto-complete-mode -1))
+
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
-
-
-;;; For emacs 28
-;;; To use command and option as M-key
-(setq mac-command-modifier 'meta)
 
 (add-to-list 'display-buffer-alist
              '("\\*.+?\\*"
@@ -62,7 +60,6 @@
 (exec-path-from-shell-copy-env "PYTHONPATH")
 (exec-path-from-shell-copy-env "GOPATH")
 (exec-path-from-shell-copy-env "PATH")
-
 ;; Disable Scroll Bars
 (when (>= emacs-major-version 25)
   (scroll-bar-mode -1)
