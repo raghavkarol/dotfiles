@@ -24,6 +24,6 @@
 (global-set-key (kbd "M-0") 'raghav/elscreen-goto-9)
 
 (load-file "~/.emacs.d/elisp/revive.el")
-(add-to-list 'load-path "/Users/raghav.karol/github/raghavkarol/elscreen-persist")
+(add-to-list 'load-path "~/github/elscreen-persist")
 (require 'elscreen-persist)
 (elscreen-persist-mode 1)

@@ -1,4 +1,4 @@
-(defvar my-load-path "~/github/raghavkarol/dotfiles/emacs.d/elisp/")
+(defvar my-load-path "~/github/dotfiles/emacs.d/elisp/")
 (defun my-load(filename)
   (load (concat my-load-path (symbol-name filename))))
 
