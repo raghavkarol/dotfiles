@@ -109,6 +109,7 @@ alias emacs="emacsclient -a ''"
 alias vi="emacsclient -a ''"
 alias vim="emacsclient -a ''"
 alias ls='ls --color=auto'
+alias txs='tmuxinator start'
 
 # PATH customizations
 export PATH="/opt/homebrew/bin:$PATH"
