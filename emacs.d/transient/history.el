@@ -62,6 +62,7 @@
  (magit-revert
   ("--edit"))
  (magit-run nil)
+ (magit-show-refs nil)
  (magit-stash nil)
  (magit-submodule nil)
  (magit-tag nil

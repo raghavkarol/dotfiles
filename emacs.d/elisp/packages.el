@@ -57,8 +57,6 @@
   :ensure t)
 (use-package company
   :ensure t)
-(use-package company-go
-  :ensure t)
 (use-package groovy-mode
   :ensure t)
 (use-package rjsx-mode

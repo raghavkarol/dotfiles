@@ -55,12 +55,12 @@
 
 (my-load 'ivy)
 (my-load 'autopair)
-(my-load 'erlang)
+;; (my-load 'erlang)
 (my-load 'org)
 (my-load 'yas)
 
 (when window-mode
-  (my-load 'go)
+  ;; (my-load 'go)
   (my-load 'compilation)
   (my-load 'dired)
   (my-load 'elscreen)

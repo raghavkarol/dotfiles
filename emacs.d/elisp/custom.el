@@ -21,8 +21,7 @@
  '(company-go-gocode-command "/Users/rkarol-admin/go/bin/gocode")
  '(company-quickhelp-color-background "#4F4F4F")
  '(company-quickhelp-color-foreground "#DCDCCC")
- '(compilation-environment '("TERM=eterm-color
-" "LANG=en_US.UTF-8"))
+ '(compilation-environment '("TERM=eterm-color\12" "LANG=en_US.UTF-8"))
  '(compilation-window-height 20)
  '(create-lockfiles nil)
  '(custom-enabled-themes '(zenburn))
@@ -59,25 +58,7 @@
  '(elscreen-tab-display-control nil)
  '(elscreen-tab-display-kill-screen nil)
  '(emms-mode-line-icon-image-cache
-   '(image :type xpm :ascent center :data "/* XPM */
-static char *note[] = {
-/* width height num_colors chars_per_pixel */
-\"    10   11        2            1\",
-/* colors */
-\". c #1ba1a1\",
-\"# c None s None\",
-/* pixels */
-\"###...####\",
-\"###.#...##\",
-\"###.###...\",
-\"###.#####.\",
-\"###.#####.\",
-\"#...#####.\",
-\"....#####.\",
-\"#..######.\",
-\"#######...\",
-\"######....\",
-\"#######..#\" };"))
+   '(image :type xpm :ascent center :data "/* XPM */\12static char *note[] = {\12/* width height num_colors chars_per_pixel */\12\"    10   11        2            1\",\12/* colors */\12\". c #1ba1a1\",\12\"# c None s None\",\12/* pixels */\12\"###...####\",\12\"###.#...##\",\12\"###.###...\",\12\"###.#####.\",\12\"###.#####.\",\12\"#...#####.\",\12\"....#####.\",\12\"#..######.\",\12\"#######...\",\12\"######....\",\12\"#######..#\" };"))
  '(explicit-bash-args '("--login" "-i"))
  '(flycheck-highlighting-mode 'lines)
  '(flycheck-javascript-eslint-executable nil)
@@ -102,27 +83,7 @@ static char *note[] = {
  '(gnuplot-program "/usr/local/bin/gnuplot")
  '(gnus-logo-colors '("#4c8383" "#bababa") t)
  '(gnus-mode-line-image-cache
-   '(image :type xpm :ascent center :data "/* XPM */
-static char *gnus-pointer[] = {
-/* width height num_colors chars_per_pixel */
-\"    18    13        2            1\",
-/* colors */
-\". c #1ba1a1\",
-\"# c None s None\",
-/* pixels */
-\"##################\",
-\"######..##..######\",
-\"#####........#####\",
-\"#.##.##..##...####\",
-\"#...####.###...##.\",
-\"#..###.######.....\",
-\"#####.########...#\",
-\"###########.######\",
-\"####.###.#..######\",
-\"######..###.######\",
-\"###....####.######\",
-\"###..######.######\",
-\"###########.######\" };") t)
+   '(image :type xpm :ascent center :data "/* XPM */\12static char *gnus-pointer[] = {\12/* width height num_colors chars_per_pixel */\12\"    18    13        2            1\",\12/* colors */\12\". c #1ba1a1\",\12\"# c None s None\",\12/* pixels */\12\"##################\",\12\"######..##..######\",\12\"#####........#####\",\12\"#.##.##..##...####\",\12\"#...####.###...##.\",\12\"#..###.######.....\",\12\"#####.########...#\",\12\"###########.######\",\12\"####.###.#..######\",\12\"######..###.######\",\12\"###....####.######\",\12\"###..######.######\",\12\"###########.######\" };") t)
  '(graphviz-dot-indent-width 2)
  '(helm-autoresize-max-height 16)
  '(helm-autoresize-min-height 16)
@@ -191,11 +152,9 @@ static char *gnus-pointer[] = {
      ("Diff with file `C-='" . diff-buffer-with-file)
      ("Ediff Marked buffers `C-c ='" . helm-ediff-marked-buffers)
      ("Ediff Merge marked buffers `M-='" .
-      #[257 "\300\301\"\207"
+      #[257 "\300\1\301\"\207"
             [helm-ediff-marked-buffers t]
-            4 "
-
-(fn CANDIDATE)"])))
+            4 "\12\12(fn CANDIDATE)"])))
  '(help-at-pt-display-when-idle '(flymake-overlay) nil (help-at-pt))
  '(history-delete-duplicates t)
  '(horizontal-scroll-bar-mode nil)
@@ -255,7 +214,7 @@ static char *gnus-pointer[] = {
  '(org-src-tab-acts-natively t)
  '(org-todo-keywords '((sequence "TODO" "WAIT" "DONE")))
  '(package-selected-packages
-   '(org-roam-ui svg org-roam jinja2-mode format-all eglot golint ag wakatime-mode applescript-mode undo-tree ivy ein emamux string-inflection yafolding company-distel forge elscreen alchemist elixir-mode company-nginx nginx-mode nginx gerrit-download magit-gerrit js-doc helm-xref pug-mode indium js2-refactor ac-js2 skewer-mode tern-auto-complete company-tern json-mode prettier-jsx rjsx-mode docker-tramp color-theme-sanityinc-tomorrow groovy flymake-go go-autocomplete gorepl-mode nodejs-repl company-jedi cmake-ide irony irony-mode cmake-mode flycheck go-guru go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm auto-complete yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode blank-mode blackboard-theme zenburn-theme synonyms synonymous gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme intellij-theme doom-themes github-browse-file virtualenvwrapper docker yaml-mode windata wgrep-helm web-mode sqlup-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ autopair atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm))
+   '(autopair base16-theme company-ansible ansible terraform-mode counsel docker-tramp xref-js2 groovy-mode company-go go-dlv python-mode org-roam-ui svg org-roam jinja2-mode format-all eglot golint ag wakatime-mode applescript-mode undo-tree ivy ein emamux string-inflection yafolding company-distel forge elscreen alchemist elixir-mode company-nginx nginx-mode nginx gerrit-download magit-gerrit js-doc helm-xref pug-mode indium js2-refactor ac-js2 skewer-mode tern-auto-complete company-tern json-mode prettier-jsx rjsx-mode color-theme-sanityinc-tomorrow groovy flymake-go go-autocomplete gorepl-mode nodejs-repl company-jedi cmake-ide irony irony-mode cmake-mode flycheck go-guru go-mode haskell haskell-mode deferred info-lookup exec-shell-from-path virtualenv-wrapper auto-pair slime js2-mode helm yassnippets yassnippet projectile use-package dockerfile-mode graphviz-dot-mode blank-mode blackboard-theme zenburn-theme synonyms synonymous gradle-mode grandshell-theme magit multiple-cursors anti-zenburn-theme adoc-mode wgrep auto-complete-distel ob-restclient markdown-mode sexy-monochrome-theme intellij-theme doom-themes github-browse-file virtualenvwrapper docker yaml-mode windata wgrep-helm web-mode sqlup-mode sass-mode rvm rsense restclient projectile-rails paredit orgtbl-ascii-plot multi-term jedi imakado idle-highlight-mode highlight-parentheses helm-projectile helm-ls-git helm-git-grep helm-c-yasnippet helm-ag grizzl google-this gnuplot-mode gnuplot expand-region exec-path-from-shell enh-ruby-mode engine-mode elscreen-persist elisp-slime-nav edit-server edbi dired+ dash-at-point coffee-mode bookmark+ atom-one-dark-theme atom-dark-theme anaphora ac-slime ac-python ac-math ac-inf-ruby ac-html ac-helm))
  '(pdf-view-midnight-colors '("#DCDCCC" . "#383838"))
  '(projectile-completion-system 'ivy)
  '(projectile-enable-caching t)
