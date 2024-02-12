@@ -1,101 +1,165 @@
-;;; For emacs 28
-;;; To use command and option as M-key
-(setq mac-command-modifier 'meta)
+;;
+;; Emacs initialization file
+;;
+;; Copyright (C) Raghav Karol
+;;
 
-;;; Temporary solution until I can install karabiner
-;;; Key mappings in Iterm2 General -> Profiles -> Key Mappings
-;;;  § `
-;;;  ± ~
-;;; and here in Emacs
-(global-set-key (kbd "§") "`")
-(global-set-key (kbd "±") "~")
+;; Package management
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize) ; Added by package.el, don't delete, comment out instead
+
+;; Key bindings
+;;
+;; Remap Cmd to Meta
+(setq mac-command-modifier 'meta)
 
 ;; Path for global settings file
 (setq custom-file "~/.emacs.d/elisp/custom.el")
 (load custom-file 'noerror)
 (load "~/.emacs.d/elisp/defuns" 'noerror)
 
-(require 'package)
-
-(add-to-list
- 'package-archives
- '("melpa-stable" . "http://stable.melpa.org/packages/")
- t)
-;; ;; For org-roam-ui
-;; (add-to-list
-;;  'package-archives
-;;  '("melpa" . "http://melpa.org/packages/")
-;;  t)
-
-(package-initialize) ; Added by package.el, don't delete, comment out instead
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(setq reload-packages 't)
-(when reload-packages
-  (my-load 'packages))
-
-;; terminal/window mode
-(when (not (boundp 'terminal-mode))
-  (setq terminal-mode nil))
-(setq window-mode (not terminal-mode))
-
-;; Disabled plugins
-(when nil
-  (my-load 'airtame-device)
-  (my-load 'cmake)
-  (my-load 'cpp)
-  (my-load 'gerrit)
-  (my-load 'haskell)
-  (my-load 'react)
-  (my-load 'ruby)
-  (my-load 'speedbar))
-
-(my-load 'ivy)
-(my-load 'autopair)
-;; (my-load 'erlang)
-(my-load 'org)
-(my-load 'yas)
-
-(when window-mode
-  ;; (my-load 'go)
-  (my-load 'compilation)
-  (my-load 'dired)
-  (my-load 'elscreen)
-  (my-load 'elscreen-sessions)
-  (my-load 'expand-region)
-  (my-load 'flycheck)
-  (my-load 'js2-mode)
-  (my-load 'mc)
-  (my-load 'projectile)
-  (my-load 'python)
-  (my-load 'slime)
-  (my-load 'sql)
-  (my-load 'tramp)
-  (my-load 'web)
-  (my-load 'org-roam))
+;; Initialize packages
+(use-package ansi-color
+    :hook (compilation-filter . ansi-color-compilation-filter))
+(use-package ag
+  :ensure t)
+(use-package company
+  :ensure t)
+(use-package counsel
+  :ensure t)
+(use-package elscreen
+ :ensure t)
+(use-package emamux
+  :ensure t)
+(use-package exec-path-from-shell
+  :ensure t)
+(use-package expand-region
+  :ensure t)
+(use-package flycheck
+  :ensure t)
+(use-package graphviz-dot-mode
+  :ensure t)
+(use-package ivy
+  :ensure t
+  :config
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  (setq enable-recursive-minibuffers t)
+  (global-set-key (kbd "C-s") 'swiper)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "C-o") 'projectile-find-file)
+  (global-set-key (kbd "M-o") 'counsel-switch-buffer)
+  (global-set-key (kbd "C-c k") 'counsel-ag)
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+  (ivy-mode 1))
+(use-package json-mode
+  :ensure t)
+(use-package magit
+  :ensure t)
+(use-package markdown-mode
+  :ensure t)
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory "~/org/roam/")
+  (org-roam-completion-everywhere 't)
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+      :unnarrowed t)))
+  :bind
+  (("C-c n i" . org-roam-node-insert)
+   ("C-c n f" . org-roam-node-find)
+   ("C-c n l" . org-roam-buffer-toggle)
+   :map org-mode-map
+   ("C-M-i" . completion-at-point))
+  :config
+  (org-roam-setup))
+(use-package org-roam-ui
+  :ensure t
+  :config
+  (setq org-roam-ui-follow t
+        org-roam-ui-open-on-start t
+        org-roam-ui-update-on-save t
+        org-roam-ui-sync-theme t))
+(use-package paredit
+  :ensure t)
+(use-package projectile
+  :ensure t
+  :config
+  (projectile-mode 't)
+  (setq projectile-completion-system 'ivy))
+(use-package pyvenv
+  :ensure t
+  :config
+  (pyvenv-mode t)
+  ;; Set correct Python interpreter
+  (setq pyvenv-post-activate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter (concat pyvenv-virtual-env "bin/python3")))))
+  (setq pyvenv-post-deactivate-hooks
+        (list (lambda ()
+                (setq python-shell-interpreter "python3")))))
+(use-package string-inflection
+  :ensure t)
+(use-package undo-tree
+  :ensure t)
+(use-package web-mode
+  :ensure t)
+(use-package wgrep
+  :ensure t)
+(use-package toml-mode
+  :ensure t)
+(use-package yaml-mode
+  :ensure t)
+(use-package yasnippet
+  :ensure t
+  :custom
+  (require 'yasnippet)
+  (yas-reload-all))
+(use-package yafolding
+  :ensure t)
+(use-package zenburn-theme
+  :ensure t)
 
 (my-load 'global)
+(my-load 'elscreen)
+(my-load 'elscreen-sessions)
 
-;; Load saved sessions
-(when window-mode
-  (when (file-exists-p my-current-session)
-      (add-to-list 'kill-emacs-hook (lambda () (save-session)))
-      (switch-session (my-current-session-name))))
-(when window-mode (server-start))
+(yas-global-mode)
 
-;; Reload theme, switch-session does not restore all colors in the
-;; session correctly
-(load-theme 'zenburn)
+;;; Python customizations
+(defun python-mode-extras ()
+  (yafolding-mode)
+  (company-mode))
 
-(setq global-auto-complete-mode nil)
+(defun emamux-pdb-continue ()
+  "Command to continue a pytest case that stops in pdb
 
-;;; Bug in emacs 28.2, Fixed in master branch
-;;
-;; https://debbugs.gnu.org/cgi/bugreport.cgi?bug=59081
-;;
-;; See https://emacs.stackexchange.com/questions/74289/emacs-28-2-error-in-macos-ventura-image-type-invalid-image-type-svg
-;;
-(setq image-types (cons 'svg image-types))
+   When pyest is invokved with --pdb like
+   pytest --pdbcls=IPython.terminal.debugger:Pdb ...
+
+   Then it stops execution on an unhandled exception, use this
+   function to send it the continue command from emacs"
+  (interactive)
+  (emamux:send-command "c")
+  (insert " ")
+  (delete-backward-char 1))
+
+
+(add-hook 'python-mode-hook 'python-mode-extras)
+(define-key python-mode-map (kbd "C-j") 'emamux-tmux-run-line)
+(define-key python-mode-map (kbd "C-M-x") 'emamux-tmux-run-sexp)
+
+(electric-pair-mode 't)
+
+;; Use the key next to shift for ` and ~
+;; iterm key mappings in Iterm2 General -> Profiles -> Key Mappings
+;;  § -> `,  ± -> ~
+;; emcas
+(global-set-key (kbd "§") "`")
+(global-set-key (kbd "±") "~")
