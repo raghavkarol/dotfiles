@@ -2,7 +2,12 @@
 # name: docstring
 # key: docstring
 # --
-'''$1
+"""${1:headline}
 
-$2
-'''
+${2:description}
+
+Args:
+   ${3:arg1}
+
+Returns:
+"""

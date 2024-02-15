@@ -6,9 +6,15 @@
 
 ;; Package management
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-(package-initialize) ; Added by package.el, don't delete, comment out instead
+(add-to-list
+ 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list
+ 'package-archives '("jcs-elpa" . "https://jcs-emacs.github.io/jcs-elpa/packages/") t)
 
+(setq package-archive-priorities
+      '(("melpa"    . 5)
+        ("jcs-elpa" . 0)))
+(package-initialize) ; Added by package.el, don't delete, comment out instead
 ;; Key bindings
 ;;
 ;; Remap Cmd to Meta
@@ -118,18 +124,23 @@
   :ensure t)
 (use-package yasnippet
   :ensure t
-  :custom
-  (require 'yasnippet)
+  :config
   (yas-reload-all))
 (use-package yafolding
   :ensure t)
 (use-package zenburn-theme
   :ensure t)
+(use-package atomic-chrome
+  :ensure t
+  :config
+  (atomic-chrome-start-server))
+(use-package chatgpt
+  :ensure t)
+
 
 (my-load 'global)
 (my-load 'elscreen)
 (my-load 'elscreen-sessions)
-
 (yas-global-mode)
 
 ;;; Python customizations

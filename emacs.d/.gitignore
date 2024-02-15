@@ -13,3 +13,5 @@ url/
 # Metadata for persistent sessions
 current-desktop-session
 desktop-sessions/
+
+secrets.el

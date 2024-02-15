@@ -1,14 +1,18 @@
-;;; Enable which function module
+;;
+;; Enable which-function-mode
+;; See https://www.gnu.org/software/emacs/manual/html_node/emacs/Which-Function.html
+;;
 (which-function-mode 1)
 
-(setq make-backup-files nil) ; stop creating backup~ files
-(setq auto-save-default nil) ; stop creating #autosave# files
+;; stop creating backup~ files
+(setq make-backup-files nil)
+;; stop creating #autosave# files
+(setq auto-save-default nil)
 
-
-;;; For emacs 28
-;;; To use command and option as M-key
+;; use Command as Meta, so that Cmd- works as M-
 (setq mac-command-modifier 'meta)
 
+;; display buffer customizatoins
 (add-to-list 'display-buffer-alist
              '("\\*.+?\\*"
                (display-buffer-at-bottom)
@@ -20,24 +24,20 @@
                (display-buffer-at-bottom)
                (reusable-frames . visible)
                (window-height   . 0.3)))
-
-(add-to-list 'display-buffer-alist
-             '("\\*Gofmt Errors\\*"
-               (display-buffer-at-bottom)
-               (reusable-frames . visible)))
-
-(global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+;;
+;; Global keybindings
+;;
 (global-set-key (kbd "<f1>") 'magit-status)
-(global-set-key (kbd "M-h") 'dash-at-point)
-(global-set-key (kbd "C-M-r")  'compile)
-;;; Use the same keybinds as tmux to split windows
+(global-set-key (kbd "<f5>") 'revert-buffer-no-confirm)
+;; Use the same keybinds as tmux to split windows
 (global-set-key (kbd "C-x %") 'split-window-horizontally)
 (global-set-key (kbd "C-x \"") 'split-window-vertically)
-;;; Org-capture and org-mobile sync
+;; Org-capture and org-mobile sync
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c C-p") 'org-mobile-push)
 (global-set-key (kbd "C-c C-f") 'org-mobile-full)
-
+;; Compilation
+(global-set-key (kbd "C-M-r") 'compile)
 
 (setq inhibit-startup-message t)
 (setq-default indent-tabs-mode nil)
@@ -78,8 +78,6 @@
 (setq fill-column 100)
 
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
-(add-hook 'prog-mode-hook (lambda () (yafolding-mode)))
-(add-hook 'yaml-mode-hook (lambda () (yafolding-mode)))
 
 (global-display-line-numbers-mode)
 (setq magit-last-seen-setup-instructions "1.4.0")

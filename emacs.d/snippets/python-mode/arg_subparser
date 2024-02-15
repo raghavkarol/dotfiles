@@ -3,9 +3,9 @@
 # key: arg-subparser
 # --
     $1 = subparsers.add_parser(
-        '$2',
-        help='')
+        "$2",
+        help="")
     $1.add_argument(
-        '--sub-command',
-        help='')
+        "--sub-command",
+        help="")
     $1.set_defaults(func=cmd_$2)
