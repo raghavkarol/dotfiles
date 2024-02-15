@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pytest-trace
+# key: pytest-trace
+# --
+import pytest ; pytest.set_trace()

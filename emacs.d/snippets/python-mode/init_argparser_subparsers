@@ -1,0 +1,39 @@
+# -*- mode: snippet -*-
+# name: init-argparser-subparsers
+# key: init-argparser-subparsers
+# --
+import argparse
+
+def cmd_run(args):
+    print(args)
+
+def init_parser():
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description="\\n".join(["Add Description here"]))
+    subparsers = parser.add_subparsers(
+        title="commands",
+        metavar="command",
+        help="description")
+    build = subparsers.add_parser(
+        "run",
+        help="")
+    build.add_argument(
+        "--sub-command",
+        help="")
+    build.set_defaults(func=cmd_run)
+    return parser
+
+# --------------------------------------------------------------------
+# main
+# --------------------------------------------------------------------
+def main():
+    parser = init_parser()
+    args = parser.parse_args()
+    if "func" in args:
+        args.func(args)
+    else:
+        parser.print_usage()
+
+if __name__ == "__main__":
+    main()

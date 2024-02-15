@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: install-poetry
+# key: install-poetry
+# --
+# Install and configure poetry
+RUN apk add --no-cache curl gcc musl-dev libffi-dev
+RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PATH=\$PATH:/root/.local/bin
+RUN poetry config virtualenvs.create false

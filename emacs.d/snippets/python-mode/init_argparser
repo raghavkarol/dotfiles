@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: init-argparser
+# key: init-argparser
+# --
+import argparse
+import traceback
+
+def cmd_run(args):
+    pass
+
+def init_parser():
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        description="\\n".join(["Add Description here"]),
+    )
+    parser.add_argument("--example", type=int, default=None, help="")
+    return parser
+
+def main():
+    parser = init_parser()
+    try:
+        args = parser.parse_args()
+        cmd_run(args)
+    except Exception as e:
+        print(f"ERROR: {e}")
+        print(f"{traceback.format_exc()}")
+
+if __name__ == '__main__':
+    main()
